@@ -26,10 +26,10 @@ export default function Navbar() {
               Home
             </a>
             <a
-              href="#"
+              href="/booking"
               className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
             >
-              Features
+              Booking
             </a>
             <a
               href="#"
