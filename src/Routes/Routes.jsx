@@ -4,7 +4,7 @@ import Home from "../page/Home/Home";
 import About from "../page/About/About";
 
 import BookingRoutes from "../page/Booking/BookingRoutes";
-import Contact from "../page/Contac/Contact";
+import Contact from "../page/Contact/Contact";
 
 const router = createBrowserRouter([
   {

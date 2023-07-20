@@ -38,6 +38,7 @@ const BookingBanner = ({ selectedDate, setSelectedDate }) => {
         />
       </div>
     </section>
+    
   );
 };
 
