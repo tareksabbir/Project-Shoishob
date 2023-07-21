@@ -5,6 +5,10 @@ import About from "../page/About/About";
 
 import BookingRoutes from "../page/Booking/BookingRoutes";
 import Contact from "../page/Contact/Contact";
+import Login from "../page/Login/Login";
+import SignUp from "../page/SignUp/SignUp";
+import Review from "../page/Review/Review";
+import Dashboard from "../page/Dashboard/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +31,23 @@ const router = createBrowserRouter([
         path: "/booking",
         element: <BookingRoutes></BookingRoutes>,
       },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/review",
+        element: <Review></Review>,
+      },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
   },
 ]);
 

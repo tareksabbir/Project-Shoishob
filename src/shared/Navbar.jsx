@@ -1,4 +1,14 @@
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthProvider";
+
 export default function Navbar() {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogout = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="bg-white pb-6 sm:pb-8 lg:pb-12">
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
@@ -31,18 +41,43 @@ export default function Navbar() {
             >
               Booking
             </a>
-            <a
-              href="#"
-              className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
-            >
-              Pricing
-            </a>
+
             <a
               href="/about"
               className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
             >
               About
             </a>
+
+            {user?.uid ? (
+              <>
+                <button
+                  onClick={handleLogout}
+                  className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
+                >
+                  Sign Out
+                </button>
+                <a
+                  href="/review"
+                  className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
+                >
+                  review
+                </a>
+                <a
+                  href="/dashboard"
+                  className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
+                >
+                  Dashboard
+                </a>
+              </>
+            ) : (
+              <a
+                href="/login"
+                className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
+              >
+                Login
+              </a>
+            )}
           </nav>
 
           <a
