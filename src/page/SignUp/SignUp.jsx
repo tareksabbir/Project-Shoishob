@@ -2,16 +2,29 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import app from "../../firebase/firebase.config";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const auth = getAuth(app);
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile, verifyEmail } =
+    useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
   const [emailAlreadyInUseError, setEmailAlreadyInUseError] = useState("");
+  const [isGoogleLogin, setIsGoogleLogin] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleSignUp = (data) => {
     console.log(data);
@@ -22,18 +35,23 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        Swal.fire(
-          "Congratulations!!",
-          "Your Account Has been successfully Created",
-          "success"
-        );
+
+        Swal.fire("Thank You!!", "Please Verify Your Email First ", "info");
         const userInfo = {
           displayName: data.name,
         };
-        updateUser(userInfo)
+        updateUserProfile(userInfo)
+          .then(() => {
+            reset();
+          })
+          .catch((error) => {
+            console.log(error.message);
+            setSignUpError(error.message);
+          });
+        verifyEmail()
           .then(() => {})
           .catch((error) => {
-            setSignUpError(error.message);
+            console.log(error.message);
           });
       })
       .catch((error) => {
@@ -43,6 +61,20 @@ const SignUp = () => {
         } else {
           setSignUpError(error.message);
         }
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setIsGoogleLogin(true);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log("error", error);
       });
   };
 
@@ -70,10 +102,10 @@ const SignUp = () => {
                   name="name"
                   className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                   {...register("name", {
-                    required: "Name is required",
+                    required: isGoogleLogin ? false : "Name is required",
                   })}
                 />
-                {errors.name && (
+                {errors.name && !isGoogleLogin && (
                   <p role="alert" className="mt-3 text-indigo-500 text-center">
                     {errors.name?.message}
                   </p>
@@ -89,13 +121,15 @@ const SignUp = () => {
                 </label>
                 <input
                   name="email"
+                  type="email"
                   className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                   {...register("email", {
-                    required: "Email Address is required",
+                    required: isGoogleLogin
+                      ? false
+                      : "Email Address is required",
                   })}
-                  aria-invalid={errors.email ? "true" : "false"}
                 />
-                {errors.email && (
+                {errors.email && !isGoogleLogin && (
                   <p role="alert" className="mt-3 text-indigo-500 text-center">
                     {errors.email?.message}
                   </p>
@@ -114,7 +148,7 @@ const SignUp = () => {
                   type="password"
                   className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                   {...register("password", {
-                    required: "Password is required",
+                    required: isGoogleLogin ? false : "Password is required",
                     minLength: {
                       value: 6,
                       message:
@@ -127,7 +161,7 @@ const SignUp = () => {
                     },
                   })}
                 />
-                {errors.password && (
+                {errors.password && !isGoogleLogin && (
                   <p role="alert" className="mt-3 text-indigo-500 text-center">
                     {errors.password?.message}
                   </p>
@@ -156,7 +190,10 @@ const SignUp = () => {
                 </span>
               </div>
 
-              <button className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base">
+              <button
+                onClick={handleGoogleSignIn}
+                className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
+              >
                 <svg
                   className="h-5 w-5 shrink-0"
                   width="24"
@@ -205,3 +242,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
