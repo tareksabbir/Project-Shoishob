@@ -8,12 +8,13 @@ import BookingModal from "./BookingModal";
 export default function BookingAvailableSlots({ selectedDate }) {
   const [turfs, setTurfs] = useState([]);
   const [booking, setBooking] = useState(null);
+  const date = format(selectedDate, 'PP')
 
   useEffect(() => {
-    fetch("service.json")
+    fetch(`http://localhost:5000/api/v1/turf?date=${date}`)
       .then((res) => res.json())
-      .then((data) => setTurfs(data));
-  });
+      .then((data) => setTurfs(data.data));
+  }, [date]);
   return (
     <>
       <section>
@@ -51,7 +52,7 @@ export default function BookingAvailableSlots({ selectedDate }) {
         </div>
         {booking && (
           <BookingModal
-          booking={booking}
+            booking={booking}
             selectedDate={selectedDate}
             setBooking={setBooking}
           ></BookingModal>

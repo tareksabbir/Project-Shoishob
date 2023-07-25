@@ -15,7 +15,7 @@ const BookingBanner = ({ selectedDate, setSelectedDate }) => {
   return (
     <section className="flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16 px-10 lg:px-32 mb-10">
       <div className="xl:w-5/12 flex flex-col justify-center lg:items-start sm:text-center lg:text-left lg:py-10 xl:py-10">
-        <h1 className="text-black-800 text-3xl sm:text-4xl md:text-4xl font-bold mb-4 md:mb-12 lg:mb-2  px-10 lg:px-0">
+        <h1 className="text-black-800 text-3xl sm:text-4xl md:text-4xl font-bold mb-4 md:mb-12 lg:mb-2  px-10 lg:px-0 lg:mt-14">
           Pick Your Date
         </h1>
 
@@ -38,7 +38,6 @@ const BookingBanner = ({ selectedDate, setSelectedDate }) => {
         />
       </div>
     </section>
-    
   );
 };
 

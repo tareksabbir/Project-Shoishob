@@ -10,6 +10,7 @@ import SignUp from "../page/SignUp/SignUp";
 import Review from "../page/Review/Review";
 import Dashboard from "../page/Dashboard/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import DashBoardLayout from "../Layoute/DashBoardLayout";
 
 const router = createBrowserRouter([
   {
@@ -50,9 +51,15 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <Dashboard></Dashboard>
+        <DashBoardLayout></DashBoardLayout>
       </PrivateRoute>
     ),
+    children: [
+      {
+        path: "/dashboard",
+        element:<Dashboard></Dashboard>
+      },
+    ],
   },
 ]);
 

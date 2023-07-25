@@ -1,9 +1,15 @@
 import { format } from "date-fns";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider";
+import Swal from "sweetalert2";
 
 /* eslint-disable react/prop-types */
 const BookingModal = ({ booking, selectedDate, setBooking }) => {
   const { turf_name, address, slots } = booking;
   const date = format(selectedDate, "PP");
+
+  const { user } = useContext(AuthContext);
+
   const handleBooking = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -12,6 +18,7 @@ const BookingModal = ({ booking, selectedDate, setBooking }) => {
     const email = form.email.value;
     const slot = form.slot.value;
     const phone = form.phone.value;
+    const trxId = form.trxId.value;
     const address = form.address.value;
     const booking = {
       turf,
@@ -19,12 +26,33 @@ const BookingModal = ({ booking, selectedDate, setBooking }) => {
       email,
       slot,
       phone,
+      trxId,
       address,
       selectedDate: date,
     };
 
     console.log(booking);
-    setBooking(null);
+    fetch("http://localhost:5000/api/v1/turf-booking", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          Swal.fire(
+            "Congratulations!!",
+            "Your Appointment Is fixed!",
+            "success"
+          );
+          window.location.reload();
+        } else if (data.message) {
+          Swal.fire("sorry", `${data.message}`, "error");
+        }
+        setBooking(null);
+      });
   };
   return (
     <>
@@ -51,12 +79,16 @@ const BookingModal = ({ booking, selectedDate, setBooking }) => {
             name="name"
             type="text"
             placeholder="Your Name"
+            defaultValue={user?.displayName}
+            disabled
             className="input input-bordered w-full max-w-xs"
           />
           <input
             name="email"
             placeholder="Your Email"
             type="email"
+            defaultValue={user?.email}
+            disabled
             className="input input-bordered w-full max-w-xs"
           />
 
@@ -83,6 +115,12 @@ const BookingModal = ({ booking, selectedDate, setBooking }) => {
             name="phone"
             type="number"
             placeholder="Phone Number"
+            className="input input-bordered w-full max-w-xs"
+          />
+          <input
+            name="trxId"
+            placeholder="bKash Trx ID"
+            type="text"
             className="input input-bordered w-full max-w-xs"
           />
           <input

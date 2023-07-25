@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC0NJ5r3FhFsraQTSf9VcOkIOwWJP9EJUc",
-  authDomain: "shoihob-project.firebaseapp.com",
-  projectId: "shoihob-project",
-  storageBucket: "shoihob-project.appspot.com",
-  messagingSenderId: "155095316914",
-  appId: "1:155095316914:web:cfd6c81bcc80d38c940cab",
+  apiKey: "AIzaSyALRbIYfLxnneu5tz2Zw8d4aKBbDIwi2NU",
+  authDomain: "shoishob-6ccea.firebaseapp.com",
+  projectId: "shoishob-6ccea",
+  storageBucket: "shoishob-6ccea.appspot.com",
+  messagingSenderId: "596492397168",
+  appId: "1:596492397168:web:fe993dae0edf826ff162b5",
 };
 
 // Initialize Firebase

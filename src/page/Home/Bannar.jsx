@@ -7,8 +7,8 @@ export default function Bannar() {
   return (
     <>
       <section className=" flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16 lg:px-20 px-10">
-        <div className="xl:w-11/12 flex flex-col justify-center items-center lg:items-start sm:text-center lg:text-left lg:py-8 xl:py-10">
-          <h1 className="mt-10  text-black-800 text-4xl sm:text-5xl md:text-8xl mb-8 md:mb-12 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-indigo-500">
+        <div className="xl:w-11/12 flex flex-col justify-center items-center lg:items-start sm:text-center lg:text-left lg:py-8 xl:py-10 lg:mb-10">
+          <h1 className="mt-10  text-black-800 text-4xl sm:text-5xl md:text-8xl mb-8 md:mb-12 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-indigo-500 lg:mt-16">
             Nothing But Sports..
           </h1>
 
@@ -35,7 +35,7 @@ export default function Bannar() {
           </div>
         </div>
 
-        <div className="xl:w-full lg:w-3/4 lg:h-auto h-full">
+        <div className="xl:w-full lg:w-3/4 lg:h-auto h-full lg:py-16">
           <img
             src={hero}
             loading="lazy"

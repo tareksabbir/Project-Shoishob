@@ -2,6 +2,9 @@
 
 module.exports = {
   env: { browser: true, es2020: true },
+  globals: {
+    process: "readonly"
+  },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',

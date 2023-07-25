@@ -1,10 +1,8 @@
-
-
 const Dashboard = () => {
   return (
-    <div>
-      <h1>coming soo0000n !</h1>
-    </div>
+    <>
+      <h1>coming soon</h1>
+    </>
   );
 };
 
