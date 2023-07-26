@@ -11,6 +11,7 @@ import Review from "../page/Review/Review";
 import Dashboard from "../page/Dashboard/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import DashBoardLayout from "../Layoute/DashBoardLayout";
+import MyBookings from "../page/Dashboard/MyBookings/MyBookings";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +58,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element:<Dashboard></Dashboard>
+        element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "/dashboard/mybookings",
+        element: <MyBookings></MyBookings>,
       },
     ],
   },

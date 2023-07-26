@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 /* eslint-disable react/prop-types */
 const BookingModal = ({ booking, selectedDate, setBooking }) => {
-  const { turf_name, address, slots } = booking;
+  const { turf_name, address, slots, logo } = booking;
   const date = format(selectedDate, "PP");
 
   const { user } = useContext(AuthContext);
@@ -42,11 +42,7 @@ const BookingModal = ({ booking, selectedDate, setBooking }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          Swal.fire(
-            "Congratulations!!",
-            "Your Appointment Is fixed!",
-            "success"
-          );
+          Swal.fire("Congratulations!!", "Your Booking Is fixed!", "success");
           window.location.reload();
         } else if (data.message) {
           Swal.fire("sorry", `${data.message}`, "error");
@@ -60,12 +56,20 @@ const BookingModal = ({ booking, selectedDate, setBooking }) => {
         <form
           onSubmit={handleBooking}
           method="dialog"
-          className="modal-box grid grid-cols-1 gap-3 justify-items-center"
+          className="modal-box grid grid-cols-1 gap-3 justify-items-center bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"
         >
+          
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
             ✕
           </button>
-          <h3 className="font-bold text-3xl text-center mb-1">{turf_name}</h3>
+          <img
+            alt="team"
+            className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mx-auto mb-2"
+            src={logo}
+          />
+          <h3 className="font-bold text-3xl text-center mb-1 text-white">
+            {turf_name}
+          </h3>
           <p className="text-lg text-center mb-5">{address}</p>
 
           <input
@@ -133,7 +137,7 @@ const BookingModal = ({ booking, selectedDate, setBooking }) => {
           <input
             type="submit"
             value="submit"
-            className="btn btn-primary w-full max-w-xs mb-5"
+            className="btn btn-primary w-full max-w-xs mb-5 text-white"
           />
         </form>
       </dialog>

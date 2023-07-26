@@ -11,12 +11,13 @@ export default function Navbar() {
   };
 
   return (
-    <div className="bg-white pb-6 sm:pb-8 lg:pb-0">
+    <>
+    <div className=" pb-6 sm:pb-8 lg:pb-0">
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
         <header className=" flex items-center justify-between py-4 md:mb-12 md:py-8 xl:mb-0">
           <a
             href="/"
-            className="inline-flex items-center gap-2.5 text-2xl font-bold  md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-400"
+            className="inline-flex items-center gap-2.5 text-2xl font-bold  md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200"
             aria-label="logo"
           >
             <svg
@@ -66,51 +67,59 @@ export default function Navbar() {
           </a>
 
           <nav className="hidden gap-12 lg:flex">
-            <a href="/" className="text-lg font-semibold text-indigo-500">
+            <a href="/" className="text-lg font-semibold text-cyan-500">
               Home
             </a>
             <a
               href="/booking"
-              className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
+              className="text-lg font-semibold text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
             >
               Booking
             </a>
 
             <a
               href="/about"
-              className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
+              className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
             >
               About
+            </a>
+            <a
+              href="/about"
+              className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
+            >
+              Leader Board
             </a>
 
             {user?.uid ? (
               <>
-                <button
-                  onClick={handleLogout}
-                  className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
-                >
-                  Sign Out
-                </button>
+                
                 <a
                   href="/review"
-                  className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
+                  className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
                 >
-                  review
+                  Review
                 </a>
                 <a
                   href="/dashboard"
-                  className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
+                  className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
                 >
                   Dashboard
                 </a>
+                <button
+                  onClick={handleLogout}
+                  className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
+                >
+                  Sign Out
+                </button>
               </>
             ) : (
               <a
                 href="/login"
-                className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-400 active:text-indigo-900"
+                className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
               >
                 Login
               </a>
+              
             )}
           </nav>
 
@@ -143,5 +152,7 @@ export default function Navbar() {
         </header>
       </div>
     </div>
+    
+    </>
   );
 }
