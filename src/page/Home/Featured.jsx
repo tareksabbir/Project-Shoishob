@@ -30,7 +30,7 @@ export default function Featured() {
               </div>
               <div className="flex flex-wrap -m-3">
                 <div className="xl:w-1/4 md:w-1/2 sm:w-full p-4">
-                  <div className="bg-gray-800 p-6 rounded-lg">
+                  <div className="bg-slate-900 p-6 rounded-lg">
                     <img
                       className="h-40 rounded w-full object-cover object-center mb-6"
                       src={f1}
@@ -45,7 +45,7 @@ export default function Featured() {
                   </div>
                 </div>
                 <div className="xl:w-1/4 md:w-1/2 p-4">
-                  <div className="bg-gray-800 p-6 rounded-lg">
+                  <div className="bg-slate-900 p-6 rounded-lg">
                     <img
                       className="h-40 rounded w-full object-cover object-center mb-6"
                       src={f2}
@@ -60,7 +60,7 @@ export default function Featured() {
                   </div>
                 </div>
                 <div className="xl:w-1/4 md:w-1/2 p-4">
-                  <div className="bg-gray-800 p-6 rounded-lg">
+                  <div className=" bg-slate-900 p-6 rounded-lg">
                     <img
                       className="h-40 rounded w-full object-cover object-center mb-6"
                       src={f3}
@@ -75,7 +75,7 @@ export default function Featured() {
                   </div>
                 </div>
                 <div className="xl:w-1/4 md:w-1/2 p-4">
-                  <div className="bg-gray-800 p-6 rounded-lg">
+                  <div className="bg-slate-900 p-6 rounded-lg">
                     <img
                       className="h-40 rounded w-full object-cover object-center mb-6"
                       src={f4}

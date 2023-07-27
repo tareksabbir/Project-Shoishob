@@ -2,6 +2,7 @@ import { useState } from "react";
 import BookingAvailableSlots from "./BookingAvailableSlots";
 import BookingBanner from "./BookingBanner";
 import PlayZone from "../Home/PlayZone";
+
 //import Practice from "./practice";
 
 export default function BookingRoutes() {
@@ -17,6 +18,7 @@ export default function BookingRoutes() {
       ></BookingAvailableSlots>
       {/* <Practice></Practice> */}
       <PlayZone></PlayZone>
+
     </>
   );
 }

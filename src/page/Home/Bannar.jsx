@@ -14,7 +14,7 @@ export default function Bannar() {
                 Nothing But Sports..
               </h1>
 
-              <p className="lg:w-4/5 text-gray-400 xl:text-lg leading-relaxed mb-8 md:mb-12">
+              <p className="lg:w-4/5 text-gray-400 xl:text-lg leading-relaxed mb-8 md:mb-12 ">
                 Seize the moment and embrace the possibilities that lie before
                 you. Opportunities come and go, fleeting like shooting stars
                 across the night sky. Its in those moments of decision, when you
@@ -168,7 +168,7 @@ export default function Bannar() {
           style={{
             background:
               "linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)",
-            zIndex: -1,
+            zIndex: -4,
           }}
         ></div>
       </main>

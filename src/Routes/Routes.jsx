@@ -12,6 +12,7 @@ import Dashboard from "../page/Dashboard/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import DashBoardLayout from "../Layoute/DashBoardLayout";
 import MyBookings from "../page/Dashboard/MyBookings/MyBookings";
+import TurfDetails from "../page/TurfDetails/TurfDetails";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/booking",
-        element: <BookingRoutes></BookingRoutes>,
+        element: (
+          <PrivateRoute>
+            <BookingRoutes></BookingRoutes>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -45,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/review",
         element: <Review></Review>,
+      },
+      {
+        path: "/turf/:id",
+        element: <TurfDetails></TurfDetails>,
       },
     ],
   },

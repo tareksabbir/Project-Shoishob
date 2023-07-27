@@ -5,11 +5,11 @@ export default function Motivation() {
         <section className="relative">
           <div className="bg-nearest-rgb-23-32-49">
             <div className="mx-auto lg:px-28 px-4 md:px-2">
-              <h1 className="mb-4 lg:mb-10 text-center text-2xl text-gray-800 sm:text-3xl lg:text-8xl md:mb-6 lg:py-3 font-extrabold bg-gradient-to-r from-cyan-400 to-purple-800 text-transparent bg-clip-text">
+              <h1 className="mb-4 lg:mb-10 text-center text-2xl sm:text-3xl lg:text-8xl md:mb-6 lg:py-3 font-extrabold bg-gradient-to-r from-cyan-400 to-purple-800 text-transparent bg-clip-text">
                 About Us
               </h1>
 
-              <p className="mb-6 text-gray-400 sm:text-lg md:mb-8">
+              <p className="mb-6 text-gray-500 sm:text-lg md:mb-8 text-justify">
                 Our project aims to address the growing concern of screen
                 addiction and physical inactivity in children and young people
                 by providing accessible and engaging opportunities for them to
@@ -28,7 +28,7 @@ export default function Motivation() {
                 leadership qualities, self-confidence, and make friends.{" "}
                 <a
                   href="#"
-                  className="text-indigo-500 underline transition duration-100 hover:text-indigo-600 active:text-indigo-700"
+                  className="text-indigo-500 underline transition duration-100 hover:text-indigo-600 active:text-indigo-700 text-justify"
                 ></a>{" "}
                 Our project is not just about promoting physical activity but
                 also aims to create a healthy environment that fosters positive
@@ -64,7 +64,7 @@ export default function Motivation() {
           style={{
             background:
               "linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)",
-              zIndex: -1,
+            zIndex: -1,
           }}
         ></div>
       </main>

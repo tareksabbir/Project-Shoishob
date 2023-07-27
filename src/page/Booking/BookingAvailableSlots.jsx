@@ -1,20 +1,33 @@
 /* eslint-disable react/prop-types */
 
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BookingCard from "./BookingCard";
 import BookingModal from "./BookingModal";
+import { useQuery } from "react-query";
+import Loading from "../Loading/Loading";
 
 export default function BookingAvailableSlots({ selectedDate }) {
-  const [turfs, setTurfs] = useState([]);
   const [booking, setBooking] = useState(null);
   const date = format(selectedDate, "PP");
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/turf?date=${date}`)
-      .then((res) => res.json())
-      .then((data) => setTurfs(data.data));
-  }, [date]);
+  const {
+    data: turfs = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["turfs", date],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/api/v1/turf?date=${date}`);
+      const data = await res.json();
+      return data.data;
+    },
+  });
+
+  if (isLoading) {
+    <Loading></Loading>;
+  }
+
   return (
     <>
       <main className="relative bg-nearest-rgb-23-32-49">
@@ -57,6 +70,7 @@ export default function BookingAvailableSlots({ selectedDate }) {
                 booking={booking}
                 selectedDate={selectedDate}
                 setBooking={setBooking}
+                refetch={refetch}
               ></BookingModal>
             )}
           </section>

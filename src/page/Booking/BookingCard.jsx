@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
 const BookingCard = ({ turf, setBooking }) => {
-  console.log(turf);
   const { logo, turf_name, slots, price } = turf;
   return (
     <>
@@ -27,19 +26,15 @@ const BookingCard = ({ turf, setBooking }) => {
             </p>
             <p className="text-white text-sm p-1 font-bold">{price}</p>
 
-            <button
-              className="text-white bg-primary px-3 py-1 text-xs rounded-md"
-              onClick={() => {
-                setBooking(turf);
-                window.my_modal_3.showModal();
-              }}
+            <label
+              onClick={() => setBooking(turf)}
+              htmlFor="my_modal_7"
+              className=" bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text  px-3 py-1 text-xs rounded-md"
             >
               Book Now
-            </button>
-            
+            </label>
           </div>
         </div>
-        
       </div>
     </>
   );

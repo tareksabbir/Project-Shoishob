@@ -42,7 +42,28 @@ const SignUp = () => {
         };
         updateUserProfile(userInfo)
           .then(() => {
-            reset();
+            const saveUser = { name: data.name, email: data.email };
+            fetch("http://localhost:5000/api/v1/user/create-user", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(saveUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId) {
+                  reset();
+                  Swal.fire(
+                    "Thank You!!",
+                    "Please Verify Your Email First ",
+                    "info"
+                  );
+                  navigate(from, { replace: true });
+                } else {
+                  reset();
+                }
+              });
           })
           .catch((error) => {
             console.log(error.message);
@@ -69,7 +90,17 @@ const SignUp = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+
+        const saveUser = { name: user.displayName, email: user.email };
+        fetch("http://localhost:5000/api/v1/user/create-user", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(saveUser),
+        })
+          .then((res) => res.json())
+          .then(() => {});
         setIsGoogleLogin(true);
         navigate(from, { replace: true });
       })

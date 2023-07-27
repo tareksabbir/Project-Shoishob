@@ -9,8 +9,9 @@ export default function Home() {
     <>
       <Bannar></Bannar>
       <Turf></Turf>
-      <Featured></Featured>
+     
       <Heading />
+      <Featured></Featured>
       <EmailCollect></EmailCollect>
     </>
   );

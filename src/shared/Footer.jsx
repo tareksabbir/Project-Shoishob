@@ -3,7 +3,7 @@ export default function Footer() {
   return (
     <>
       <div>
-        <div className="bg-gray-900">
+        <div className="bg-slate-950">
           <footer className="max-w-screen-2xl px-4 md:px-8 mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12 lg:gap-8 pt-10 lg:pt-12 mb-16">
               <div className="col-span-full lg:col-span-2">

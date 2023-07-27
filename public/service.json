@@ -8,7 +8,7 @@
     "logo": "https://i.postimg.cc/MZCF9mmT/sico.jpg",
     "cover": "https://images.unsplash.com/photo-1529900748604-07564a03e7a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
     "price": "3000",
-    "person": [5, 8, 10],
+    "person": ["12", "14", "16"],
     "slots": [
       "04.00 PM - 5.00 PM",
       "05.00 PM - 6.00 PM",
@@ -29,7 +29,7 @@
     "logo": "https://i.postimg.cc/fTkRvZ5Z/ctgt.jpg",
     "cover": "https://images.unsplash.com/photo-1529900672901-908be5302554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
     "price": "3000",
-    "person": [5, 8, 10],
+    "person": ["12", "14", "16"],
     "slots": [
       "04.00 PM - 5.00 PM",
       "05.00 PM - 6.00 PM",
@@ -50,7 +50,7 @@
     "logo": "https://i.postimg.cc/xdLB5470/akc.jpg",
     "cover": "https://images.unsplash.com/photo-1616514169928-a1e40c6f791c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
     "price": "3000",
-    "person": [5, 8, 10],
+    "person": ["12", "14", "16"],
     "slots": [
       "04.00 PM - 5.00 PM",
       "05.00 PM - 6.00 PM",
@@ -71,7 +71,7 @@
     "logo": "https://i.postimg.cc/T3Vc4vRH/acm.jpg",
     "cover": "https://images.unsplash.com/photo-1536122985607-4fe00b283652?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
     "price": "3000",
-    "person": [5, 8, 10],
+    "person": ["12", "14", "16"],
     "slots": [
       "04.00 PM - 5.00 PM",
       "05.00 PM - 6.00 PM",
@@ -92,7 +92,7 @@
     "logo": "https://i.postimg.cc/3RcjvKBW/ctgg.jpg",
     "cover": "https://images.unsplash.com/photo-1506079906501-adbb5907b720?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
     "price": "3000",
-    "person": [5, 8, 10],
+    "person": ["12", "14", "16"],
     "slots": [
       "04.00 PM - 5.00 PM",
       "05.00 PM - 6.00 PM",
@@ -113,7 +113,7 @@
     "logo": "https://i.postimg.cc/SKZ1gbdb/fortune.jpg",
     "cover": "https://images.unsplash.com/photo-1509419573860-712f07d5310f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
     "price": "3000",
-    "person": [5, 8, 10],
+    "person": ["12", "14", "16"],
     "slots": [
       "04.00 PM - 5.00 PM",
       "05.00 PM - 6.00 PM",
@@ -134,7 +134,7 @@
     "logo": "https://i.postimg.cc/vHsBQJ7s/GR-Sports.jpg",
     "cover": "https://images.unsplash.com/photo-1514514757092-71ebbc3db4e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
     "price": "3000",
-    "person": [5, 8, 10],
+    "person": ["12", "14", "16"],
     "slots": [
       "04.00 PM - 5.00 PM",
       "05.00 PM - 6.00 PM",
@@ -155,7 +155,7 @@
     "logo": "https://i.postimg.cc/TP88vDWY/khulshi.jpg",
     "cover": "https://images.unsplash.com/photo-1540753003857-32db1552eead?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
     "price": "3000",
-    "person": [5, 8, 10],
+    "person": ["12", "14", "16"],
     "slots": [
       "04.00 PM - 5.00 PM",
       "05.00 PM - 6.00 PM",
@@ -176,7 +176,7 @@
     "logo": "https://i.postimg.cc/ry77r4QG/Chawk-Bazar.jpg",
     "cover": "https://images.unsplash.com/photo-1605135693932-f1d6fb1be3cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
     "price": "3000",
-    "person": [5, 8, 10],
+    "person": ["12", "14", "16"],
     "slots": [
       "04.00 PM - 5.00 PM",
       "05.00 PM - 6.00 PM",
@@ -197,7 +197,7 @@
     "logo": "https://i.postimg.cc/Mp9Dy2zk/Choudhury.jpg",
     "cover": "https://images.unsplash.com/photo-1587329310686-91414b8e3cb7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
     "price": "3000",
-    "person": [5, 8, 10],
+    "person": ["12", "14", "16"],
     "slots": [
       "04.00 PM - 5.00 PM",
       "05.00 PM - 6.00 PM",
