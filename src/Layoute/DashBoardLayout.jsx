@@ -1,15 +1,46 @@
 /* eslint-disable react/no-unknown-property */
-import { Link, Outlet } from "react-router-dom";
-
+import { Link, Navigate, Outlet } from "react-router-dom";
 import "boxicons";
-import { AuthContext } from "../Context/AuthProvider";
 import { useContext } from "react";
+import { AuthContext } from "../Context/AuthProvider";
+import { useQuery } from "react-query";
+
 
 const DashBoardLayout = () => {
+  // todo: load data for admin
+
+  const { user } = useContext(AuthContext);
+
+  const {
+    data: isAdmin, 
+  } = useQuery(["isAdmin", user?.email], async () => {
+    const res = await fetch(
+      `http://localhost:5000/api/v1/user/${user?.email}`,
+      {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("access_token")}`,
+        },
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch admin data");
+    }
+
+    const data = await res.json();
+    return data.isAdmin;
+  });
+
+
+
+
+  const from = location.state?.from?.pathname || "/";
   const { logOut } = useContext(AuthContext);
   const handleLogout = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        Navigate(from, { replace: true });
+      })
       .catch((err) => console.log(err));
   };
   return (
@@ -88,46 +119,101 @@ const DashBoardLayout = () => {
                   </svg>
                   Shoishob
                 </a>
+                {isAdmin ? (
+                  <>
+                    <li>
+                      <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon name="home" color="white"></box-icon>
+                        Admin Home
+                      </a>
+                    </li>
+                    <li>
+                      <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon name="user" color="white"></box-icon>
+                        Turf Profile
+                      </a>
+                    </li>
+                    <li>
+                      <Link
+                        to="/dashboard/allUsers"
+                        className="  text-gray-400 transition duration-100 hover:text-white active:bg-slate-100   px-10"
+                      >
+                        <box-icon name="user-circle" color="white"></box-icon>
+                        All User
+                      </Link>
+                      <Link
+                        to="/dashboard/allAdmin"
+                        className="  text-gray-400 transition duration-100 hover:text-white active:bg-slate-100   px-10"
+                      >
+                        <box-icon name="user-circle" color="white"></box-icon>
+                        All Admin
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon name="bookmark" color="white"></box-icon>
+                        All Booking
+                      </Link>
+                    </li>
+                    <li>
+                      <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon
+                          name="bar-chart-square"
+                          color="white"
+                        ></box-icon>
+                        Leader Board
+                      </a>
+                    </li>
 
-                <li>
-                  <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                    <box-icon name="user" color="white"></box-icon>
-                    My Profile
-                  </a>
-                </li>
-                <li>
-                  <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                    <box-icon name="user-circle" color="white"></box-icon>
-                    All User
-                  </a>
-                </li>
-                <li>
-                  <Link
-                    to="/dashboard/mybookings"
-                    className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
-                  >
-                    <box-icon name="bookmark" color="white"></box-icon>
-                    My Booking
-                  </Link>
-                </li>
-                <li>
-                  <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                    <box-icon name="bar-chart-square" color="white"></box-icon>
-                    Leader Board
-                  </a>
-                </li>
-                <li>
-                  <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                    <box-icon name="comment" color="white"></box-icon>
-                    Give Review
-                  </a>
-                </li>
-                <li>
-                  <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                    <box-icon name="purchase-tag" color="white"></box-icon>
-                    Payment
-                  </a>
-                </li>
+                    <li>
+                      <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon name="purchase-tag" color="white"></box-icon>
+                        Payment
+                      </a>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon name="user" color="white"></box-icon>
+                        My Profile
+                      </a>
+                    </li>
+
+                    <li>
+                      <Link
+                        to="/dashboard/mybookings"
+                        className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
+                        <box-icon name="bookmark" color="white"></box-icon>
+                        My Booking
+                      </Link>
+                    </li>
+                    <li>
+                      <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon
+                          name="bar-chart-square"
+                          color="white"
+                        ></box-icon>
+                        Leader Board
+                      </a>
+                    </li>
+                    <li>
+                      <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon name="comment" color="white"></box-icon>
+                        Give Review
+                      </a>
+                    </li>
+                    <li>
+                      <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon name="purchase-tag" color="white"></box-icon>
+                        Payment
+                      </a>
+                    </li>
+                  </>
+                )}
+
                 <hr className="mt-5 mb-5" />
                 <li>
                   <Link

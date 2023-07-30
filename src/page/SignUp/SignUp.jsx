@@ -90,8 +90,8 @@ const SignUp = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-
-        const saveUser = { name: user.displayName, email: user.email };
+        console.log(user)
+        const saveUser = { name: user.displayName, email: user.email ,photo:user.photoURL};
         fetch("http://localhost:5000/api/v1/user/create-user", {
           method: "POST",
           headers: {

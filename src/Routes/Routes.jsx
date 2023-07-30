@@ -13,6 +13,8 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import DashBoardLayout from "../Layoute/DashBoardLayout";
 import MyBookings from "../page/Dashboard/MyBookings/MyBookings";
 import TurfDetails from "../page/TurfDetails/TurfDetails";
+import AllUsers from "../page/Dashboard/AllUsers/AllUsers";
+import AllAdmin from "../page/Dashboard/AlllAdmin/AllAdmin";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +74,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/mybookings",
         element: <MyBookings></MyBookings>,
+      },
+      {
+        path: "/dashboard/allUsers",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "/dashboard/allAdmin",
+        element: <AllAdmin></AllAdmin>,
       },
     ],
   },

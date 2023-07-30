@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }) => {
   if (loading) {
     return (
       <>
-        <div className="bg-slate-900 w-full min-h-screen flex justify-center items-center">
+        <div className=" bg-slate-900 w-full min-h-screen flex justify-center items-center">
           <div className="flex min-h-screen w-full items-center justify-center bg-slate-900">
             <div className="flex items-center justify-center">
               <a

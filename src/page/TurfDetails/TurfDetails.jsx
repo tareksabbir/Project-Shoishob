@@ -5,16 +5,20 @@ import PlayZone from "../Home/PlayZone";
 import Heading from "../Home/Heading";
 import GoBooking from "./GoBooking";
 
+
 const TurfDetails = () => {
   const [turfDetails, setTurfDetails] = useState([]);
   const { id } = useParams();
-  const { cover, logo, turf_name, address, about, rules } = turfDetails;
+   const { cover, logo, turf_name, address, about, rules } = turfDetails;
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/v1/turf/${id}`)
       .then((res) => res.json())
       .then((data) => setTurfDetails(data.data));
   }, [id]);
+
+ 
+
   return (
     <>
       <section className="text-gray-600 body-font relative bg-nearest-rgb-23-32-49">
