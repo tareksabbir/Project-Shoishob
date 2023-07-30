@@ -15,6 +15,7 @@ import MyBookings from "../page/Dashboard/MyBookings/MyBookings";
 import TurfDetails from "../page/TurfDetails/TurfDetails";
 import AllUsers from "../page/Dashboard/AllUsers/AllUsers";
 import AllAdmin from "../page/Dashboard/AlllAdmin/AllAdmin";
+import AllBookings from "../page/Dashboard/AllBookings.jsx/AllBookings";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/allAdmin",
         element: <AllAdmin></AllAdmin>,
+      },
+      {
+        path: "/dashboard/allBookings",
+        element: <AllBookings></AllBookings>,
       },
     ],
   },

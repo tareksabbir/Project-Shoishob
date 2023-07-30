@@ -5,15 +5,12 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { useQuery } from "react-query";
 
-
 const DashBoardLayout = () => {
   // todo: load data for admin
 
   const { user } = useContext(AuthContext);
 
-  const {
-    data: isAdmin, 
-  } = useQuery(["isAdmin", user?.email], async () => {
+  const { data: isAdmin } = useQuery(["isAdmin", user?.email], async () => {
     const res = await fetch(
       `http://localhost:5000/api/v1/user/${user?.email}`,
       {
@@ -31,8 +28,26 @@ const DashBoardLayout = () => {
     return data.isAdmin;
   });
 
+  const { data: isSuperAdmin } = useQuery(
+    ["isSuperAdmin", user?.email],
+    async () => {
+      const res = await fetch(
+        `http://localhost:5000/api/v1/admin/${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
 
+      if (!res.ok) {
+        throw new Error("Failed to fetch admin data");
+      }
 
+      const data = await res.json();
+      return data.isSuperAdmin;
+    }
+  );
 
   const from = location.state?.from?.pathname || "/";
   const { logOut } = useContext(AuthContext);
@@ -43,6 +58,7 @@ const DashBoardLayout = () => {
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <>
       <main className="relative bg-nearest-rgb-23-32-49">
@@ -119,7 +135,8 @@ const DashBoardLayout = () => {
                   </svg>
                   Shoishob
                 </a>
-                {isAdmin ? (
+
+                {isSuperAdmin ? (
                   <>
                     <li>
                       <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
@@ -149,6 +166,47 @@ const DashBoardLayout = () => {
                         All Admin
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        to="/dashboard/allBookings"
+                        className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
+                        <box-icon name="bookmark" color="white"></box-icon>
+                        All Booking
+                      </Link>
+                    </li>
+                    <li>
+                      <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon
+                          name="bar-chart-square"
+                          color="white"
+                        ></box-icon>
+                        Leader Board
+                      </a>
+                    </li>
+
+                    <li>
+                      <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon name="purchase-tag" color="white"></box-icon>
+                        Payment
+                      </a>
+                    </li>
+                  </>
+                ) : isAdmin ? (
+                  <>
+                    <li>
+                      <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon name="home" color="white"></box-icon>
+                        Admin Home
+                      </a>
+                    </li>
+                    <li>
+                      <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                        <box-icon name="user" color="white"></box-icon>
+                        Turf Profile
+                      </a>
+                    </li>
+
                     <li>
                       <Link className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
                         <box-icon name="bookmark" color="white"></box-icon>

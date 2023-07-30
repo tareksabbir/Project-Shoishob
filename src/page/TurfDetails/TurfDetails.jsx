@@ -2,22 +2,23 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PlayZone from "../Home/PlayZone";
-import Heading from "../Home/Heading";
 import GoBooking from "./GoBooking";
-
+import Heading from "../Home/heading";
 
 const TurfDetails = () => {
   const [turfDetails, setTurfDetails] = useState([]);
   const { id } = useParams();
-   const { cover, logo, turf_name, address, about, rules } = turfDetails;
+  const { cover, logo, turf_name, address, about, rules } = turfDetails;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/turf/${id}`)
+    fetch(`http://localhost:5000/api/v1/turf/${id}`, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("access_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setTurfDetails(data.data));
   }, [id]);
-
- 
 
   return (
     <>

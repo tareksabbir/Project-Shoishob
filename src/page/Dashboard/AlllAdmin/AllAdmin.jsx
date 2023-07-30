@@ -27,9 +27,6 @@ const AllAdmin = () => {
         const makeAdmin = { role: "superAdmin" };
         fetch(`http://localhost:5000/api/v1/admin/${id}`, {
           method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
           body: JSON.stringify(makeAdmin),
         })
           .then((res) => res.json())

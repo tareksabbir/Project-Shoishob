@@ -31,6 +31,7 @@ const AllUsers = () => {
       if (result.isConfirmed) {
         fetch(`http://localhost:5000/api/v1/user/${id}`, {
           method: "DELETE",
+          
         }).then(() => {
           Swal.fire("Done!!", "User Deleted Successfully ", "success");
           refetch();

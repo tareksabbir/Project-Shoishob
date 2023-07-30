@@ -18,7 +18,9 @@ export default function BookingAvailableSlots({ selectedDate }) {
   } = useQuery({
     queryKey: ["turfs", date],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/api/v1/turf?date=${date}`);
+      const res = await fetch(
+        `http://localhost:5000/api/v1/turf?date=${date}`
+      );
       const data = await res.json();
       return data.data;
     },

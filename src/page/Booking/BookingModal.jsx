@@ -15,6 +15,7 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
     event.preventDefault();
     const form = event.target;
     const turf = turf_name;
+    const photo = logo;
     const name = form.name.value;
     const email = form.email.value;
     const slot = form.slot.value;
@@ -30,13 +31,12 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
       phone,
       address,
       price,
+      photo,
 
       selectedDate: date,
     };
 
-
-
-    fetch("http://localhost:5000/api/v1/turf-booking", {
+    fetch("http://localhost:5000/api/v1/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -116,8 +116,6 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
                 </option>
               ))}
             </select>
-
-           
 
             <input
               name="phone"
