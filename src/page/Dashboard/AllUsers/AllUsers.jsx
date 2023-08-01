@@ -141,7 +141,7 @@ const AllUsers = () => {
                   {user.email}
                   <br />
                   <span className="badge badge-ghost badge-sm">
-                    id : {user._id}
+                    {user._id}
                   </span>
                 </td>
 

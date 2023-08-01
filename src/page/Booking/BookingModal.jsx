@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 /* eslint-disable react/prop-types */
 const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
-  const { turf_name, address, slots, logo, price } = booking;
+  const { turf_name, address, slots, logo, price,ownerId } = booking;
   console.log(booking);
   const date = format(selectedDate, "PP");
 
@@ -32,7 +32,7 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
       address,
       price,
       photo,
-
+      ownerId,
       selectedDate: date,
     };
 

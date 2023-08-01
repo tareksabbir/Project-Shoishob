@@ -19,6 +19,7 @@ import MyProfile from "../page/Dashboard/MyProfile/MyProfile";
 import Main from "../Layoute/Main";
 import UserMyBooking from "../page/Dashboard/UserMyBooking/UserMyBooking";
 import AllTurfs from "../page/Dashboard/AllTurfs/AllTurfs";
+import AddTurf from "../page/Dashboard/AddTurf/AddTurf";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/allTurfs",
         element: <AllTurfs></AllTurfs>,
+      },
+      {
+        path: "/dashboard/addTurf",
+        element: <AddTurf></AddTurf>,
       },
       {
         path: "/dashboard/usermybookings",

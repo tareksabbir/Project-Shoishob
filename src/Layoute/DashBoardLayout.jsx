@@ -138,9 +138,25 @@ const DashBoardLayout = () => {
                       </a>
                     </li>
                     <li>
-                      <Link to="/dashboard/allTurfs" className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                        <box-icon name="user" color="white"></box-icon>
-                        All Turf 
+                      <Link
+                        to="/dashboard/allTurfs"
+                        className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
+                        <box-icon name="hive" color="white"></box-icon>
+                        All Turf
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/dashboard/addTurf"
+                        className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
+                        <box-icon
+                          type="solid"
+                          name="component"
+                          color="white"
+                        ></box-icon>
+                        Add Turf
                       </Link>
                     </li>
                     <li>
@@ -155,7 +171,10 @@ const DashBoardLayout = () => {
                         to="/dashboard/allAdmin"
                         className="  text-gray-400 transition duration-100 hover:text-white active:bg-slate-100   px-10"
                       >
-                        <box-icon name="user-circle" color="white"></box-icon>
+                        <box-icon
+                          name="shield-quarter"
+                          color="white"
+                        ></box-icon>
                         All Admin
                       </Link>
                     </li>
@@ -170,10 +189,7 @@ const DashBoardLayout = () => {
                     </li>
                     <li>
                       <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                        <box-icon
-                          name="bar-chart-square"
-                          color="white"
-                        ></box-icon>
+                        <box-icon name="trophy" color="white"></box-icon>
                         Leader Board
                       </a>
                     </li>
@@ -198,29 +214,32 @@ const DashBoardLayout = () => {
                         to="/dashboard/myProfile"
                         className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
                       >
-                        <box-icon name="user" color="white"></box-icon>
+                        <box-icon name="user-circle" color="white"></box-icon>
                         My Profile
                       </Link>
                     </li>
                     <li>
                       <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                        <box-icon name="user" color="white"></box-icon>
+                        <box-icon name="badge-check" color="white"></box-icon>
                         Turf Profile
                       </a>
                     </li>
 
                     <li>
-                      <Link className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                        <box-icon name="bookmark" color="white"></box-icon>
+                      <Link
+                       
+                        className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
+                        <box-icon
+                          name="calendar-event"
+                          color="white"
+                        ></box-icon>
                         All Booking
                       </Link>
                     </li>
                     <li>
                       <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                        <box-icon
-                          name="bar-chart-square"
-                          color="white"
-                        ></box-icon>
+                        <box-icon name="trophy" color="white"></box-icon>
                         Leader Board
                       </a>
                     </li>
@@ -244,7 +263,6 @@ const DashBoardLayout = () => {
                       </Link>
                     </li>
 
-                
                     <li>
                       <Link
                         to="/dashboard/usermybookings"
@@ -256,10 +274,7 @@ const DashBoardLayout = () => {
                     </li>
                     <li>
                       <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                        <box-icon
-                          name="bar-chart-square"
-                          color="white"
-                        ></box-icon>
+                        <box-icon name="trophy" color="white"></box-icon>
                         Leader Board
                       </a>
                     </li>
