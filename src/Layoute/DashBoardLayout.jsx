@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unknown-property */
+
 import { Link, Navigate, Outlet } from "react-router-dom";
 import "boxicons";
 import { useContext } from "react";
@@ -20,10 +21,6 @@ const DashBoardLayout = () => {
       }
     );
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch admin data");
-    }
-
     const data = await res.json();
     return data.isAdmin;
   });
@@ -39,10 +36,6 @@ const DashBoardLayout = () => {
           },
         }
       );
-
-      if (!res.ok) {
-        throw new Error("Failed to fetch admin data");
-      }
 
       const data = await res.json();
       return data.isSuperAdmin;
@@ -145,10 +138,10 @@ const DashBoardLayout = () => {
                       </a>
                     </li>
                     <li>
-                      <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                      <Link to="/dashboard/allTurfs" className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
                         <box-icon name="user" color="white"></box-icon>
-                        Turf Profile
-                      </a>
+                        All Turf 
+                      </Link>
                     </li>
                     <li>
                       <Link
@@ -201,6 +194,15 @@ const DashBoardLayout = () => {
                       </a>
                     </li>
                     <li>
+                      <Link
+                        to="/dashboard/myProfile"
+                        className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
+                        <box-icon name="user" color="white"></box-icon>
+                        My Profile
+                      </Link>
+                    </li>
+                    <li>
                       <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
                         <box-icon name="user" color="white"></box-icon>
                         Turf Profile
@@ -233,15 +235,19 @@ const DashBoardLayout = () => {
                 ) : (
                   <>
                     <li>
-                      <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                      <Link
+                        to="/dashboard/myProfile"
+                        className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
                         <box-icon name="user" color="white"></box-icon>
                         My Profile
-                      </a>
+                      </Link>
                     </li>
 
+                
                     <li>
                       <Link
-                        to="/dashboard/mybookings"
+                        to="/dashboard/usermybookings"
                         className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
                       >
                         <box-icon name="bookmark" color="white"></box-icon>

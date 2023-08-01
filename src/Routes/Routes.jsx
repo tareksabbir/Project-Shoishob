@@ -1,8 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../Layoute/main";
+
 import Home from "../page/Home/Home";
 import About from "../page/About/About";
-
 import BookingRoutes from "../page/Booking/BookingRoutes";
 import Contact from "../page/Contact/Contact";
 import Login from "../page/Login/Login";
@@ -11,11 +10,15 @@ import Review from "../page/Review/Review";
 import Dashboard from "../page/Dashboard/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import DashBoardLayout from "../Layoute/DashBoardLayout";
-import MyBookings from "../page/Dashboard/MyBookings/MyBookings";
 import TurfDetails from "../page/TurfDetails/TurfDetails";
 import AllUsers from "../page/Dashboard/AllUsers/AllUsers";
 import AllAdmin from "../page/Dashboard/AlllAdmin/AllAdmin";
-import AllBookings from "../page/Dashboard/AllBookings.jsx/AllBookings";
+import AllBookings from "../page/Dashboard/AllBookings/AllBookings";
+import SuperAdminRoute from "./SuperAdminRoute/SuperAdminRoute";
+import MyProfile from "../page/Dashboard/MyProfile/MyProfile";
+import Main from "../Layoute/Main";
+import UserMyBooking from "../page/Dashboard/UserMyBooking/UserMyBooking";
+import AllTurfs from "../page/Dashboard/AllTurfs/AllTurfs";
 
 const router = createBrowserRouter([
   {
@@ -73,9 +76,33 @@ const router = createBrowserRouter([
         element: <Dashboard></Dashboard>,
       },
       {
-        path: "/dashboard/mybookings",
-        element: <MyBookings></MyBookings>,
+        path: "/dashboard/myProfile",
+        element: <MyProfile></MyProfile>,
       },
+      {
+        path: "/dashboard/allTurfs",
+        element: <AllTurfs></AllTurfs>,
+      },
+      {
+        path: "/dashboard/usermybookings",
+        element: <UserMyBooking></UserMyBooking>,
+      },
+      // {
+      //   path: "/dashboard/allUsers",
+      //   element: (
+      //     <SuperAdminRoute>
+      //       <AllUsers></AllUsers>
+      //     </SuperAdminRoute>
+      //   ),
+      // },
+      // {
+      //   path: "/dashboard/allAdmin",
+      //   element: (
+      //     <SuperAdminRoute>
+      //       <AllAdmin></AllAdmin>
+      //     </SuperAdminRoute>
+      //   ),
+      // },
       {
         path: "/dashboard/allUsers",
         element: <AllUsers></AllUsers>,
@@ -86,7 +113,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/allBookings",
-        element: <AllBookings></AllBookings>,
+        element: (
+          <SuperAdminRoute>
+            <AllBookings></AllBookings>
+          </SuperAdminRoute>
+        ),
       },
     ],
   },
