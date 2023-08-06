@@ -77,11 +77,11 @@ const MyProfile = () => {
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-                    <div className="relative">
+                    <div>
                       <img
-                        alt="Profile Picture"
-                        src={userData?.photo}
-                        className="shadow-xl rounded-full w-32 h-auto border-none max-w-150-px mx-auto "
+                        alt="Upload Profile Picture"
+                        src={user?.photoURL}
+                        className="rounded-full mt-5 w-32"
                       />
                     </div>
                   </div>
@@ -181,6 +181,3 @@ const MyProfile = () => {
 };
 
 export default MyProfile;
-
-
-

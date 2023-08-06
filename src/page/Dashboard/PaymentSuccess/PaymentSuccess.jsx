@@ -1,16 +1,19 @@
-import { useContext } from "react";
 import { useQuery } from "react-query";
-import Swal from "sweetalert2";
-import { AuthContext } from "../../../Context/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import Loading from "../../Loading/Loading";
+import print from "../../../assets/icons/icons8-print-48.png";
+import coin from "../../../assets/icons/star (1).png";
 
-const UserMyBooking = () => {
-  const { user } = useContext(AuthContext);
-  const { data: booking = [], refetch } = useQuery(
-    ["booking", user?.email],
+const PaymentSuccess = () => {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const transactionId = query.get("transactionId");
+
+  const { data: booking = [], isLoading } = useQuery(
+    ["booking", transactionId],
     async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/bookings/email/${user?.email}`,
+        `http://localhost:5000/api/v1/bookings/payment/details/${transactionId}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -22,41 +25,24 @@ const UserMyBooking = () => {
     }
   );
 
-  //   console.log(userBooking)
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  console.log(booking);
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You Wanted Delete This Booking!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#5ac5a6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
-          method: "DELETE",
-        }).then(() => {
-          Swal.fire("Done!!", "Booking Deleted Successfully ", "success");
-          refetch();
-        });
-      }
-    });
-  };
   return (
     <>
-      <div className="overflow-x-auto lg:p-20">
+      <div className="overflow-x-auto lg:p-20 lg:py-40">
+        
         <table className="table bg-slate-900">
           {/* head */}
           <thead>
             <tr>
-              <th className=" bg-slate-700 rounded-tl-xl py-4">
-                <label>Booking</label>
+              <th className=" bg-slate-700 text-slate-300 rounded-tl-xl py-4">
+                Turf Name
               </th>
-              <th className=" bg-slate-700 text-slate-300">Turf Name</th>
               <th className=" bg-slate-700 text-slate-300">
-                Email & Booking Id
+                Transaction Id 
               </th>
 
               <th className=" bg-slate-700 text-slate-300">Date & Slots</th>
@@ -64,19 +50,14 @@ const UserMyBooking = () => {
               <th className=" bg-slate-700 text-slate-300 ">Turf Details</th>
               <th className=" bg-slate-700 text-slate-300 ">Payment </th>
               <th className=" bg-slate-700 text-slate-300 rounded-tr-xl">
-                Action
+                Invoice
               </th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            {booking.map((booked, index) => (
+            {booking.map((booked) => (
               <tr key={booked._id}>
-                <th>
-                  <label>
-                    <p>{index + 1}</p>
-                  </label>
-                </th>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
@@ -94,10 +75,10 @@ const UserMyBooking = () => {
                   </div>
                 </td>
                 <td>
-                  {booked.email}
-                  <br />
-                  <span className="badge badge-ghost badge-sm">
-                    id : {booked._id}
+         
+                 
+                  <span>
+                    trx_id : {booked.transactionId}
                   </span>
                 </td>
 
@@ -123,14 +104,14 @@ const UserMyBooking = () => {
                       </button>
                     </Link>
                   ) : (
-                    <button className="btn btn-circle bg-success text-white">
-                      <box-icon name="check" color="white"></box-icon>
+                    <button>
+                      <img src={coin} className="w-10"></img>
                     </button>
                   )}
                 </td>
                 <td>
-                  <button onClick={() => handleDelete(booked._id)}>
-                    <box-icon name="trash" color="gray"></box-icon>
+                  <button className="btn btn-circle bg-cyan-700 text-white" onClick={()=>window.print()}>
+                    <img src={print} alt="" />
                   </button>
                 </td>
               </tr>
@@ -142,4 +123,10 @@ const UserMyBooking = () => {
   );
 };
 
-export default UserMyBooking;
+export default PaymentSuccess;
+
+
+
+
+
+

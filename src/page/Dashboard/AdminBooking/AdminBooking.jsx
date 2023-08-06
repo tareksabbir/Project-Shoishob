@@ -1,16 +1,41 @@
+import { useContext } from "react";
 import { useQuery } from "react-query";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../Context/AuthProvider";
+import Loading from "../../Loading/Loading";
 
-const AllBookings = () => {
-  const { data: booking = [], refetch } = useQuery(["booking"], async () => {
-    const res = await fetch("http://localhost:5000/api/v1/bookings", {
-      headers: {
-        authorization: `bearer ${localStorage.getItem("access_token")}`,
-      },
-    });
-    const data = await res.json();
-    return data.data;
-  });
+const AdminBooking = () => {
+  const { user, loading } = useContext(AuthContext);
+  const { data: owner, isLoading } = useQuery(
+    ["owner", user?.email],
+    async () => {
+      const res = await fetch(
+        `http://localhost:5000/api/v1/user/email/${user?.email}`
+      );
+      const data = await res.json();
+      return data.data;
+    }
+  );
+
+  const { data: booking = [], refetch } = useQuery(
+    ["booking", owner?._id],
+    async () => {
+      if (owner) {
+        const res = await fetch(
+          `http://localhost:5000/api/v1/bookings/?ownerId=${owner?._id}`
+        );
+        const data = await res.json();
+        return data.data;
+      }
+      return [];
+    }
+  );
+
+  if (loading || isLoading) {
+    return <Loading></Loading>;
+  }
+
+  //console.log(booking);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -32,7 +57,6 @@ const AllBookings = () => {
       }
     });
   };
-
   return (
     <>
       <div className="overflow-x-auto lg:p-20">
@@ -115,4 +139,4 @@ const AllBookings = () => {
   );
 };
 
-export default AllBookings;
+export default AdminBooking;

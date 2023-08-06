@@ -1,94 +1,65 @@
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
+import { useQuery } from "react-query";
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+import { useParams } from "react-router-dom";
+import Loading from "../../Loading/Loading";
 
-const AddTurf = () => {
-  const { register, handleSubmit,reset } = useForm();
+const Payment = () => {
+  const { id } = useParams();
+  const { register, handleSubmit } = useForm();
+  const { data: booking, isLoading } = useQuery(["booking", id], async () => {
+    const res = await fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("access_token")}`,
+      },
+    });
 
-  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
+    const data = await res.json();
+    return data.data;
+  });
 
-  const handleForm = async (data) => {
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  //console.log(booking);
 
-    const logoFormData = new FormData();
-    logoFormData.append("image", data.logo[0]);
+  const handleForm = (data) => {
+    const bookingDataUpdate = {
+      phone: data.phone,
+      address: data.address,
+      city: data.city,
+      person: data.person,
+    };
 
-    const coverFormData = new FormData();
-    coverFormData.append("image", data.cover[0]);
-
-    // First, upload the logo image
-    fetch(img_hosting_url, {
-      method: "POST",
-      body: logoFormData,
+    fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingDataUpdate),
     })
       .then((res) => res.json())
-      .then((logoResponse) => {
-        const logoUrl = logoResponse.data.display_url;
-
-        // After logo image upload, upload the cover image
-        fetch(img_hosting_url, {
-          method: "POST",
-          body: coverFormData,
-        })
-          .then((res) => res.json())
-          .then((coverResponse) => {
-            const coverUrl = coverResponse.data.display_url;
-
-            // Now, you have both logoUrl and coverUrl
-            const saveTurf = {
-              turf_name: data.turf_name,
-              email: data.email,
-              ownerId: data.ownerId,
-              ownerPhone: data.ownerPhone,
-              address: data.address,
-              city: data.city,
-              price: data.price,
-              logo: logoUrl,
-              cover: coverUrl,
-              about: data.about,
-              rules: data.rules,
-            };
-            fetch("http://localhost:5000/api/v1/turf/post-turf-data", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(saveTurf),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data) {
-                  reset();
-                  Swal.fire("DONE!!", "Data inserted successfully", "success");
-                } else {
-                  reset();
-                }
-              });
-          })
-          .catch((error) => {
-            console.error("Error uploading cover image:", error);
-          });
-      })
-      .catch((error) => {
-        console.error("Error uploading logo image:", error);
+      .then((data) => {
+        window.location.replace(data.url)
+        console.log(data);
       });
   };
 
   return (
     <>
-      <main className="relative py-10 bg-gray-950 px-10">
+      <main className="relative py-5 bg-gray-950 px-10">
         <div className="relative z-10 max-w-screen-xl mx-auto text-gray-600 sm:px-4 md:px-8">
           <div className="mt-12 mx-auto px-4 p-8 sm:px-8 sm:rounded-xl">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6  rounded-lg bg-blueGray-100 border-0 bg-white p-10 shadow-2xl shadow-slate-700">
-              <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+              <div className="flex-auto px-4 lg:px-10 py-8 pt-0">
                 <form onSubmit={handleSubmit(handleForm)}>
-                  <div className="max-w-lg space-y-3 px-4 sm:mx-auto sm:text-center sm:px-0 mb-20">
-                    <h3 className="text-black font-semibold">Admin</h3>
+                  <div className="max-w-lg space-y-3 px-4 sm:mx-auto sm:text-center sm:px-0 mb-14">
+                    <h3 className="text-black font-semibold">Payment</h3>
                     <p className="bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-3xl font-bold sm:text-4xl">
-                      Add Turf Details
+                      Make Payment For Your Booking
                     </p>
                     <p className="text-gray-900">
-                      Please do not submit with out fill up all the section
+                      Please make sure your informations
                     </p>
                   </div>
                   <div className="flex flex-wrap">
@@ -98,15 +69,14 @@ const AddTurf = () => {
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Turf Name*
+                          Turf Name
                         </label>
                         <input
                           type="text"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("turf_name", {
-                            required: true,
-                          })}
+                          {...register("turf_name")}
                           placeholder="Turf Name"
+                          value={booking.turf}
                         />
                       </div>
                     </div>
@@ -116,15 +86,14 @@ const AddTurf = () => {
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Owner Email address*
+                          Your Email address
                         </label>
                         <input
                           type="email"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("email", {
-                            required: true,
-                          })}
-                          placeholder="Owner Email address"
+                          {...register("email")}
+                          placeholder="Your Email address"
+                          value={booking.email}
                         />
                       </div>
                     </div>
@@ -135,15 +104,14 @@ const AddTurf = () => {
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Owner Id*
+                          Booking Id
                         </label>
                         <input
                           type="text"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("ownerId", {
-                            required: true,
-                          })}
+                          {...register("bookingId")}
                           placeholder="Owner Id"
+                          value={booking._id}
                         />
                       </div>
                     </div>
@@ -153,15 +121,14 @@ const AddTurf = () => {
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Owner phone*
+                          Your Phone*
                         </label>
                         <input
                           type="text"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("ownerPhone", {
-                            required: true,
-                          })}
-                          placeholder="Owner phone Number"
+                          {...register("phone")}
+                          placeholder="Your phone Number"
+                          defaultValue={booking.phone}
                         />
                       </div>
                     </div>
@@ -181,10 +148,9 @@ const AddTurf = () => {
                         <input
                           type="text"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("address", {
-                            required: true,
-                          })}
+                          {...register("address")}
                           placeholder="Turf Address"
+                          defaultValue={booking.address}
                         />
                       </div>
                     </div>
@@ -200,10 +166,9 @@ const AddTurf = () => {
                         <input
                           type="text"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("city", {
-                            required: true,
-                          })}
+                          {...register("city")}
                           placeholder="City"
+                          defaultValue={"Chittagong"}
                         />
                       </div>
                     </div>
@@ -213,15 +178,14 @@ const AddTurf = () => {
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Price*
+                          Price
                         </label>
                         <input
                           type="text"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("price", {
-                            required: true,
-                          })}
+                          {...register("price")}
                           placeholder="Price In Taka"
+                          value={booking.price}
                         />
                       </div>
                     </div>
@@ -236,45 +200,9 @@ const AddTurf = () => {
                         <input
                           type="text"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("person", {
-                            required: true,
-                          })}
+                          {...register("person")}
                           placeholder="Persons"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Turf Logo*
-                        </label>
-                        <input
-                          type="file"
-                          className="file-input file-input-bordered w-full max-w-sm bg-slate-200"
-                          {...register("logo", {
-                            required: true,
-                          })}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Cover Photo*
-                        </label>
-                        <input
-                          type="file"
-                          className="file-input file-input-bordered w-full max-w-sm bg-slate-200"
-                          {...register("cover", {
-                            required: true,
-                          })}
+                          defaultValue={"14"}
                         />
                       </div>
                     </div>
@@ -284,41 +212,46 @@ const AddTurf = () => {
 
                   <div className="flex flex-wrap mt-5">
                     <div className="w-full lg:w-12/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          About Turf Details*
-                        </label>
-                        <textarea
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          rows="4"
-                          {...register("about", {
-                            required: true,
-                          })}
-                          placeholder="About Turf Details in 100 Words"
-                        ></textarea>
+                      <div className="flex flex-wrap">
+                        <div className="w-full lg:w-6/12 px-4">
+                          <div className="relative w-full mb-3">
+                            <label
+                              className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                            >
+                              Selected Date
+                            </label>
+                            <input
+                              type="text"
+                              className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                              {...register("selectedDate")}
+                              placeholder="Selected Date"
+                              value={booking.selectedDate}
+                            />
+                          </div>
+                        </div>
+                        <div className="w-full lg:w-6/12 px-4">
+                          <div className="relative w-full mb-3">
+                            <label
+                              className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                              htmlFor="grid-password"
+                            >
+                              Selected Slot
+                            </label>
+                            <input
+                              type="text"
+                              className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                              {...register("slot")}
+                              placeholder="Your Email address"
+                              value={booking.slot}
+                            />
+                          </div>
+                        </div>
                       </div>
+
                       <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          About Turf Rules*
-                        </label>
-                        <textarea
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          rows="4"
-                          {...register("rules", {
-                            required: true,
-                          })}
-                          placeholder="About Turf Rules in 100 Words"
-                        ></textarea>
                         <button className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150 mt-5">
-                          Submit
+                          Make Payment
                         </button>
                       </div>
                     </div>
@@ -340,5 +273,4 @@ const AddTurf = () => {
   );
 };
 
-export default AddTurf;
-
+export default Payment;

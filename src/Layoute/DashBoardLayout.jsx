@@ -227,7 +227,7 @@ const DashBoardLayout = () => {
 
                     <li>
                       <Link
-                       
+                        to="/dashboard/ownerbookings"
                         className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
                       >
                         <box-icon
@@ -285,10 +285,13 @@ const DashBoardLayout = () => {
                       </a>
                     </li>
                     <li>
-                      <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                      <Link
+                  
+                        className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
                         <box-icon name="purchase-tag" color="white"></box-icon>
-                        Payment
-                      </a>
+                        Payments
+                      </Link>
                     </li>
                   </>
                 )}

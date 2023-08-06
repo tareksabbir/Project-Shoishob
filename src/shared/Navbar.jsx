@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const { user, logOut } = useContext(AuthContext);
@@ -12,12 +13,12 @@ export default function Navbar() {
 
   return (
     <>
-      <div className=" pb-6 sm:pb-8 lg:pb-0">
+      <div className=" pb-6 sm:pb-8 lg:pb-0 print:hidden">
         <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
           <header className=" flex items-center justify-between py-4 md:mb-12 md:py-8 xl:mb-0">
-            <a
+            <Link
               href="/"
-              className="inline-flex items-center gap-2.5 text-2xl font-bold  md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200"
+              className="inline-flex items-center gap-2.5 text-2xl font-bold  md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-gray-500 "
               aria-label="logo"
             >
               <svg
@@ -63,8 +64,8 @@ export default function Navbar() {
                   d="M185.432.063L96.44 17.501a3.268 3.268 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113Z"
                 ></path>
               </svg>
-              Shoishob
-            </a>
+              <p>Shoishob</p>
+            </Link>
 
             <nav className="hidden gap-12 lg:flex">
               <a href="/" className="text-lg font-semibold text-cyan-500">

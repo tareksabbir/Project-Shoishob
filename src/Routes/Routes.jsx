@@ -20,6 +20,9 @@ import Main from "../Layoute/Main";
 import UserMyBooking from "../page/Dashboard/UserMyBooking/UserMyBooking";
 import AllTurfs from "../page/Dashboard/AllTurfs/AllTurfs";
 import AddTurf from "../page/Dashboard/AddTurf/AddTurf";
+import AdminBooking from "../page/Dashboard/AdminBooking/AdminBooking";
+import Payment from "../page/Dashboard/Payment/Payment";
+import PaymentSuccess from "../page/Dashboard/PaymentSuccess/PaymentSuccess";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +65,11 @@ const router = createBrowserRouter([
         path: "/turf/:id",
         element: <TurfDetails></TurfDetails>,
       },
+      {
+        path: "/dashboard/payment/success",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      
     ],
   },
   {
@@ -76,10 +84,12 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dashboard></Dashboard>,
       },
+      
       {
         path: "/dashboard/myProfile",
         element: <MyProfile></MyProfile>,
       },
+
       {
         path: "/dashboard/allTurfs",
         element: <AllTurfs></AllTurfs>,
@@ -91,6 +101,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/usermybookings",
         element: <UserMyBooking></UserMyBooking>,
+      },
+      {
+        path: "/dashboard/ownerbookings",
+        element: <AdminBooking></AdminBooking>,
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: <Payment></Payment>,
       },
       // {
       //   path: "/dashboard/allUsers",
