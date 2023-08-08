@@ -15,11 +15,15 @@ const AllTurfs = () => {
   return (
     <>
       <section className="text-gray-600 body-font bg-nearest-rgb-23-32-49">
+      <div
+          id="main"
+          className="main-content flex-1 mt-12 md:mt-2 pb-24 md:pb-5"
+        >
         <div className="container px-5 py-20 mx-auto">
           <div className="flex flex-wrap -m-3 ">
             {turfs.map((turf) => (
               <div key={turf._id} className="p-1 lg:w-1/5 md:w-1/3 w-1/2 ">
-                <div className="h-full bg-slate-900 items-center border-spacing-2  p-6 rounded-lg ">
+                <div className="h-full bg-slate-950 items-center border-spacing-2  p-6 rounded-lg ">
                   <img
                     alt="team"
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mx-auto mb-2"
@@ -39,6 +43,7 @@ const AllTurfs = () => {
               </div>
             ))}
           </div>
+        </div>
         </div>
       </section>
     </>

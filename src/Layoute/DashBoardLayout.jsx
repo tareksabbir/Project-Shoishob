@@ -54,7 +54,7 @@ const DashBoardLayout = () => {
 
   return (
     <>
-      <main className="relative bg-nearest-rgb-23-32-49">
+      <main className="relative bg-slate-900">
         <section className="relative">
           <div className="drawer lg:drawer-open">
             <input
@@ -132,10 +132,13 @@ const DashBoardLayout = () => {
                 {isSuperAdmin ? (
                   <>
                     <li>
-                      <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                      <Link
+                        to="/dashboard/adminHome"
+                        className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
                         <box-icon name="home" color="white"></box-icon>
-                        Admin Home
-                      </a>
+                        Dashboard
+                      </Link>
                     </li>
                     <li>
                       <Link
@@ -204,10 +207,13 @@ const DashBoardLayout = () => {
                 ) : isAdmin ? (
                   <>
                     <li>
-                      <a className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                      <Link
+                        to="/dashboard/ownerHome"
+                        className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
                         <box-icon name="home" color="white"></box-icon>
-                        Admin Home
-                      </a>
+                        Dashboard
+                      </Link>
                     </li>
                     <li>
                       <Link
@@ -255,6 +261,15 @@ const DashBoardLayout = () => {
                   <>
                     <li>
                       <Link
+                        to="/dashboard/userHome"
+                        className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
+                        <box-icon name="user" color="white"></box-icon>
+                        User Home
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
                         to="/dashboard/myProfile"
                         className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
                       >
@@ -285,10 +300,7 @@ const DashBoardLayout = () => {
                       </a>
                     </li>
                     <li>
-                      <Link
-                  
-                        className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
-                      >
+                      <Link className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
                         <box-icon name="purchase-tag" color="white"></box-icon>
                         Payments
                       </Link>
@@ -360,7 +372,7 @@ const DashBoardLayout = () => {
           </div>
         </section>
         <div
-          className="absolute inset-0 blur-[118px] max-w-lg h-[800px] mx-auto sm:max-w-3xl sm:h-[400px] mt-20"
+          className="absolute inset-0 blur-[118px] max-w-lg h-[1400px] mx-auto sm:max-w-3xl sm:h-[400px]"
           style={{
             background:
               "linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)",

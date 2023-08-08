@@ -23,6 +23,9 @@ import AddTurf from "../page/Dashboard/AddTurf/AddTurf";
 import AdminBooking from "../page/Dashboard/AdminBooking/AdminBooking";
 import Payment from "../page/Dashboard/Payment/Payment";
 import PaymentSuccess from "../page/Dashboard/PaymentSuccess/PaymentSuccess";
+import UserHome from "../page/Dashboard/UserHome/UserHome";
+import OwnerHome from "../page/Dashboard/OwnerHome/OwnerHome";
+import AdminHome from "../page/Dashboard/AdminHome/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -69,7 +72,6 @@ const router = createBrowserRouter([
         path: "/dashboard/payment/success",
         element: <PaymentSuccess></PaymentSuccess>,
       },
-      
     ],
   },
   {
@@ -84,7 +86,19 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dashboard></Dashboard>,
       },
-      
+      {
+        path: "/dashboard/userHome",
+        element: <UserHome></UserHome>,
+      },
+      {
+        path: "/dashboard/ownerHome",
+        element: <OwnerHome></OwnerHome>,
+      },
+      {
+        path: "/dashboard/adminHome",
+        element: <AdminHome></AdminHome>,
+      },
+
       {
         path: "/dashboard/myProfile",
         element: <MyProfile></MyProfile>,

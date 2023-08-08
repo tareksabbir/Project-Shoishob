@@ -47,7 +47,7 @@ const UserMyBooking = () => {
   return (
     <>
       <div className="overflow-x-auto lg:p-20">
-        <table className="table bg-slate-900">
+        <table className="table bg-slate-950">
           {/* head */}
           <thead>
             <tr>
@@ -137,6 +137,7 @@ const UserMyBooking = () => {
             ))}
           </tbody>
         </table>
+
       </div>
     </>
   );

@@ -34,7 +34,7 @@ const PaymentSuccess = () => {
     <>
       <div className="overflow-x-auto lg:p-20 lg:py-40">
         
-        <table className="table bg-slate-900">
+        <table className="table bg-slate-950">
           {/* head */}
           <thead>
             <tr>

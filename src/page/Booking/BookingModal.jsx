@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 /* eslint-disable react/prop-types */
 const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
-  const { turf_name, address, slots, logo, price,ownerId } = booking;
+  const { turf_name, address, slots, logo, price, ownerId } = booking;
   console.log(booking);
   const date = format(selectedDate, "PP");
 
@@ -22,38 +22,50 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
     const phone = form.phone.value;
     const address = form.address.value;
     const price = form.price.value;
+    const paid = false;
+    
+    const selectedDate = new Date(form.date.value); 
+    const currentDate = new Date();
+
+  
+    if (selectedDate < currentDate) {
+        Swal.fire("Invalid Date", "Please select a date that is after the current date.", "error");
+        return;
+    }
 
     const booking = {
-      turf,
-      name,
-      email,
-      slot,
-      phone,
-      address,
-      price,
-      photo,
-      ownerId,
-      selectedDate: date,
+        turf,
+        name,
+        email,
+        slot,
+        phone,
+        address,
+        price,
+        photo,
+        ownerId,
+        paid,
+        selectedDate: date
     };
 
     fetch("http://localhost:5000/api/v1/bookings", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(booking),
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify(booking),
     })
-      .then((res) => res.json())
-      .then((data) => {
+    .then((res) => res.json())
+    .then((data) => {
         if (data.success) {
-          setBooking(null);
-          Swal.fire("Congratulations!!", "Your Booking Is fixed!", "success");
-          refetch();
+            setBooking(null);
+            Swal.fire("Congratulations!!", "Your Booking Is fixed!", "success");
+            refetch();
         } else if (data.message) {
-          Swal.fire("sorry", `${data.message}`, "error");
+            Swal.fire("Sorry", `${data.message}`, "error");
         }
-      });
-  };
+    });
+};
+
   return (
     <>
       <input type="checkbox" id="my_modal_7" className="modal-toggle" />
