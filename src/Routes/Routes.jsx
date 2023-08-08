@@ -26,6 +26,9 @@ import PaymentSuccess from "../page/Dashboard/PaymentSuccess/PaymentSuccess";
 import UserHome from "../page/Dashboard/UserHome/UserHome";
 import OwnerHome from "../page/Dashboard/OwnerHome/OwnerHome";
 import AdminHome from "../page/Dashboard/AdminHome/AdminHome";
+import TournamentForm from "../page/Dashboard/Tournament/Details/TournamentForm";
+
+
 
 const router = createBrowserRouter([
   {
@@ -107,6 +110,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/allTurfs",
         element: <AllTurfs></AllTurfs>,
+      },
+      {
+        path: "/dashboard/addTournament",
+        element: <TournamentForm></TournamentForm>
       },
       {
         path: "/dashboard/addTurf",

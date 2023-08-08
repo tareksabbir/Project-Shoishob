@@ -1,8 +1,9 @@
 import { useQuery } from "react-query";
 import { Link, useLocation } from "react-router-dom";
-import Loading from "../../Loading/Loading";
+
 import print from "../../../assets/icons/icons8-print-48.png";
 import coin from "../../../assets/icons/star (1).png";
+import Loading from "../../Loading/Loading";
 
 const PaymentSuccess = () => {
   const location = useLocation();

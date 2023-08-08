@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useQuery } from "react-query";
-import Loading from "../../Loading/Loading";
+
 import {
   BarChart,
   Bar,
@@ -13,6 +12,9 @@ import {
   Pie,
 } from "recharts";
 import { useContext } from "react";
+
+import { useQuery } from "react-query";
+import Loading from "../../Loading/Loading";
 import { AuthContext } from "../../../Context/AuthProvider";
 const OwnerHome = () => {
   const { user, loading } = useContext(AuthContext);

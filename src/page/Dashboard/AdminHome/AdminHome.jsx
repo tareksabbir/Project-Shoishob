@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
+
 import { useQuery } from "react-query";
-import Loading from "../../Loading/Loading";
 import {
   BarChart,
   Bar,
@@ -12,6 +12,7 @@ import {
   PieChart,
   Pie,
 } from "recharts";
+import Loading from "../../Loading/Loading";
 
 const AdminHome = () => {
   const { data: adminStat, isLoading } = useQuery(["adminStat"], async () => {
@@ -31,7 +32,7 @@ const AdminHome = () => {
   if (isLoading) {
     return (
       <>
-      <Loading></Loading>
+        <Loading></Loading>
       </>
     );
   }
@@ -74,22 +75,35 @@ const AdminHome = () => {
 
   /// pi chart
   const data2 = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
+    { name: "Group A", value: 400 },
+    { name: "Group B", value: 300 },
+    { name: "Group C", value: 300 },
+    { name: "Group D", value: 200 },
   ];
-  
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-  
+
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
   const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent}) => {
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+  }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
-  
+
     return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
         {`${(percent * 100).toFixed(0)}%`}
       </text>
     );
@@ -98,7 +112,6 @@ const AdminHome = () => {
   return (
     <>
       <section>
-
         <div
           id="main"
           className="main-content flex-1  mt-12 md:mt-2 pb-24 md:pb-5"
@@ -267,24 +280,27 @@ const AdminHome = () => {
               </ResponsiveContainer>
             </div>
             <div className="w-full  md:w-1/2 xl:w-1/3 p-6">
-            <ResponsiveContainer width="100%" height="100%">
-        <PieChart width={400} height={400}>
-          <Pie
-            data={data2}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart width={400} height={400}>
+                  <Pie
+                    data={data2}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={renderCustomizedLabel}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {data.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
             </div>
           </div>
         </div>

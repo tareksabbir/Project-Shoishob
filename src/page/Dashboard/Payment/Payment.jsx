@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 
+
 const Payment = () => {
   const { id } = useParams();
   const { register, handleSubmit } = useForm();

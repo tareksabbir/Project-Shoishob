@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import { useQuery } from "react-query";
-import Swal from "sweetalert2";
 import { AuthContext } from "../../../Context/AuthProvider";
+import { useQuery } from "react-query";
 import Loading from "../../Loading/Loading";
+import Swal from "sweetalert2";
+
 
 const AdminBooking = () => {
   const { user, loading } = useContext(AuthContext);

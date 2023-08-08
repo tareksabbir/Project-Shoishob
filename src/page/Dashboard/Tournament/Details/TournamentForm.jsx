@@ -1,15 +1,51 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../../../Context/AuthProvider";
+import { useQuery } from "react-query";
+import Loading from "../../../Loading/Loading";
 import Swal from "sweetalert2";
 
 const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
 
-const AddTurf = () => {
+const TournamentForm = () => {
   const { register, handleSubmit,reset } = useForm();
+  const { user, loading } = useContext(AuthContext);
+  const { data: owner } = useQuery(["owner", user?.email], async () => {
+    const res = await fetch(
+      `http://localhost:5000/api/v1/user/email/${user?.email}`
+    );
+    const data = await res.json();
+    return data.data;
+  });
+
+  const { data: turf = [], isLoading } = useQuery(
+    ["turf", owner?.email],
+    async () => {
+      if (owner) {
+        const res = await fetch(
+          `http://localhost:5000/api/v1/turf/details?searchTerm=${owner?.email}`
+        );
+        const data = await res.json();
+        return data.data;
+      }
+      return [];
+    }
+  );
+
+  const turfData = turf[0];
+
+  console.log(turfData)
+
+  if (loading || isLoading) {
+    return <Loading></Loading>;
+  }
+
+
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
   const handleForm = async (data) => {
-    
+    console.log(data);
 
     const logoFormData = new FormData();
     logoFormData.append("image", data.logo[0]);
@@ -39,8 +75,11 @@ const AddTurf = () => {
             const saveTurf = {
               turf_name: data.turf_name,
               email: data.email,
-              ownerId: data.ownerId,
+              turf_id: data.turf_id,
               ownerPhone: data.ownerPhone,
+              tournament_name:data.tournament_name,
+              registration_start:data.registration_start,
+              registration_end:data.registration_end,
               address: data.address,
               city: data.city,
               price: data.price,
@@ -48,9 +87,12 @@ const AddTurf = () => {
               cover: coverUrl,
               about: data.about,
               rules: data.rules,
+              person:data.person
+             
+
             };
-          
-            fetch("http://localhost:5000/api/v1/turf/post-turf-data", {
+            console.log(saveTurf)
+            fetch("http://localhost:5000/api/v1/tournament-details/post-Tournament-data", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -75,7 +117,6 @@ const AddTurf = () => {
         console.error("Error uploading logo image:", error);
       });
   };
-
   return (
     <>
       <main className="relative py-10 bg-gray-950 px-10">
@@ -85,9 +126,9 @@ const AddTurf = () => {
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <form onSubmit={handleSubmit(handleForm)}>
                   <div className="max-w-lg space-y-3 px-4 sm:mx-auto sm:text-center sm:px-0 mb-20">
-                    <h3 className="text-black font-semibold">Admin</h3>
+                    <h3 className="text-black font-semibold">Owner</h3>
                     <p className="bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-3xl font-bold sm:text-4xl">
-                      Add Turf Details
+                      Tournament <br /> Registration Form
                     </p>
                     <p className="text-gray-900">
                       Please do not submit with out fill up all the section
@@ -109,6 +150,7 @@ const AddTurf = () => {
                             required: true,
                           })}
                           placeholder="Turf Name"
+                          value={turfData?.turf_name}
                         />
                       </div>
                     </div>
@@ -118,7 +160,7 @@ const AddTurf = () => {
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Owner Email address*
+                          Your Email address*
                         </label>
                         <input
                           type="email"
@@ -127,6 +169,7 @@ const AddTurf = () => {
                             required: true,
                           })}
                           placeholder="Owner Email address"
+                          value={turfData?.email}
                         />
                       </div>
                     </div>
@@ -137,15 +180,16 @@ const AddTurf = () => {
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Owner Id*
+                          Turf Id*
                         </label>
                         <input
                           type="text"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("ownerId", {
+                          {...register("turf_id", {
                             required: true,
                           })}
                           placeholder="Owner Id"
+                          value={turfData?.id}
                         />
                       </div>
                     </div>
@@ -155,7 +199,7 @@ const AddTurf = () => {
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Owner phone*
+                          Your phone*
                         </label>
                         <input
                           type="text"
@@ -164,6 +208,7 @@ const AddTurf = () => {
                             required: true,
                           })}
                           placeholder="Owner phone Number"
+                          defaultValue={turfData?.ownerPhone}
                         />
                       </div>
                     </div>
@@ -187,6 +232,7 @@ const AddTurf = () => {
                             required: true,
                           })}
                           placeholder="Turf Address"
+                          defaultValue={turfData?.address}
                         />
                       </div>
                     </div>
@@ -206,6 +252,7 @@ const AddTurf = () => {
                             required: true,
                           })}
                           placeholder="City"
+                          defaultValue={"chittagong"}
                         />
                       </div>
                     </div>
@@ -224,6 +271,7 @@ const AddTurf = () => {
                             required: true,
                           })}
                           placeholder="Price In Taka"
+                          defaultValue={3500}
                         />
                       </div>
                     </div>
@@ -242,6 +290,62 @@ const AddTurf = () => {
                             required: true,
                           })}
                           placeholder="Persons"
+                          defaultValue={7}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full lg:w-4/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Tournament Name*
+                        </label>
+                        <input
+                          type="text"
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          {...register("tournament_name", {
+                            required: true,
+                          })}
+                          placeholder="Tournament Name"
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full lg:w-4/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Registration Start*
+                        </label>
+                        <input
+                          type="date"
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          {...register("registration_start", {
+                            required: true,
+                          })}
+                          
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full lg:w-4/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Registration End*
+                        </label>
+                        <input
+                          type="date"
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          {...register("registration_end", {
+                            required: true,
+                          })}
+                         
+                          
                         />
                       </div>
                     </div>
@@ -291,7 +395,7 @@ const AddTurf = () => {
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          About Turf Details*
+                          Tournament Details*
                         </label>
                         <textarea
                           type="text"
@@ -300,7 +404,7 @@ const AddTurf = () => {
                           {...register("about", {
                             required: true,
                           })}
-                          placeholder="About Turf Details in 100 Words"
+                          placeholder="About Tournament Details in 100 Words"
                         ></textarea>
                       </div>
                       <div className="relative w-full mb-3">
@@ -308,7 +412,7 @@ const AddTurf = () => {
                           className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          About Turf Rules*
+                          Tournament Rules*
                         </label>
                         <textarea
                           type="text"
@@ -317,7 +421,7 @@ const AddTurf = () => {
                           {...register("rules", {
                             required: true,
                           })}
-                          placeholder="About Turf Rules in 100 Words"
+                          placeholder="About Tournament Rules in 100 Words"
                         ></textarea>
                         <button className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150 mt-5">
                           Submit
@@ -342,5 +446,4 @@ const AddTurf = () => {
   );
 };
 
-export default AddTurf;
-
+export default TournamentForm;

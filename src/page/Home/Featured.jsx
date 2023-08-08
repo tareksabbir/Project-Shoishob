@@ -1,10 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
-import f1 from "../../assets/featured/f-1.jpeg";
-import f2 from "../../assets/featured/f-3.jpeg";
-import f3 from "../../assets/featured/f-4.jpeg";
-import f4 from "../../assets/featured/f-5.jpeg";
+import { useQuery } from "react-query";
 
 export default function Featured() {
+  const { data: tournament = [] } = useQuery(["tournament"], async () => {
+    const res = await fetch("http://localhost:5000/api/v1/tournament-details", {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("access_token")}`,
+      },
+    });
+    const data = await res.json();
+    return data.data;
+  });
+
+  console.log(tournament);
+
   return (
     <>
       <main className="relative bg-nearest-rgb-23-32-49">
@@ -29,66 +38,26 @@ export default function Featured() {
                 </p>
               </div>
               <div className="flex flex-wrap -m-3">
-                <div className="xl:w-1/4 md:w-1/2 sm:w-full p-4">
-                  <div className="bg-slate-900 p-6 rounded-lg">
-                    <img
-                      className="h-40 rounded w-full object-cover object-center mb-6"
-                      src={f1}
-                      alt="content"
-                    />
-                    <h3 className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font">
-                      REGISTRATION
-                    </h3>
-                    <h2 className="text-lg text-white font-medium title-font mb-4">
-                      Sicho Arena Tournament
-                    </h2>
+                {tournament.map((tur) => (
+                  <div
+                    key={tur._id}
+                    className="xl:w-1/4 md:w-1/2 sm:w-full p-4"
+                  >
+                    <div className="bg-slate-900 p-6 rounded-lg">
+                      <img
+                        className="h-40 rounded w-full object-cover object-center mb-6"
+                        src={tur.cover}
+                        alt="content"
+                      />
+                      <h3 className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font">
+                        REGISTRATION
+                      </h3>
+                      <h2 className="text-lg text-white font-medium title-font mb-4">
+                        {tur.tournament_name}
+                      </h2>
+                    </div>
                   </div>
-                </div>
-                <div className="xl:w-1/4 md:w-1/2 p-4">
-                  <div className="bg-slate-900 p-6 rounded-lg">
-                    <img
-                      className="h-40 rounded w-full object-cover object-center mb-6"
-                      src={f2}
-                      alt="content"
-                    />
-                    <h3 className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font">
-                      REGISTRATION
-                    </h3>
-                    <h2 className="text-lg text-white font-medium title-font mb-4">
-                      Chatto Turf Tournament
-                    </h2>
-                  </div>
-                </div>
-                <div className="xl:w-1/4 md:w-1/2 p-4">
-                  <div className=" bg-slate-900 p-6 rounded-lg">
-                    <img
-                      className="h-40 rounded w-full object-cover object-center mb-6"
-                      src={f3}
-                      alt="content"
-                    />
-                    <h3 className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font">
-                      REGISTRATION
-                    </h3>
-                    <h2 className="text-lg text-white font-medium title-font mb-4">
-                      AKC Play Tournament
-                    </h2>
-                  </div>
-                </div>
-                <div className="xl:w-1/4 md:w-1/2 p-4">
-                  <div className="bg-slate-900 p-6 rounded-lg">
-                    <img
-                      className="h-40 rounded w-full object-cover object-center mb-6"
-                      src={f4}
-                      alt="content"
-                    />
-                    <h3 className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font">
-                      REGISTRATION
-                    </h3>
-                    <h2 className="text-lg text-white font-medium title-font mb-4">
-                      ACM Turf Tournament
-                    </h2>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </section>

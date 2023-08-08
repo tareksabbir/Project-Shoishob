@@ -244,6 +244,12 @@ const DashBoardLayout = () => {
                       </Link>
                     </li>
                     <li>
+                      <Link to="/dashboard/addTournament" className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                      <box-icon name='add-to-queue' color="white"></box-icon>
+                        Registration
+                      </Link>
+                    </li>
+                    <li>
                       <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
                         <box-icon name="trophy" color="white"></box-icon>
                         Leader Board

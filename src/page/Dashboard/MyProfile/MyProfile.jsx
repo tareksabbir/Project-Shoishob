@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../../../Context/AuthProvider";
 import { useQuery } from "react-query";
 import Loading from "../../Loading/Loading";
+import { AuthContext } from "../../../Context/AuthProvider";
+
 
 const MyProfile = () => {
   const [showMore, setShowMore] = useState(false);
