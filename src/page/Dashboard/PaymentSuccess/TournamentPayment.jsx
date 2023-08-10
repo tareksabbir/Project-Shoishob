@@ -5,34 +5,34 @@ import print from "../../../assets/icons/icons8-print-48.png";
 import coin from "../../../assets/icons/star (1).png";
 import Loading from "../../Loading/Loading";
 
-const PaymentSuccess = () => {
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const transactionId = query.get("transactionId");
-
-  const { data: booking = [], isLoading } = useQuery(
-    ["booking", transactionId],
-    async () => {
-      const res = await fetch(
-        `http://localhost:5000/api/v1/bookings/payment/details/${transactionId}`,
-        {
-          headers: {
-            authorization: `bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
-      const data = await res.json();
-      return data.data;
+const TournamentPayment = () => {
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const transactionId = query.get("transactionId");
+  
+    const { data: booking = [], isLoading } = useQuery(
+      ["booking", transactionId],
+      async () => {
+        const res = await fetch(
+          `http://localhost:5000/api/v1/tournamentRegistration/payment/details/${transactionId}`,
+          {
+            headers: {
+              authorization: `bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        );
+        const data = await res.json();
+        return data.data;
+      }
+    );
+  
+    if (isLoading) {
+      return <Loading></Loading>;
     }
-  );
-
-  if (isLoading) {
-    return <Loading></Loading>;
-  }
-  console.log(booking);
-
-  return (
-    <>
+    console.log(booking);
+    return (
+     
+        <>
       <div className="overflow-x-auto lg:p-20 lg:py-40">
         
         <table className="table bg-slate-950">
@@ -61,18 +61,10 @@ const PaymentSuccess = () => {
               <tr key={booked._id}>
                 <td>
                   <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src={booked?.photo}
-                          alt="Avatar Tailwind CSS Component"
-                        />
-                      </div>
-                    </div>
+                    
                     <div>
-                      <div className="font-bold">{booked?.name}</div>
-                      <div className="font-bold">{booked?.email}</div>
-                      <div className="text-sm opacity-50">{booked?.phone}</div>
+                      <div className="font-bold">{booked?.team_name}</div>
+                      
                     </div>
                   </div>
                 </td>
@@ -86,13 +78,12 @@ const PaymentSuccess = () => {
 
                 <td>
                   <div>
-                    <div className="font-bold">{booked.selectedDate}</div>
-                    <div className="text-sm opacity-50">{booked.slot}</div>
+                  <div className="font-bold">{booked?.email}</div>
                   </div>
                 </td>
                 <th>
                   <div>
-                    <div className="font-bold">{booked.turf}</div>
+                    
                     <div className="text-sm opacity-50">
                       {booked.price} Taka
                     </div>
@@ -122,14 +113,7 @@ const PaymentSuccess = () => {
         </table>
       </div>
     </>
-  );
+    );
 };
 
-export default PaymentSuccess;
-
-
-
-
-
-
-
+export default TournamentPayment;

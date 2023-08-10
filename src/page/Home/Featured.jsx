@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 
 export default function Featured() {
   const { data: tournament = [] } = useQuery(["tournament"], async () => {
@@ -49,9 +50,9 @@ export default function Featured() {
                         src={tur.cover}
                         alt="content"
                       />
-                      <h3 className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font">
+                      <Link to={`/tournament-booking/${tur._id}`} className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font">
                         REGISTRATION
-                      </h3>
+                      </Link>
                       <h2 className="text-lg text-white font-medium title-font mb-4">
                         {tur.tournament_name}
                       </h2>

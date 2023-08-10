@@ -79,7 +79,7 @@ export default function Navbar() {
               </a>
 
               <a
-                href="/about"
+                href="/leaderBoard"
                 className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
               >
                 Leader Board

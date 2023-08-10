@@ -27,8 +27,10 @@ import UserHome from "../page/Dashboard/UserHome/UserHome";
 import OwnerHome from "../page/Dashboard/OwnerHome/OwnerHome";
 import AdminHome from "../page/Dashboard/AdminHome/AdminHome";
 import TournamentForm from "../page/Dashboard/Tournament/Details/TournamentForm";
-
-
+import TournamentBooking from "../page/TournamentBooking/TournamentBooking";
+import RegistrationForm from "../page/TournamentBooking/RegistrationForm";
+import TournamentPayment from "../page/Dashboard/PaymentSuccess/TournamentPayment";
+import LeaderBoard from "../page/LeaderBoard/LeaderBoard";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +48,22 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: "/tournament-booking/:id",
+        element: (
+          <PrivateRoute>
+            <TournamentBooking></TournamentBooking>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/registration-form/:id",
+        element: (
+          <PrivateRoute>
+            <RegistrationForm></RegistrationForm>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/booking",
@@ -68,12 +86,20 @@ const router = createBrowserRouter([
         element: <Review></Review>,
       },
       {
+        path: "/leaderBoard",
+        element: <LeaderBoard></LeaderBoard>,
+      },
+      {
         path: "/turf/:id",
         element: <TurfDetails></TurfDetails>,
       },
       {
         path: "/dashboard/payment/success",
         element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "/dashboard/tournament/payment/success",
+        element: <TournamentPayment></TournamentPayment>,
       },
     ],
   },
@@ -113,7 +139,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/addTournament",
-        element: <TournamentForm></TournamentForm>
+        element: <TournamentForm></TournamentForm>,
       },
       {
         path: "/dashboard/addTurf",
