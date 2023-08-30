@@ -2,10 +2,18 @@
 import booking from "../../assets/images/hero7.png";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { format } from "date-fns";
+import { format,isBefore, isToday} from "date-fns";
 
 const BookingBanner = ({ selectedDate, setSelectedDate }) => {
+  const today = new Date() ;
+
+
+  const isDisabled = (date) => {
+    return isBefore(date, today) && !isToday(date);
+  };
+
   let footer = <p>Please pick a day.</p>;
+
   if (selectedDate) {
     footer = (
       <p className="mt-2 mb-5">You picked {format(selectedDate, "PP")}.</p>
@@ -25,8 +33,10 @@ const BookingBanner = ({ selectedDate, setSelectedDate }) => {
               <div className="mx-auto">
                 <DayPicker
                   mode="single"
+                  disabled={ isDisabled }
                   selected={selectedDate}
                   onSelect={setSelectedDate}
+                  
                 />
               </div>
               {footer}

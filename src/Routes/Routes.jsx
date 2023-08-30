@@ -31,6 +31,7 @@ import TournamentBooking from "../page/TournamentBooking/TournamentBooking";
 import RegistrationForm from "../page/TournamentBooking/RegistrationForm";
 import TournamentPayment from "../page/Dashboard/PaymentSuccess/TournamentPayment";
 import LeaderBoard from "../page/LeaderBoard/LeaderBoard";
+import TurfUpdates from "../page/Dashboard/Updates/TurfUpdates/TurfUpdates";
 
 const router = createBrowserRouter([
   {
@@ -114,6 +115,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "/dashboard/turfUpdate/:id",
+        element: <TurfUpdates></TurfUpdates>,
+      },
+      {
+        path: "/dashboard/leaderBoard",
+        element: <LeaderBoard></LeaderBoard>,
       },
       {
         path: "/dashboard/userHome",

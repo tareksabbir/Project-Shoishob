@@ -1,15 +1,9 @@
-// import { useContext } from "react";
-// import { AuthContext } from "../../../Context/AuthProvider";
-// import { useQuery } from "react-query";
-// import AdminHome from "../AdminHome/AdminHome";
-// import OwnerHome from "../OwnerHome/OwnerHome";
-import UserHome from "../UserHome/UserHome";
-
 import { useContext } from "react";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { useQuery } from "react-query";
 import AdminHome from "../AdminHome/AdminHome";
 import OwnerHome from "../OwnerHome/OwnerHome";
+import MyProfile from "../MyProfile/MyProfile";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -47,7 +41,7 @@ const Dashboard = () => {
   return (
     <>
       {
-        isSuperAdmin ? <AdminHome></AdminHome> : isAdmin ? <OwnerHome></OwnerHome> : <UserHome></UserHome>
+        isSuperAdmin ? <AdminHome></AdminHome> : isAdmin ? <OwnerHome></OwnerHome> : <MyProfile></MyProfile>
       }
     </>
   );

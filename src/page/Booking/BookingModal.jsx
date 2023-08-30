@@ -2,13 +2,14 @@ import { format } from "date-fns";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
   const { turf_name, address, slots, logo, price, ownerId } = booking;
   console.log(booking);
   const date = format(selectedDate, "PP");
-
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
   const handleBooking = (event) => {
@@ -23,48 +24,75 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
     const address = form.address.value;
     const price = form.price.value;
     const paid = false;
-    
-    const selectedDate = new Date(form.date.value); 
-    const currentDate = new Date();
 
-  
-    if (selectedDate < currentDate) {
-        Swal.fire("Invalid Date", "Please select a date that is after the current date.", "error");
-        return;
-    }
+    // const selectedDate = new Date(form.date.value);
+    // const currentDate = new Date();
+
+    // if (selectedDate < currentDate) {
+    //     Swal.fire("Invalid Date", "Please select a date that is after the current date.", "error");
+    //     return;
+    // }
 
     const booking = {
-        turf,
-        name,
-        email,
-        slot,
-        phone,
-        address,
-        price,
-        photo,
-        ownerId,
-        paid,
-        selectedDate: date
+      turf,
+      name,
+      email,
+      slot,
+      phone,
+      address,
+      price,
+      photo,
+      ownerId,
+      paid,
+      selectedDate: date,
     };
 
     fetch("http://localhost:5000/api/v1/bookings", {
-        method: "POST",
-        headers: {
-            "content-type": "application/json",
-        },
-        body: JSON.stringify(booking),
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
     })
-    .then((res) => res.json())
-    .then((data) => {
+      .then((res) => res.json())
+      .then((data) => {
+        const id = data.data._id;
+
         if (data.success) {
-            setBooking(null);
-            Swal.fire("Congratulations!!", "Your Booking Is fixed!", "success");
-            refetch();
+          setBooking(null);
+          // Swal.fire(
+          //   "Congratulations!!",
+          //   "Your Booking Is fixed!",
+          //   "success"
+          // );
+
+          Swal.fire({
+            title: "Congratulations!!",
+            text: "Your Booking Is fixed!",
+            icon: "success",
+            confirmButtonColor: "#5ac5a6",
+            cancelButtonColor: "#d33",
+            showCancelButton: true,
+            confirmButtonText: "Pay Now",
+            cancelButtonText: "Pay Letter!",
+            reverseButtons: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate(`/dashboard/payment/${id}`);
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              Swal.fire("Pay within 60 minutes!", "Otherwise Your booking will delete automatically", "warning");
+            }
+          });
+
+          refetch();
         } else if (data.message) {
-            Swal.fire("Sorry", `${data.message}`, "error");
+          Swal.fire("Sorry", `${data.message}`, "error");
         }
-    });
-};
+      });
+  };
 
   return (
     <>

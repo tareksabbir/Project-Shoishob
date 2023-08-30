@@ -259,13 +259,13 @@ const DashBoardLayout = () => {
                     <li>
                       <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
                         <box-icon name="purchase-tag" color="white"></box-icon>
-                        Payment
+                        Pay History
                       </a>
                     </li>
                   </>
                 ) : (
                   <>
-                    <li>
+                    {/* <li>
                       <Link
                         to="/dashboard/userHome"
                         className="  text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
@@ -273,7 +273,7 @@ const DashBoardLayout = () => {
                         <box-icon name="user" color="white"></box-icon>
                         User Home
                       </Link>
-                    </li>
+                    </li> */}
                     <li>
                       <Link
                         to="/dashboard/myProfile"
@@ -294,10 +294,10 @@ const DashBoardLayout = () => {
                       </Link>
                     </li>
                     <li>
-                      <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                      <Link to="/dashboard/leaderBoard" className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
                         <box-icon name="trophy" color="white"></box-icon>
                         Leader Board
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
@@ -308,7 +308,7 @@ const DashBoardLayout = () => {
                     <li>
                       <Link className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
                         <box-icon name="purchase-tag" color="white"></box-icon>
-                        Payments
+                        Pay History
                       </Link>
                     </li>
                   </>
