@@ -71,6 +71,10 @@ const UserMyBooking = () => {
   return (
     <>
       <div className="overflow-x-auto lg:p-20">
+      <div className="text-3xl font-bold text-center mb-10">
+          {" "}
+          My Bookings
+        </div>
         <table className="table bg-slate-950">
           {/* head */}
           <thead>

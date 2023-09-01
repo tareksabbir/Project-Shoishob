@@ -32,6 +32,7 @@ import RegistrationForm from "../page/TournamentBooking/RegistrationForm";
 import TournamentPayment from "../page/Dashboard/PaymentSuccess/TournamentPayment";
 import LeaderBoard from "../page/LeaderBoard/LeaderBoard";
 import TurfUpdates from "../page/Dashboard/Updates/TurfUpdates/TurfUpdates";
+import PayHistory from "../page/Dashboard/PayHistory/PayHistory";
 
 const router = createBrowserRouter([
   {
@@ -123,6 +124,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/leaderBoard",
         element: <LeaderBoard></LeaderBoard>,
+      },
+      {
+        path: "/dashboard/history",
+        element: <PayHistory></PayHistory>,
       },
       {
         path: "/dashboard/userHome",
