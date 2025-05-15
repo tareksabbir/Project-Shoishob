@@ -4,19 +4,21 @@ A modern web application for booking sports turfs and fields with an intuitive, 
 
 ## 📋 Table of Contents
 
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Prerequisites](#prerequisites)
-- [System Architecture](#system-architecture)
-- [Installation](#installation)
-- [Environment Setup](#environment-setup)
-- [Project Structure](#project-structure)
-- [Core Functionality](#core-functionality)
-- [User Roles](#user-roles)
-- [API Endpoints](#api-endpoints)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
+| Section                                     | Description                                  |
+| ------------------------------------------- | -------------------------------------------- |
+| [Features](#features)                       | Overview of key features and functionalities |
+| [Technology Stack](#technology-stack)       | Technologies and tools used in the project   |
+| [Prerequisites](#prerequisites)             | Required software and tools                  |
+| [System Architecture](#system-architecture) | Detailed system design and components        |
+| [Installation](#installation)               | Step-by-step installation guide              |
+| [Environment Setup](#environment-setup)     | Configuration and environment variables      |
+| [Project Structure](#project-structure)     | Codebase organization and structure          |
+| [Core Functionality](#core-functionality)   | Main features and their implementation       |
+| [User Roles](#user-roles)                   | Different user types and their permissions   |
+| [API Endpoints](#api-endpoints)             | Available API routes and their purposes      |
+| [Deployment](#deployment)                   | Deployment instructions and options          |
+| [Contributing](#contributing)               | Guidelines for contributing to the project   |
+| [License](#license)                         | Project licensing information                |
 
 ## ✨ Features
 
@@ -136,7 +138,6 @@ The dashboard UI adapts to show only the relevant functionality for each role:
 
 ![Role-Based Access Control](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob7.png)
 
-
 ### 6. Booking System Architecture
 
 The booking system is a core component of Project Shoishob, allowing users to reserve sports fields:
@@ -149,14 +150,11 @@ The project follows a feature-based code organization pattern:
 
 ![Code Organization](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob9.png)
 
-
-
 ### Component Relationships
 
 The application is built using component composition and context-based state management:
 
 ![Component Relationships](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob10.png)
-
 
 ### Protected Routes Implementation
 
