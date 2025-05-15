@@ -4,21 +4,25 @@ A modern web application for booking sports turfs and fields with an intuitive, 
 
 ## 📋 Table of Contents
 
-| Section                                     | Description                                  |
-| :------------------------------------------ | :------------------------------------------- |
-| [Features](#features)                       | Overview of key features and functionalities |
-| [Technology Stack](#technology-stack)       | Technologies and tools used in the project   |
-| [Prerequisites](#prerequisites)             | Required software and tools                  |
-| [System Architecture](#system-architecture) | Detailed system design and components        |
-| [Installation](#installation)               | Step-by-step installation guide              |
-| [Environment Setup](#environment-setup)     | Configuration and environment variables      |
-| [Project Structure](#project-structure)     | Codebase organization and structure          |
-| [Core Functionality](#core-functionality)   | Main features and their implementation       |
-| [User Roles](#user-roles)                   | Different user types and their permissions   |
-| [API Endpoints](#api-endpoints)             | Available API routes and their purposes      |
-| [Deployment](#deployment)                   | Deployment instructions and options          |
-| [Contributing](#contributing)               | Guidelines for contributing to the project   |
-| [License](#license)                         | Project licensing information                |
+| **Section**                                 | **Description**                                                                                                                                                                               |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Features](#features)                       | A concise overview of the key functionalities offered by the platform, such as turf booking, user registration, secure login, role-based dashboards, tournament creation, and more.           |
+| [Technology Stack](#technology-stack)       | Detailed breakdown of the technologies used in frontend, backend, authentication, UI design, state management, and form handling.                                                             |
+| [Prerequisites](#prerequisites)             | A list of software and configurations you need to have before running the project locally (Node.js, Firebase setup, etc.).                                                                    |
+| [System Architecture](#system-architecture) | High-level explanation of how the app works behind the scenes, including the layout structure, private routing, role protection, Firebase Auth integration, and JWT-based session management. |
+| [Installation](#installation)               | Instructions to clone the repository, install dependencies, and get the app running on your local development environment.                                                                    |
+| [Environment Setup](#environment-setup)     | Steps to create and configure your `.env` files, Firebase project, and other third-party services for smooth functionality.                                                                   |
+| [Project Structure](#project-structure)     | Clear directory-level breakdown of the codebase, describing how components, pages, routes, hooks, and services are organized.                                                                 |
+| [Core Functionality](#core-functionality)   | Overview of major functional features like turf listing, booking flow, user profile management, turf management for owners, and admin approval workflows.                                     |
+| [User Roles](#user-roles)                   | Detailed explanation of the 3-tier access structure — regular users, turf owners, and admins — each with their own permissions and dashboard capabilities.                                    |
+| [API Endpoints](#api-endpoints)             | List of backend endpoints (with methods like GET, POST, PATCH, DELETE) used for authentication, booking, user management, payment processing, and turf/tournament control.                    |
+| [Deployment](#deployment)                   | Guidelines to build and host the app on a production server (e.g., Vercel, Firebase Hosting, or custom VPS) with steps like build, environment setup, and domain linking.                     |
+| [Contributing](#contributing)               | Guidelines and best practices for developers who want to contribute to the codebase — including branch naming conventions, commit structure, and PR workflow.                                 |
+| [License](#license)                         | Legal information about what you're allowed to do with the source code, usage terms, and any disclaimers.                                                                                     |
+
+---
+
+
 
 ## ✨ Features
 
@@ -59,31 +63,17 @@ A modern web application for booking sports turfs and fields with an intuitive, 
 
 ## 🛠️ Technology Stack
 
-### Frontend
+| **Layer**            | **Technology Used**                                                        | **Purpose / Functionality**                                                                                                              |
+| -------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Frontend**         | React, Vite, React Router, Tailwind CSS, DaisyUI, React Query, SweetAlert2 | Used to build a fast, reactive, and responsive interface with modern UI components and seamless navigation.                              |
+| **Authentication**   | Firebase Authentication, JWT (JSON Web Token)                              | Ensures secure login/logout, registration (via email/password and Google), token generation and verification for protected route access. |
+| **Form Handling**    | React Hook Form                                                            | Efficient, scalable form validation and state management with minimal re-renders.                                                        |
+| **API Requests**     | Axios (with interceptor)                                                   | Handles HTTP requests to backend services with centralized token management and error handling.                                          |
+| **State Management** | React Query                                                                | Fetching, caching, and syncing server state with client UI in real-time.                                                                 |
+| **UI Design**        | Tailwind CSS, DaisyUI                                                      | Utility-first CSS framework with styled UI components for a clean and consistent layout.                                                 |
+| **Alerts/Toasts**    | SweetAlert2, React Toastify                                                | Interactive alert boxes and toast notifications for user feedback on actions like booking, login, success, and error handling.           |
 
-- **React.js** with Vite as build tool for fast development
-- **React Router** for seamless navigation and routing
-- **Tailwind CSS** with DaisyUI for responsive and modern UI
-- **React Query** for efficient data fetching, caching, and state management
-- **SweetAlert2** for interactive notifications
-
-### Authentication
-
-- **Firebase Authentication** for secure user management
-- **JWT** (JSON Web Tokens) implementation for protected routes
-
-### API & Data Management
-
-- **Axios** for API requests with interceptors
-- **React Hook Form** for form validations and submissions
-
-## 📋 Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- Node.js (v14.0.0 or later)
-- npm (v6.0.0 or later)
-- Git
+---
 
 ## System Architecture
 
@@ -128,11 +118,13 @@ The dashboard renders different components and navigation options based on the u
 
 The system implements three primary user roles, each with progressively more capabilities:
 
-| Role           | API Route              | Capabilities                                                                                                       |
-| :------------- | :--------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| User (Regular) | N/A                    | - View profile<br>- Book turfs<br>- View own bookings<br>- View payment history                                    |
-| Admin/Owner    | `/api/v1/user/:email`  | - All User capabilities<br>- Manage owned turfs<br>- View all bookings for owned turfs<br>- Add tournaments        |
-| Super Admin    | `/api/v1/admin/:email` | - All Admin capabilities<br>- Manage all turfs<br>- Manage all users<br>- View all bookings<br>- Manage all admins |
+| **Role**          | **Responsibilities & Access**                                                                                                                                                                                                                                                                                                                                                 |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Regular User**  | - View turf listings with filters.<br>- Book available turfs by selecting date, time, and players.<br>- View and edit their profile and booking history.<br>- Cancel upcoming bookings (if allowed).<br>- Pay online for confirmed bookings via Stripe or similar (if implemented).                                                                                           |
+| **Turf Owner**    | - All features of a Regular User.<br>- Add, update, or delete their own turf listings.<br>- Set availability and slot prices.<br>- Approve or reject booking requests manually or automate it.<br>- Monitor booking performance and earnings.<br>- Host and manage tournaments with bracket creation and team participation.                                                  |
+| **Administrator** | - Full system access.<br>- View, approve, or ban users and turf owners.<br>- Add or remove turfs on behalf of owners (if needed).<br>- Oversee all bookings across the platform.<br>- Access earnings reports, platform statistics, and user analytics.<br>- Manage reported issues, disputes, and feedback from users.<br>- Moderate tournament content and public messages. |
+
+---
 
 The dashboard UI adapts to show only the relevant functionality for each role:
 
