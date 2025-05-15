@@ -116,7 +116,7 @@ The application uses two primary layouts:
 - **Main Layout (Main.jsx):** Used for public pages
 - **Dashboard Layout (DashBoardLayout.jsx):** Used for authenticated user functionality
 
-![ Layout System](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob4.png)
+![Layout System](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob4.png)
 
 ### 4. Dashboard System
 
@@ -136,7 +136,7 @@ The system implements three primary user roles, each with progressively more cap
 
 The dashboard UI adapts to show only the relevant functionality for each role:
 
-![Role-Based Access Control](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob7.png)
+![Role-Based Access Control](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob6.png)
 
 ### 6. Booking System Architecture
 
