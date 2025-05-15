@@ -5,7 +5,7 @@ A modern web application for booking sports turfs and fields with an intuitive, 
 ## 📋 Table of Contents
 
 | Section                                     | Description                                  |
-| ------------------------------------------- | -------------------------------------------- |
+| :------------------------------------------ | :------------------------------------------- |
 | [Features](#features)                       | Overview of key features and functionalities |
 | [Technology Stack](#technology-stack)       | Technologies and tools used in the project   |
 | [Prerequisites](#prerequisites)             | Required software and tools                  |
@@ -129,7 +129,7 @@ The dashboard renders different components and navigation options based on the u
 The system implements three primary user roles, each with progressively more capabilities:
 
 | Role           | API Route              | Capabilities                                                                                                       |
-| -------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| :------------- | :--------------------- | :----------------------------------------------------------------------------------------------------------------- |
 | User (Regular) | N/A                    | - View profile<br>- Book turfs<br>- View own bookings<br>- View payment history                                    |
 | Admin/Owner    | `/api/v1/user/:email`  | - All User capabilities<br>- Manage owned turfs<br>- View all bookings for owned turfs<br>- Add tournaments        |
 | Super Admin    | `/api/v1/admin/:email` | - All Admin capabilities<br>- Manage all turfs<br>- Manage all users<br>- View all bookings<br>- Manage all admins |
@@ -315,31 +315,39 @@ The application communicates with a backend server for data management. Key API 
 
 ### Authentication
 
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `POST /api/auth/verify-email` - Email verification
-- `POST /api/auth/reset-password` - Password reset
+| Endpoint                   | Method | Description        |
+| :------------------------- | :----- | :----------------- |
+| `/api/auth/register`       | POST   | User registration  |
+| `/api/auth/login`          | POST   | User login         |
+| `/api/auth/verify-email`   | POST   | Email verification |
+| `/api/auth/reset-password` | POST   | Password reset     |
 
 ### Turf Management
 
-- `GET /api/turfs` - List all turfs
-- `GET /api/turfs/:id` - Get turf details
-- `POST /api/turfs` - Add new turf (turf owner)
-- `PUT /api/turfs/:id` - Update turf details (turf owner)
+| Endpoint         | Method | Description                      |
+| :--------------- | :----- | :------------------------------- |
+| `/api/turfs`     | GET    | List all turfs                   |
+| `/api/turfs/:id` | GET    | Get turf details                 |
+| `/api/turfs`     | POST   | Add new turf (turf owner)        |
+| `/api/turfs/:id` | PUT    | Update turf details (turf owner) |
 
 ### Booking
 
-- `GET /api/bookings` - List user bookings
-- `POST /api/bookings` - Create new booking
-- `GET /api/bookings/:id` - Get booking details
-- `PUT /api/bookings/:id` - Update booking status
+| Endpoint            | Method | Description           |
+| :------------------ | :----- | :-------------------- |
+| `/api/bookings`     | GET    | List user bookings    |
+| `/api/bookings`     | POST   | Create new booking    |
+| `/api/bookings/:id` | GET    | Get booking details   |
+| `/api/bookings/:id` | PUT    | Update booking status |
 
 ### Tournament
 
-- `GET /api/tournaments` - List all tournaments
-- `POST /api/tournaments` - Create new tournament
-- `GET /api/tournaments/:id/teams` - Get tournament teams
-- `POST /api/tournaments/:id/register` - Register for tournament
+| Endpoint                        | Method | Description             |
+| :------------------------------ | :----- | :---------------------- |
+| `/api/tournaments`              | GET    | List all tournaments    |
+| `/api/tournaments`              | POST   | Create new tournament   |
+| `/api/tournaments/:id/teams`    | GET    | Get tournament teams    |
+| `/api/tournaments/:id/register` | POST   | Register for tournament |
 
 ## 📦 Deployment
 
