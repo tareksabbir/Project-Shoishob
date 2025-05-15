@@ -5,14 +5,14 @@ import { useQuery } from "react-query";
 import Loading from "../../../Loading/Loading";
 import Swal from "sweetalert2";
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+const img_hosting_token = import.metahttp://localhost:3000.VITE_Image_Upload_token;
 
 const TournamentForm = () => {
-  const { register, handleSubmit,reset } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const { user, loading } = useContext(AuthContext);
   const { data: owner } = useQuery(["owner", user?.email], async () => {
     const res = await fetch(
-      `http://localhost:5000/api/v1/user/email/${user?.email}`
+      `http://localhost:3000/api/v1/user/email/${user?.email}`
     );
     const data = await res.json();
     return data.data;
@@ -23,7 +23,7 @@ const TournamentForm = () => {
     async () => {
       if (owner) {
         const res = await fetch(
-          `http://localhost:5000/api/v1/turf/details?searchTerm=${owner?.email}`
+          `http://localhost:3000/api/v1/turf/details?searchTerm=${owner?.email}`
         );
         const data = await res.json();
         return data.data;
@@ -34,13 +34,11 @@ const TournamentForm = () => {
 
   const turfData = turf[0];
 
-  console.log(turfData)
+  console.log(turfData);
 
   if (loading || isLoading) {
     return <Loading></Loading>;
   }
-
-
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
@@ -77,9 +75,9 @@ const TournamentForm = () => {
               email: data.email,
               turf_id: data.turf_id,
               ownerPhone: data.ownerPhone,
-              tournament_name:data.tournament_name,
-              registration_start:data.registration_start,
-              registration_end:data.registration_end,
+              tournament_name: data.tournament_name,
+              registration_start: data.registration_start,
+              registration_end: data.registration_end,
               address: data.address,
               city: data.city,
               price: data.price,
@@ -87,18 +85,19 @@ const TournamentForm = () => {
               cover: coverUrl,
               about: data.about,
               rules: data.rules,
-              person:data.person
-             
-
+              person: data.person,
             };
-            console.log(saveTurf)
-            fetch("http://localhost:5000/api/v1/tournament-details/post-Tournament-data", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(saveTurf),
-            })
+            console.log(saveTurf);
+            fetch(
+              "http://localhost:3000/api/v1/tournament-details/post-Tournament-data",
+              {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify(saveTurf),
+              }
+            )
               .then((res) => res.json())
               .then((data) => {
                 if (data) {
@@ -326,7 +325,6 @@ const TournamentForm = () => {
                           {...register("registration_start", {
                             required: true,
                           })}
-                          
                         />
                       </div>
                     </div>
@@ -344,8 +342,6 @@ const TournamentForm = () => {
                           {...register("registration_end", {
                             required: true,
                           })}
-                         
-                          
                         />
                       </div>
                     </div>

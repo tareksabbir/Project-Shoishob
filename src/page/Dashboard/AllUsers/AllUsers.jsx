@@ -3,11 +3,9 @@ import admin from "../../../assets/icons/star (4).png";
 import userIcon from "../../../assets/icons/star (5).png";
 import Swal from "sweetalert2";
 
-
 const AllUsers = () => {
-
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/api/v1/user", {
+    const res = await fetch("http://localhost:3000/api/v1/user", {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
@@ -15,7 +13,6 @@ const AllUsers = () => {
     const data = await res.json();
     return data.data;
   });
-  
 
   const handleUserDetails = () => {
     console.log("user profile ");
@@ -32,7 +29,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/api/v1/user/${id}`, {
+        fetch(`http://localhost:3000/api/v1/user/${id}`, {
           method: "DELETE",
         }).then(() => {
           Swal.fire("Done!!", "User Deleted Successfully ", "success");
@@ -55,7 +52,7 @@ const AllUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const makeAdmin = { role: "admin" };
-        fetch(`http://localhost:5000/api/v1/user/${id}`, {
+        fetch(`http://localhost:3000/api/v1/user/${id}`, {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
@@ -80,7 +77,7 @@ const AllUsers = () => {
       id: user._id,
       role: "admin",
     };
-    fetch("http://localhost:5000/api/v1/admin/create-admin", {
+    fetch("http://localhost:3000/api/v1/admin/create-admin", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -140,9 +137,7 @@ const AllUsers = () => {
                 <td>
                   {user.email}
                   <br />
-                  <span className="badge badge-ghost badge-sm">
-                    {user._id}
-                  </span>
+                  <span className="badge badge-ghost badge-sm">{user._id}</span>
                 </td>
 
                 <td>

@@ -3,13 +3,12 @@ import { useQuery } from "react-query";
 import Loading from "../../Loading/Loading";
 import { AuthContext } from "../../../Context/AuthProvider";
 
-
 const MyProfile = () => {
   const [showMore, setShowMore] = useState(false);
   const { user, loading } = useContext(AuthContext);
   const { data: userData } = useQuery(["userData", user?.email], async () => {
     const res = await fetch(
-      `http://localhost:5000/api/v1/user/email/${user?.email}`,
+      `http://localhost:3000/api/v1/user/email/${user?.email}`,
       {
         headers: {
           authorization: `bearer ${localStorage.getItem("access_token")}`,

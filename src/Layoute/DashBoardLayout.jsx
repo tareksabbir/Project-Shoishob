@@ -5,7 +5,7 @@ import "boxicons";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { useQuery } from "react-query";
-import icon from "../assets/icons/Untitled design (2).png"
+import icon from "../assets/icons/Untitled design (2).png";
 const DashBoardLayout = () => {
   // todo: load data for admin
 
@@ -13,7 +13,7 @@ const DashBoardLayout = () => {
 
   const { data: isAdmin } = useQuery(["isAdmin", user?.email], async () => {
     const res = await fetch(
-      `http://localhost:5000/api/v1/user/${user?.email}`,
+      `http://localhost:3000/api/v1/user/${user?.email}`,
       {
         headers: {
           authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -29,7 +29,7 @@ const DashBoardLayout = () => {
     ["isSuperAdmin", user?.email],
     async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/admin/${user?.email}`,
+        `http://localhost:3000/api/v1/admin/${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -83,8 +83,8 @@ const DashBoardLayout = () => {
                   className="inline-flex items-center  text-2xl font-bold  md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200 mb-10 mx-auto lg:mt-5"
                   aria-label="logo"
                 >
-                  <img src={icon} alt=""className="h-12" />
-              <p>Shoishob</p>
+                  <img src={icon} alt="" className="h-12" />
+                  <p>Shoishob</p>
                 </a>
 
                 {isSuperAdmin ? (
@@ -202,8 +202,11 @@ const DashBoardLayout = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/dashboard/addTournament" className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
-                      <box-icon name='add-to-queue' color="white"></box-icon>
+                      <Link
+                        to="/dashboard/addTournament"
+                        className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
+                        <box-icon name="add-to-queue" color="white"></box-icon>
                         Registration
                       </Link>
                     </li>
@@ -252,7 +255,10 @@ const DashBoardLayout = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/dashboard/leaderBoard" className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                      <Link
+                        to="/dashboard/leaderBoard"
+                        className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
                         <box-icon name="trophy" color="white"></box-icon>
                         Leader Board
                       </Link>
@@ -264,7 +270,10 @@ const DashBoardLayout = () => {
                       </a>
                     </li>
                     <li>
-                      <Link to={"/dashboard/history"} className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10">
+                      <Link
+                        to={"/dashboard/history"}
+                        className=" text-gray-400 transition duration-100 hover:text-white active:text-indigo-900 px-10"
+                      >
                         <box-icon name="purchase-tag" color="white"></box-icon>
                         Pay History
                       </Link>

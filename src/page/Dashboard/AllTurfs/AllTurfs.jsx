@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const AllTurfs = () => {
   const { data: turfs = [] } = useQuery(["booking"], async () => {
-    const res = await fetch("http://localhost:5000/api/v1/turf/details", {
+    const res = await fetch("http://localhost:3000/api/v1/turf/details", {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },

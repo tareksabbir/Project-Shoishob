@@ -4,7 +4,7 @@ import superIcon from "../../../assets/icons/star (2).png";
 import Swal from "sweetalert2";
 const AllAdmin = () => {
   const { data: admins = [], refetch } = useQuery(["admins"], async () => {
-    const res = await fetch("http://localhost:5000/api/v1/admin", {
+    const res = await fetch("http://localhost:3000/api/v1/admin", {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
@@ -25,7 +25,7 @@ const AllAdmin = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const makeAdmin = { role: "superAdmin" };
-        fetch(`http://localhost:5000/api/v1/admin/${id}`, {
+        fetch(`http://localhost:3000/api/v1/admin/${id}`, {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
@@ -61,7 +61,7 @@ const AllAdmin = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/api/v1/admin/${id}`, {
+        fetch(`http://localhost:3000/api/v1/admin/${id}`, {
           method: "DELETE",
         }).then(() => {
           Swal.fire("Done!!", "admin Deleted Successfully ", "success");
@@ -72,7 +72,7 @@ const AllAdmin = () => {
     });
   };
   const handleDelteUserFromUserDB = (id) => {
-    fetch(`http://localhost:5000/api/v1/user/${id}`, {
+    fetch(`http://localhost:3000/api/v1/user/${id}`, {
       method: "DELETE",
     }).then(() => {});
   };
@@ -164,9 +164,7 @@ const AllAdmin = () => {
               </tr>
             ))}
           </tbody>
-          
         </table>
-       
       </div>
     </>
   );

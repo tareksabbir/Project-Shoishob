@@ -11,7 +11,7 @@ const RegistrationForm = () => {
   const { user, loading } = useContext(AuthContext);
   const { data: userData } = useQuery(["userData", user?.email], async () => {
     const res = await fetch(
-      `http://localhost:5000/api/v1/user/email/${user?.email}`,
+      `http://localhost:3000/api/v1/user/email/${user?.email}`,
       {
         headers: {
           authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -27,13 +27,7 @@ const RegistrationForm = () => {
     return <Loading></Loading>;
   }
 
-  
-  
-
   const handleForm = async (data) => {
-
-   
-
     const registrationDataUpdate = {
       address: data.address,
       captain_name: data.captain_name,
@@ -48,22 +42,20 @@ const RegistrationForm = () => {
       player_7_email: data.player_7_email,
       player_Phone_one: data.player_Phone_one,
       team_name: data.team_name,
-      tournamentId: id
+      tournamentId: id,
     };
-    
 
-      fetch(`http://localhost:5000/api/v1/tournamentRegistration`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(registrationDataUpdate),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          window.location.replace(data.url)
-       
-        });
+    fetch(`http://localhost:3000/api/v1/tournamentRegistration`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(registrationDataUpdate),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        window.location.replace(data.url);
+      });
   };
   return (
     <>

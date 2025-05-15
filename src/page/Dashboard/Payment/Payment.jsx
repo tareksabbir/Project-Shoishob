@@ -4,12 +4,11 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 
-
 const Payment = () => {
   const { id } = useParams();
   const { register, handleSubmit } = useForm();
   const { data: booking, isLoading } = useQuery(["booking", id], async () => {
-    const res = await fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
+    const res = await fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
@@ -32,7 +31,7 @@ const Payment = () => {
       person: data.person,
     };
 
-    fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
+    fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -41,7 +40,7 @@ const Payment = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        window.location.replace(data.url)
+        window.location.replace(data.url);
         console.log(data);
       });
   };

@@ -10,7 +10,7 @@ const Dashboard = () => {
 
   const { data: isAdmin } = useQuery(["isAdmin", user?.email], async () => {
     const res = await fetch(
-      `http://localhost:5000/api/v1/user/${user?.email}`,
+      `http://localhost:3000/api/v1/user/${user?.email}`,
       {
         headers: {
           authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -26,7 +26,7 @@ const Dashboard = () => {
     ["isSuperAdmin", user?.email],
     async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/admin/${user?.email}`,
+        `http://localhost:3000/api/v1/admin/${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -40,9 +40,13 @@ const Dashboard = () => {
   );
   return (
     <>
-      {
-        isSuperAdmin ? <AdminHome></AdminHome> : isAdmin ? <OwnerHome></OwnerHome> : <MyProfile></MyProfile>
-      }
+      {isSuperAdmin ? (
+        <AdminHome></AdminHome>
+      ) : isAdmin ? (
+        <OwnerHome></OwnerHome>
+      ) : (
+        <MyProfile></MyProfile>
+      )}
     </>
   );
 };

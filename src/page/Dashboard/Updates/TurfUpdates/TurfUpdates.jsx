@@ -3,14 +3,13 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+const img_hosting_token = import.metahttp://localhost:3000.VITE_Image_Upload_token;
 
 const TurfUpdates = () => {
   const [turfDetails, setTurfDetails] = useState([]);
   const { id } = useParams();
 
-  const { register, handleSubmit, reset,} = useForm();
-
+  const { register, handleSubmit, reset } = useForm();
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
@@ -52,7 +51,7 @@ const TurfUpdates = () => {
               rules: data.rules,
             };
 
-            fetch(`http://localhost:5000/api/v1/turf/${id}`, {
+            fetch(`http://localhost:3000/api/v1/turf/${id}`, {
               method: "PATCH",
               headers: {
                 "content-type": "application/json",
@@ -79,7 +78,7 @@ const TurfUpdates = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/turf/${id}`, {
+    fetch(`http://localhost:3000/api/v1/turf/${id}`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },

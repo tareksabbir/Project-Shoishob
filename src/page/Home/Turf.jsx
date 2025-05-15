@@ -5,7 +5,7 @@ import TurfCard from "./TurfCard";
 export default function Turf() {
   const [turfs, setTurfs] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/turf/details")
+    fetch("http://localhost:3000/api/v1/turf/details")
       .then((res) => res.json())
       .then((data) => setTurfs(data.data));
   }, []);

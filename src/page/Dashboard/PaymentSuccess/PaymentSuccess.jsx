@@ -15,7 +15,7 @@ const PaymentSuccess = () => {
     ["booking", transactionId],
     async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/bookings/payment/details/${transactionId}`,
+        `http://localhost:3000/api/v1/bookings/payment/details/${transactionId}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -42,8 +42,8 @@ const PaymentSuccess = () => {
       turf: pay.turf,
       price: pay.price,
     };
- console.log(payHistory)
-    fetch("http://localhost:5000/api/v1/history/post-pay-data", {
+    console.log(payHistory);
+    fetch("http://localhost:3000/api/v1/history/post-pay-data", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -52,11 +52,10 @@ const PaymentSuccess = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data){
+        if (data) {
           Swal.fire("Done!", "Your Invoice Is Saved", "success");
         }
-       
-      })
+      });
   };
 
   return (

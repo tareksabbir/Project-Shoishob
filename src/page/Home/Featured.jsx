@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Featured() {
   const { data: tournament = [] } = useQuery(["tournament"], async () => {
-    const res = await fetch("http://localhost:5000/api/v1/tournament-details", {
+    const res = await fetch("http://localhost:3000/api/v1/tournament-details", {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
@@ -50,7 +50,10 @@ export default function Featured() {
                         src={tur.cover}
                         alt="content"
                       />
-                      <Link to={`/tournament-booking/${tur._id}`} className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font">
+                      <Link
+                        to={`/tournament-booking/${tur._id}`}
+                        className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font"
+                      >
                         REGISTRATION
                       </Link>
                       <h2 className="text-lg text-white font-medium title-font mb-4">

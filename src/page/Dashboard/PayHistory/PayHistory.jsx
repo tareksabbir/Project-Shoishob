@@ -11,7 +11,7 @@ const PayHistory = () => {
     ["booking", user?.email],
     async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/history/email/${user?.email}`,
+        `http://localhost:3000/api/v1/history/email/${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -34,7 +34,7 @@ const PayHistory = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
+        fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
           method: "DELETE",
         }).then(() => {
           Swal.fire("Done!!", "Booking Deleted Successfully ", "success");
@@ -76,7 +76,6 @@ const PayHistory = () => {
                 <tr key={booked._id}>
                   <td>
                     <div className="flex items-center space-x-3">
-                     
                       <div>
                         <div className="font-bold">{booked?.name}</div>
                         <div className="font-bold">{booked?.email}</div>
@@ -105,11 +104,9 @@ const PayHistory = () => {
                     </div>
                   </th>
                   <td>
-                    
-                      <button>
-                        <img src={coin} className="w-10"></img>
-                      </button>
-                 
+                    <button>
+                      <img src={coin} className="w-10"></img>
+                    </button>
                   </td>
 
                   <td>

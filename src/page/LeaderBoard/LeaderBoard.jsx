@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
-import star  from "../../assets/icons/star (4).png"
-import star2  from "../../assets/icons/star (5).png"
+import star from "../../assets/icons/star (4).png";
+import star2 from "../../assets/icons/star (5).png";
 
 const LeaderBoard = () => {
   const { data: users = [] } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/api/v1/user", {
+    const res = await fetch("http://localhost:3000/api/v1/user", {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
@@ -28,10 +28,10 @@ const LeaderBoard = () => {
               <th className="bg-pink-800 text-slate-300">From</th>
               <th className="bg-pink-800 text-slate-300">Match</th>
               <th className="bg-pink-800 text-slate-300">Points</th>
-              <th className="bg-pink-800 text-slate-300">
-                Improvement
+              <th className="bg-pink-800 text-slate-300">Improvement</th>
+              <th className="bg-pink-800 text-slate-300 rounded-tr-xl">
+                Badge
               </th>
-              <th className="bg-pink-800 text-slate-300 rounded-tr-xl">Badge</th>
             </tr>
           </thead>
           <tbody>
@@ -73,7 +73,6 @@ const LeaderBoard = () => {
                           100
                         ).toFixed(2)
                       : "N/A"}{" "}
-                    
                   </div>
                 </td>
                 <td>
@@ -101,4 +100,3 @@ const LeaderBoard = () => {
 };
 
 export default LeaderBoard;
-

@@ -20,7 +20,7 @@ const OwnerHome = () => {
   const { user, loading } = useContext(AuthContext);
   const { data: owner } = useQuery(["owner", user?.email], async () => {
     const res = await fetch(
-      `http://localhost:5000/api/v1/user/email/${user?.email}`
+      `http://localhost:3000/api/v1/user/email/${user?.email}`
     );
     const data = await res.json();
     return data.data;
@@ -30,7 +30,7 @@ const OwnerHome = () => {
     ["adminStat", owner?._id],
     async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/ownerStats/owner-collection-counts/${owner?._id}`,
+        `http://localhost:3000/api/v1/ownerStats/owner-collection-counts/${owner?._id}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,

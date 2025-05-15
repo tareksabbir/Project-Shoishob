@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const UserMyBooking = () => {
   const { user } = useContext(AuthContext);
   const [currentTime, setCurrentTime] = useState(new Date());
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(new Date());
@@ -20,7 +20,7 @@ const UserMyBooking = () => {
     ["booking", user?.email],
     async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/bookings/email/${user?.email}`,
+        `http://localhost:3000/api/v1/bookings/email/${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -42,9 +42,9 @@ const UserMyBooking = () => {
     );
 
     if (timeDifference >= 60 && booking.price && booking.paid === false) {
-      fetch(`http://localhost:5000/api/v1/bookings/${booking._id}`, {
-          method: "DELETE",
-        }).then();
+      fetch(`http://localhost:3000/api/v1/bookings/${booking._id}`, {
+        method: "DELETE",
+      }).then();
     }
   };
 
@@ -59,7 +59,7 @@ const UserMyBooking = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
+        fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
           method: "DELETE",
         }).then(() => {
           Swal.fire("Done!!", "Booking Deleted Successfully ", "success");
@@ -71,10 +71,7 @@ const UserMyBooking = () => {
   return (
     <>
       <div className="overflow-x-auto lg:p-20">
-      <div className="text-3xl font-bold text-center mb-10">
-          {" "}
-          My Bookings
-        </div>
+        <div className="text-3xl font-bold text-center mb-10"> My Bookings</div>
         <table className="table bg-slate-950">
           {/* head */}
           <thead>

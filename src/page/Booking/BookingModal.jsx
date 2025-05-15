@@ -47,7 +47,7 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
       selectedDate: date,
     };
 
-    fetch("http://localhost:5000/api/v1/bookings", {
+    fetch("http://localhost:3000/api/v1/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -83,7 +83,11 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
             ) {
-              Swal.fire("Pay within 60 minutes!", "Otherwise Your booking will delete automatically", "warning");
+              Swal.fire(
+                "Pay within 60 minutes!",
+                "Otherwise Your booking will delete automatically",
+                "warning"
+              );
             }
           });
 

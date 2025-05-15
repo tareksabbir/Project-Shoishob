@@ -10,7 +10,7 @@ const TournamentBooking = () => {
     ["tournamentDetails", id],
     async () => {
       const res = await fetch(
-        `http://localhost:5000/api/v1/tournament-details/${id}`,
+        `http://localhost:3000/api/v1/tournament-details/${id}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -86,13 +86,12 @@ const TournamentBooking = () => {
             zIndex: -4,
           }}
         ></div>
-       
       </section>
       <section className="text-gray-600 body-font">
         <div className="container lg:mb-20 mx-auto">
           <div className="text-center mb-20">
             <h1 className="sm:text-3xl text-2xl  text-center font-bold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text mb-4">
-              All About Tournament 
+              All About Tournament
             </h1>
             <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
               Blue bottle crucifix vinyl post-ironic four dollar toast vegan
@@ -135,7 +134,7 @@ const TournamentBooking = () => {
                   <path d="M22 4L12 14.01l-3-3"></path>
                 </svg>
                 <span className="title-font font-medium">
-                Registration Ends : {tournamentDetails.registration_end}
+                  Registration Ends : {tournamentDetails.registration_end}
                 </span>
               </div>
             </div>
@@ -154,7 +153,7 @@ const TournamentBooking = () => {
                   <path d="M22 4L12 14.01l-3-3"></path>
                 </svg>
                 <span className="title-font font-medium">
-                Registration Fee : {tournamentDetails.price} BDT
+                  Registration Fee : {tournamentDetails.price} BDT
                 </span>
               </div>
             </div>
@@ -173,7 +172,7 @@ const TournamentBooking = () => {
                   <path d="M22 4L12 14.01l-3-3"></path>
                 </svg>
                 <span className="title-font font-medium">
-                  Maximum Players :  {tournamentDetails.person} Players + 1 extra
+                  Maximum Players : {tournamentDetails.person} Players + 1 extra
                 </span>
               </div>
             </div>
@@ -216,7 +215,10 @@ const TournamentBooking = () => {
               </div>
             </div>
           </div>
-          <Link to={`/registration-form/${tournamentDetails._id}`} className="flex w-1/5 mx-auto mt-16 text-white bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">
+          <Link
+            to={`/registration-form/${tournamentDetails._id}`}
+            className="flex w-1/5 mx-auto mt-16 text-white bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg"
+          >
             REGISTRATION NOW
           </Link>
         </div>

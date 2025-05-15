@@ -1,16 +1,14 @@
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+const img_hosting_token = import.metahttp://localhost:3000.VITE_Image_Upload_token;
 
 const AddTurf = () => {
-  const { register, handleSubmit,reset } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
   const handleForm = async (data) => {
-    
-
     const logoFormData = new FormData();
     logoFormData.append("image", data.logo[0]);
 
@@ -49,8 +47,8 @@ const AddTurf = () => {
               about: data.about,
               rules: data.rules,
             };
-          
-            fetch("http://localhost:5000/api/v1/turf/post-turf-data", {
+
+            fetch("http://localhost:3000/api/v1/turf/post-turf-data", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -343,4 +341,3 @@ const AddTurf = () => {
 };
 
 export default AddTurf;
-

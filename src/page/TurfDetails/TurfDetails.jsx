@@ -11,7 +11,7 @@ const TurfDetails = () => {
   const { cover, logo, turf_name, address, about, rules } = turfDetails;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/turf/${id}`, {
+    fetch(`http://localhost:3000/api/v1/turf/${id}`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },

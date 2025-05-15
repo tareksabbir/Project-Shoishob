@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 const AllBookings = () => {
   const { data: booking = [], refetch } = useQuery(["booking"], async () => {
-    const res = await fetch("http://localhost:5000/api/v1/bookings", {
+    const res = await fetch("http://localhost:3000/api/v1/bookings", {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
@@ -23,7 +23,7 @@ const AllBookings = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/api/v1/bookings/${id}`, {
+        fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
           method: "DELETE",
         }).then(() => {
           Swal.fire("Done!!", "Booking Deleted Successfully ", "success");
