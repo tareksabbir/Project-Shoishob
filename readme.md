@@ -1,7 +1,5 @@
 # Project Shoishob
 
-![Project Shoishob Banner](https://via.placeholder.com/800x200?text=Project+Shoishob)
-
 A modern web application for booking sports turfs and fields with an intuitive, user-friendly interface. Project Shoishob streamlines the process of finding and reserving sports facilities while providing comprehensive management tools for players, turf owners, and administrators.
 
 ## 📋 Table of Contents
@@ -9,6 +7,7 @@ A modern web application for booking sports turfs and fields with an intuitive, 
 - [Features](#features)
 - [Technology Stack](#technology-stack)
 - [Prerequisites](#prerequisites)
+- [System Architecture](#system-architecture)
 - [Installation](#installation)
 - [Environment Setup](#environment-setup)
 - [Project Structure](#project-structure)
@@ -91,6 +90,79 @@ Before you begin, ensure you have the following installed:
 Project Shoishob follows a client-side rendered React application architecture with role-based access control. The application provides different views and functionalities based on three primary user roles: Regular User, Admin/Owner, and Super Admin.
 
 ![Project Overview](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob1.png)
+
+### 1. Routing System
+
+The application uses React Router to manage navigation between different views. Routes are organized into public routes (accessible to all) and protected routes (requiring authentication).
+
+![Routing System](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob2.png)
+
+### 2. Authentication and Authorization
+
+The system implements a multi-layered authentication and authorization mechanism:
+
+- **Authentication:** Users authenticate through Firebase
+- **JWT Tokens:** Authenticated API requests use bearer tokens
+- **Role-Based Authorization:** Different dashboards and capabilities based on user roles
+
+![Authentication and Authorization](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob3.png)
+
+### 3. Layout System
+
+The application uses two primary layouts:
+
+- **Main Layout (Main.jsx):** Used for public pages
+- **Dashboard Layout (DashBoardLayout.jsx):** Used for authenticated user functionality
+
+![ Layout System](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob4.png)
+
+### 4. Dashboard System
+
+The dashboard renders different components and navigation options based on the user's role:
+
+![Dashboard System](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob5.png)
+
+### 5. Role-Based Access Control
+
+The system implements three primary user roles, each with progressively more capabilities:
+
+| Role           | API Route              | Capabilities                                                                                                       |
+| -------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| User (Regular) | N/A                    | - View profile<br>- Book turfs<br>- View own bookings<br>- View payment history                                    |
+| Admin/Owner    | `/api/v1/user/:email`  | - All User capabilities<br>- Manage owned turfs<br>- View all bookings for owned turfs<br>- Add tournaments        |
+| Super Admin    | `/api/v1/admin/:email` | - All Admin capabilities<br>- Manage all turfs<br>- Manage all users<br>- View all bookings<br>- Manage all admins |
+
+The dashboard UI adapts to show only the relevant functionality for each role:
+
+![Role-Based Access Control](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob7.png)
+
+
+### 6. Booking System Architecture
+
+The booking system is a core component of Project Shoishob, allowing users to reserve sports fields:
+
+![Booking System Architecture](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob8.png)
+
+### Code Organization
+
+The project follows a feature-based code organization pattern:
+
+![Code Organization](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob9.png)
+
+
+
+### Component Relationships
+
+The application is built using component composition and context-based state management:
+
+![Component Relationships](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob10.png)
+
+
+### Protected Routes Implementation
+
+Protected routes are implemented using wrapper components that check authentication status and user roles:
+
+![Protected Routes Implementation](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob11.png)
 
 ## 🚀 Installation
 
