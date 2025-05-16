@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PlayZone from "../Home/PlayZone";
 import GoBooking from "./GoBooking";
-import Heading from "../Home/heading";
+import Heading from "../Home/Heading";
+
 
 const TurfDetails = () => {
   const [turfDetails, setTurfDetails] = useState([]);

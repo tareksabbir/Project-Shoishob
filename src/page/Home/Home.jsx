@@ -1,8 +1,9 @@
 import Turf from "./Turf";
 import Bannar from "./Bannar";
-import Heading from "./heading";
 import Featured from "./Featured";
 import EmailCollect from "./EmailCollect";
+import Heading from "./Heading";
+
 
 export default function Home() {
   return (

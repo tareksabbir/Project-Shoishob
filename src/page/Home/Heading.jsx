@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 
-export default function Heading() {
+const Heading = () => {
   return (
     <>
       <main className="relative bg-nearest-rgb-23-32-49">
@@ -133,4 +133,6 @@ export default function Heading() {
       </main>
     </>
   );
-}
+};
+
+export default Heading;
