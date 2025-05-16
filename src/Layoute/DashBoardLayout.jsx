@@ -76,7 +76,7 @@ const DashBoardLayout = () => {
                 htmlFor="dashboard-drawer"
                 className="drawer-overlay"
               ></label>
-              <ul className="menu p-5 w-60 h-full bg-slate-950 text-base-content">
+              <ul className="menu p-5 w-60 h-full bg-slate-950 text-sm-content">
                 {/* Sidebar content here */}
                 <a
                   href="/"
