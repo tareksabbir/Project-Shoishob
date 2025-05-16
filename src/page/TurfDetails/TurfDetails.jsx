@@ -5,7 +5,6 @@ import PlayZone from "../Home/PlayZone";
 import GoBooking from "./GoBooking";
 import Heading from "../Home/Heading";
 
-
 const TurfDetails = () => {
   const [turfDetails, setTurfDetails] = useState([]);
   const { id } = useParams();
