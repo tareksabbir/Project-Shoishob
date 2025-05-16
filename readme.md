@@ -22,8 +22,6 @@ A modern web application for booking sports turfs and fields with an intuitive, 
 
 ---
 
-
-
 ## ✨ Features
 
 ### User Authentication System
@@ -144,7 +142,7 @@ The project follows a feature-based code organization pattern:
 
 ### Component Relationships
 
-The application is built using component composition and context-based state management:
+The application is built using component composition and context-smd state management:
 
 ![Component Relationships](https://raw.githubusercontent.com/tareksabbir/Project-Shoishob/main/public/shoishob10.png)
 
