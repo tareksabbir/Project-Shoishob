@@ -9,7 +9,7 @@ export default function Motivation() {
                 About Us
               </h1>
 
-              <p className="mb-6 text-gray-500 sm:text-lg md:mb-8 text-justify">
+              <p className="mb-6 text-gray-500 sm:text-sm md:mb-8 text-justify">
                 Our project aims to address the growing concern of screen
                 addiction and physical inactivity in children and young people
                 by providing accessible and engaging opportunities for them to
@@ -46,7 +46,7 @@ export default function Motivation() {
                 encourage participation and motivation.
               </p>
 
-              <blockquote className="mb-6 border-l-4 pl-4 italic text-gray-500 sm:text-lg md:mb-8 md:pl-6">
+              <blockquote className="mb-6 border-l-4 pl-4 italic text-gray-500 sm:text-sm md:mb-8 md:pl-6">
                 “In summary, our projects primary objective is to promote
                 physical activity and sports among children and young people
                 while providing them with accessible and engaging opportunities

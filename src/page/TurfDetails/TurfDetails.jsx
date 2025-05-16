@@ -22,7 +22,7 @@ const TurfDetails = () => {
 
   return (
     <>
-      <section className="text-gray-600 body-font relative bg-nearest-rgb-23-32-49">
+      <section className="max-w-7xl mx-auto   text-gray-600 body-font relative bg-nearest-rgb-23-32-49">
         <div className="container px-5 py-24 mx-auto flex flex-col">
           <div className="lg:w- mx-auto">
             <div className="rounded-lg h-64 overflow-hidden">
@@ -46,7 +46,7 @@ const TurfDetails = () => {
                   />
                 </div>
                 <div className="flex flex-col items-center text-center justify-center">
-                  <h2 className="font-medium title-font mt-4 text-white text-lg">
+                  <h2 className="font-medium title-font mt-4 text-white text-sm">
                     {turf_name}
                   </h2>
                   <div className="w-12 h-1 bg-cyan-500 rounded mt-2 mb-4"></div>

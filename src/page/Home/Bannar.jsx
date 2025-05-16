@@ -10,11 +10,11 @@ export default function Bannar() {
         <section className="relative">
           <section className=" flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16 lg:px-20 px-10">
             <div className="xl:w-11/12 flex flex-col justify-center items-center lg:items-start sm:text-center lg:text-left lg:py-8 xl:py-10 lg:mb-10">
-              <h1 className="mt-10  text-black-800 text-4xl sm:text-5xl md:text-8xl mb-8 md:mb-12 font-extrabold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text lg:mt-16">
+              <h1 className="mt-10  text-black-800 text-4xl sm:text-5xl md:text-7xl mb-8 md:mb-12 font-extrabold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text lg:mt-16">
                 Nothing But Sports..
               </h1>
 
-              <p className="lg:w-4/5 text-gray-400 xl:text-lg leading-relaxed mb-8 md:mb-12 ">
+              <p className="lg:w-4/5 text-gray-400 xl:text-sm leading-relaxed mb-8 md:mb-12 ">
                 Seize the moment and embrace the possibilities that lie before
                 you. Opportunities come and go, fleeting like shooting stars
                 across the night sky. Its in those moments of decision, when you
@@ -23,14 +23,14 @@ export default function Bannar() {
               <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-2.5">
                 <Link
                   to="/"
-                  className="inline-block bg-blue-500 hover:bg-gradient-to-r from-black to-indigo-500 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+                  className="inline-block bg-blue-500 hover:bg-gradient-to-r from-black to-indigo-500 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-sm font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
                 >
                   Book now
                 </Link>
 
                 <Link
                   to="/"
-                  className="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-500 active:text-gray-700 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+                  className="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-500 active:text-gray-700 text-sm md:text-sm font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
                 >
                   Take tour
                 </Link>
@@ -49,44 +49,44 @@ export default function Bannar() {
           <section className="lg:mt-5 flex flex-col lg:flex-row justify-between items-center border-t gap-10 lg:gap-8 pt-8 lg:px-24">
             <div className="grid grid-cols-2 md:flex md:divide-x gap-4 -mx-6 md:-mx-8">
               <div className="px-6 md:px-8">
-                <span className="block text-cyan-500 text-lg md:text-xl font-bold text-center md:text-left">
+                <span className="block text-cyan-500 text-sm md:text-xl font-bold text-center md:text-left">
                   <CountUp end={20} duration={5} />
                 </span>
-                <span className="block text-gray-400 text-sm md:text-base font-semibold text-center md:text-left">
+                <span className="block text-gray-400 text-sm md:text-sm font-semibold text-center md:text-left">
                   Sports Zone
                 </span>
               </div>
 
               <div className="px-6 md:px-8">
-                <span className="block text-cyan-500 text-lg md:text-xl font-bold text-center md:text-left">
+                <span className="block text-cyan-500 text-sm md:text-xl font-bold text-center md:text-left">
                   <CountUp end={50} duration={5} />+
                 </span>
-                <span className="block text-gray-400 text-sm md:text-base font-semibold text-center md:text-left">
+                <span className="block text-gray-400 text-sm md:text-sm font-semibold text-center md:text-left">
                   Stuffs
                 </span>
               </div>
 
               <div className="px-6 md:px-8">
-                <span className="block text-cyan-500 text-lg md:text-xl font-bold text-center md:text-left">
+                <span className="block text-cyan-500 text-sm md:text-xl font-bold text-center md:text-left">
                   <CountUp end={1500} duration={5} />+
                 </span>
-                <span className="block text-gray-400 text-sm md:text-base font-semibold text-center md:text-left">
+                <span className="block text-gray-400 text-sm md:text-sm font-semibold text-center md:text-left">
                   Member
                 </span>
               </div>
 
               <div className="px-6 md:px-8">
-                <span className="block text-cyan-500 text-lg md:text-xl font-bold text-center md:text-left">
+                <span className="block text-cyan-500 text-sm md:text-xl font-bold text-center md:text-left">
                   A couple
                 </span>
-                <span className="block text-gray-400 text-sm md:text-base font-semibold text-center md:text-left">
+                <span className="block text-gray-400 text-sm md:text-sm font-semibold text-center md:text-left">
                   Coffee breaks
                 </span>
               </div>
             </div>
 
             <div className="flex justify-center lg:justify-start items-center gap-4">
-              <span className="text-gray-400 text-sm sm:text-base font-semibold tracking-widest uppercase">
+              <span className="text-gray-400 text-sm sm:text-sm font-semibold tracking-widest uppercase">
                 Social
               </span>
               <span className="w-12 h-px bg-gray-200"></span>

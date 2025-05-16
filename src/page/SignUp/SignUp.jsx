@@ -132,7 +132,7 @@ const SignUp = () => {
                 <div>
                   <label
                     htmlFor="name"
-                    className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
+                    className="mb-2 inline-block text-sm text-gray-800 sm:text-sm"
                   >
                     Name
                   </label>
@@ -156,7 +156,7 @@ const SignUp = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
+                    className="mb-2 inline-block text-sm text-gray-800 sm:text-sm"
                   >
                     Email
                   </label>
@@ -183,7 +183,7 @@ const SignUp = () => {
                 <div>
                   <label
                     htmlFor="password"
-                    className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
+                    className="mb-2 inline-block text-sm text-gray-800 sm:text-sm"
                   >
                     Password
                   </label>
@@ -226,7 +226,7 @@ const SignUp = () => {
                   </p>
                 )}
 
-                <button className="block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base">
+                <button className="block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-sm">
                   Sign Up
                 </button>
 
@@ -239,7 +239,7 @@ const SignUp = () => {
 
                 <button
                   onClick={handleGoogleSignIn}
-                  className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
+                  className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-sm"
                 >
                   <svg
                     className="h-5 w-5 shrink-0"

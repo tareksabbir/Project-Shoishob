@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { Link } from "react-router-dom";
-import icon from "../assets/icons/Untitled design (2).png"
+import icon from "../assets/icons/Untitled design (2).png";
 export default function Navbar() {
   const { user, logOut } = useContext(AuthContext);
   const handleLogout = () => {
@@ -64,30 +64,30 @@ export default function Navbar() {
                   d="M185.432.063L96.44 17.501a3.268 3.268 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113Z"
                 ></path>
               </svg> */}
-              <img src={icon} alt=""className="h-16" />
+              <img src={icon} alt="" className="h-16" />
               <p>Shoishob</p>
             </Link>
 
             <nav className="hidden gap-12 lg:flex">
-              <a href="/" className="text-lg font-semibold text-cyan-500">
+              <a href="/" className="text-sm font-semibold text-cyan-500">
                 Home
               </a>
               <a
                 href="/booking"
-                className="text-lg font-semibold text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
+                className="text-sm font-semibold text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
               >
                 Booking
               </a>
 
               <a
                 href="/leaderBoard"
-                className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
+                className="text-sm font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
               >
                 Leader Board
               </a>
               <a
                 href="/about"
-                className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
+                className="text-sm font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
               >
                 About
               </a>
@@ -96,19 +96,19 @@ export default function Navbar() {
                 <>
                   <a
                     href="/review"
-                    className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
+                    className="text-sm font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
                   >
                     Review
                   </a>
                   <a
                     href="/dashboard"
-                    className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
+                    className="text-sm font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
                   >
                     Dashboard
                   </a>
                   <button
                     onClick={handleLogout}
-                    className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
+                    className="text-sm font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
                   >
                     Sign Out
                   </button>
@@ -116,7 +116,7 @@ export default function Navbar() {
               ) : (
                 <a
                   href="/login"
-                  className="text-lg font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
+                  className="text-sm font-semibold  text-gray-400 transition duration-100 hover:text-cyan-500 active:text-indigo-900"
                 >
                   Login
                 </a>
@@ -125,7 +125,7 @@ export default function Navbar() {
 
             <a
               href="/contact"
-              className="hidden rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base lg:inline-block"
+              className="hidden rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-sm lg:inline-block"
             >
               Contact Sales
             </a>
@@ -133,7 +133,7 @@ export default function Navbar() {
             <button
               type="button"
               htmlFor="dashboard-drawer"
-              className="inline-flex items-center gap-2 rounded-lg bg-gray-200 px-2.5 py-2 text-sm font-semibold text-gray-500 ring-indigo-300 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base lg:hidden"
+              className="inline-flex items-center gap-2 rounded-lg bg-gray-200 px-2.5 py-2 text-sm font-semibold text-gray-500 ring-indigo-300 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-sm lg:hidden"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

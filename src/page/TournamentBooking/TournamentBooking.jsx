@@ -55,7 +55,7 @@ const TournamentBooking = () => {
                   />
                 </div>
                 <div className="flex flex-col items-center text-center justify-center">
-                  <h2 className="font-medium title-font mt-4 text-white text-lg">
+                  <h2 className="font-medium title-font mt-4 text-white text-sm">
                     {tournamentDetails?.tournament_name}
                   </h2>
                   <div className="w-12 h-1 bg-blue-500 rounded mt-2 mb-4"></div>
@@ -93,7 +93,7 @@ const TournamentBooking = () => {
             <h1 className="sm:text-3xl text-2xl  text-center font-bold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text mb-4">
               All About Tournament
             </h1>
-            <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
+            <p className="text-sm leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
               Blue bottle crucifix vinyl post-ironic four dollar toast vegan
               taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh
               mi pug.
@@ -217,7 +217,7 @@ const TournamentBooking = () => {
           </div>
           <Link
             to={`/registration-form/${tournamentDetails._id}`}
-            className="flex w-1/5 mx-auto mt-16 text-white bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg"
+            className="flex w-1/5 mx-auto mt-16 text-white bg-blue-600 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-sm"
           >
             REGISTRATION NOW
           </Link>

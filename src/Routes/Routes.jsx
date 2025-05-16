@@ -171,22 +171,22 @@ const router = createBrowserRouter([
         path: "/dashboard/payment/:id",
         element: <Payment></Payment>,
       },
-      // {
-      //   path: "/dashboard/allUsers",
-      //   element: (
-      //     <SuperAdminRoute>
-      //       <AllUsers></AllUsers>
-      //     </SuperAdminRoute>
-      //   ),
-      // },
-      // {
-      //   path: "/dashboard/allAdmin",
-      //   element: (
-      //     <SuperAdminRoute>
-      //       <AllAdmin></AllAdmin>
-      //     </SuperAdminRoute>
-      //   ),
-      // },
+      {
+        path: "/dashboard/allUsers",
+        element: (
+          <SuperAdminRoute>
+            <AllUsers></AllUsers>
+          </SuperAdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allAdmin",
+        element: (
+          <SuperAdminRoute>
+            <AllAdmin></AllAdmin>
+          </SuperAdminRoute>
+        ),
+      },
       {
         path: "/dashboard/allUsers",
         element: <AllUsers></AllUsers>,

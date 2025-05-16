@@ -8,7 +8,7 @@ import PlayZone from "../Home/PlayZone";
 export default function BookingRoutes() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   return (
-    <>
+    <div className="max-w-7xl mx-auto">
       <BookingBanner
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
@@ -18,7 +18,6 @@ export default function BookingRoutes() {
       ></BookingAvailableSlots>
       {/* <Practice></Practice> */}
       <PlayZone></PlayZone>
-
-    </>
+    </div>
   );
 }

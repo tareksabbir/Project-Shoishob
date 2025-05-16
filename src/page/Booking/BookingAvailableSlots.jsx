@@ -30,12 +30,12 @@ export default function BookingAvailableSlots({ selectedDate }) {
 
   return (
     <>
-      <main className="relative bg-nearest-rgb-23-32-49">
-        <section className="relative">
+      <main className=" relative bg-nearest-rgb-23-32-49">
+        <section className="relative max-w-7xl mx-auto">
           <section>
             <div className=" py-6 sm:py-8 lg:py-12 bg-nearest-rgb-23-32-49">
-              <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-                <p className="mb-2 text-center font-semibold text-white md:mb-3 lg:text-lg">
+              <div className="mx-auto max-w-7xl px-4 md:px-8">
+                <p className="mb-2 text-center font-semibold text-white md:mb-3 lg:text-sm">
                   {format(selectedDate, "PP")}
                 </p>
 
@@ -43,7 +43,7 @@ export default function BookingAvailableSlots({ selectedDate }) {
                   Available Zones In The City
                 </h2>
 
-                <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+                <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-sm">
                   ensuring that our services are accessible and tailored to your
                   specific location. Experience the convenience of our
                   wide-ranging coverage, making it easier for you to access our

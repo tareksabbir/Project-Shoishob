@@ -12,7 +12,7 @@ export default function PlayZone() {
                   Enlightening Moments In Our{" "}
                   <span className="text-white">Sport Zones</span>
                 </h1>
-                <p className="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-gray-400">
+                <p className="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-gray-400 text-sm">
                   Experience enlightening moments in our sport zones, where
                   passion, skill, and camaraderie converge. From exhilarating
                   matches to awe-inspiring performances, our sport zones provide

@@ -4,7 +4,7 @@ const GoBooking = () => {
   return (
     <>
       <section className="text-gray-600 body-font py-12">
-        <div className="container px-5  mx-auto">
+        <div className=" px-5  mx-auto">
           <div className="flex flex-col text-center w-full mb-20">
             <h1 className="sm:text-4xl text-3xl text-white font-medium title-font mb-2 text-">
               Pricing
@@ -38,7 +38,7 @@ const GoBooking = () => {
                   <td className="px-4 py-3 text-gray-400">Start</td>
                   <td className="px-4 py-3 text-gray-400">10</td>
                   <td className="px-4 py-3 text-gray-400">60 min</td>
-                  <td className="px-4 py-3 text-lg text-gray-400">3000</td>
+                  <td className="px-4 py-3 text-sm text-gray-400">3000</td>
                 </tr>
                 <tr>
                   <td className="border-t-2 border-gray-600 px-4 py-3 text-gray-400">
@@ -50,7 +50,7 @@ const GoBooking = () => {
                   <td className="border-t-2 border-gray-600 px-4 py-3 text-gray-400">
                     60 min
                   </td>
-                  <td className="border-t-2 border-gray-600 px-4 py-3 text-lg text-gray-400">
+                  <td className="border-t-2 border-gray-600 px-4 py-3 text-sm text-gray-400">
                     3400
                   </td>
                 </tr>
@@ -64,7 +64,7 @@ const GoBooking = () => {
                   <td className="border-t-2 border-gray-600 px-4 py-3 text-gray-400">
                     60min
                   </td>
-                  <td className="border-t-2 border-gray-600 px-4 py-3 text-lg text-gray-400">
+                  <td className="border-t-2 border-gray-600 px-4 py-3 text-sm text-gray-400">
                     3800
                   </td>
                 </tr>
@@ -78,7 +78,7 @@ const GoBooking = () => {
                   <td className="border-t-2 border-b-2 border-gray-600 px-4 py-3 text-gray-400">
                     60 min
                   </td>
-                  <td className="border-t-2 border-b-2 border-gray-600 px-4 py-3 text-lg text-gray-400">
+                  <td className="border-t-2 border-b-2 border-gray-600 px-4 py-3 text-sm text-gray-400">
                     4000
                   </td>
                 </tr>

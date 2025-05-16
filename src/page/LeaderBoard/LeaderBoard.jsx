@@ -17,7 +17,7 @@ const LeaderBoard = () => {
 
   return (
     <>
-      <div className="overflow-x-auto lg:px-40 lg:py-8">
+      <div className="max-w-7xl mx-auto overflow-x-auto lg:px-40 lg:py-8">
         <table className="table bg-slate-800">
           <thead>
             <tr>

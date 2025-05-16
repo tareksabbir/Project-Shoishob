@@ -12,7 +12,7 @@ const BookingCard = ({ turf, setBooking }) => {
             src={logo}
           />
           <div className="flex-grow text-center">
-            <h2 className="text-white title-font font-medium text-lg">
+            <h2 className="text-white title-font font-medium text-sm">
               {turf_name}
             </h2>
 

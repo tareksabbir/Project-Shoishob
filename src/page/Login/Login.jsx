@@ -130,7 +130,7 @@ const Login = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
+                    className="mb-2 inline-block text-sm text-gray-800 sm:text-sm"
                   >
                     Email
                   </label>
@@ -157,7 +157,7 @@ const Login = () => {
                 <div>
                   <label
                     htmlFor="password"
-                    className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
+                    className="mb-2 inline-block text-sm text-gray-800 sm:text-sm"
                   >
                     Password
                   </label>
@@ -191,7 +191,7 @@ const Login = () => {
                   )}
                 </div>
 
-                <button className="block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base">
+                <button className="block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-sm">
                   Log in
                 </button>
 
@@ -204,7 +204,7 @@ const Login = () => {
 
                 <button
                   onClick={handleGoogleSignIn}
-                  className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
+                  className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-sm"
                 >
                   <svg
                     className="h-5 w-5 shrink-0"
@@ -305,7 +305,7 @@ const Login = () => {
                       <div className="mt-2 mx-auto flex gap-5">
                         <button
                           type="button"
-                          className="mt-5 inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-indigo-500 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                          className="mt-5 inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-indigo-500 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                           onClick={() => {
                             handlePasswordReset(resetEmail);
                             handleResetModalClose();
@@ -315,7 +315,7 @@ const Login = () => {
                         </button>
                         <button
                           type="button"
-                          className="mt-5 inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base font-medium text-black shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                          className="mt-5 inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-black shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                           onClick={handleResetModalClose}
                         >
                           Cancel

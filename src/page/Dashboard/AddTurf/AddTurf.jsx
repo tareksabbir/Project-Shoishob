@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const img_hosting_token = import.metahttp://localhost:3000.VITE_Image_Upload_token;
+const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
 
 const AddTurf = () => {
   const { register, handleSubmit, reset } = useForm();

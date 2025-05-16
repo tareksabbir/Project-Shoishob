@@ -10,7 +10,7 @@ export default function AboutCount() {
                   Our Team by the numbers
                 </h2>
 
-                <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+                <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-sm">
                   This is a section of some simple filler text, also known as
                   placeholder text. It shares some characteristics of a real
                   written text but is random or otherwise generated.
@@ -22,7 +22,7 @@ export default function AboutCount() {
                   <div className="text-xl font-bold text-white sm:text-2xl md:text-3xl">
                     20
                   </div>
-                  <div className="text-sm text-indigo-200 sm:text-base">
+                  <div className="text-sm text-indigo-200 sm:text-sm">
                     Sports Zone
                   </div>
                 </div>
@@ -31,7 +31,7 @@ export default function AboutCount() {
                   <div className="text-xl font-bold text-white sm:text-2xl md:text-3xl">
                     50+
                   </div>
-                  <div className="text-sm text-indigo-200 sm:text-base">
+                  <div className="text-sm text-indigo-200 sm:text-sm">
                     Stuffs
                   </div>
                 </div>
@@ -40,7 +40,7 @@ export default function AboutCount() {
                   <div className="text-xl font-bold text-white sm:text-2xl md:text-3xl">
                     1500+
                   </div>
-                  <div className="text-sm text-indigo-200 sm:text-base">
+                  <div className="text-sm text-indigo-200 sm:text-sm">
                     Customers
                   </div>
                 </div>
@@ -49,7 +49,7 @@ export default function AboutCount() {
                   <div className="text-xl font-bold text-white sm:text-2xl md:text-3xl">
                     A couple
                   </div>
-                  <div className="text-sm text-indigo-200 sm:text-base">
+                  <div className="text-sm text-indigo-200 sm:text-sm">
                     Coffee breaks
                   </div>
                 </div>
@@ -62,7 +62,7 @@ export default function AboutCount() {
           style={{
             background:
               "linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)",
-              zIndex: -1,
+            zIndex: -1,
           }}
         ></div>
       </main>

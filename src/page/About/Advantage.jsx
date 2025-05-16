@@ -4,13 +4,13 @@ export default function Advantage() {
       <main className="relative bg-nearest-rgb-23-32-49">
         <section className="relative">
           <div className="bg-nearest-rgb-23-32-49 py-6 sm:py-8 lg:py-12 lg:px-16">
-            <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <div className="mx-auto max-w-7xl px-4 md:px-8">
               <div className="mb-10 md:mb-16">
                 <h2 className="mb-4 text-center text-2xl font-bold text-white md:mb-6 lg:text-3xl">
                   Our competitive advantage
                 </h2>
 
-                <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+                <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-sm">
                   This is a section of some simple filler text, also known as
                   placeholder text. It shares some characteristics of a real
                   written text but is random or otherwise generated.
@@ -37,7 +37,7 @@ export default function Advantage() {
                   </div>
 
                   <div>
-                    <h3 className="mb-2 text-lg font-semibold md:text-xl">
+                    <h3 className="mb-2 text-sm font-semibold md:text-xl">
                       Growth
                     </h3>
                     <p className="mb-2 text-gray-500">
@@ -72,7 +72,7 @@ export default function Advantage() {
                   </div>
 
                   <div>
-                    <h3 className="mb-2 text-lg font-semibold md:text-xl">
+                    <h3 className="mb-2 text-sm font-semibold md:text-xl">
                       Security
                     </h3>
                     <p className="mb-2 text-gray-500">
@@ -107,7 +107,7 @@ export default function Advantage() {
                   </div>
 
                   <div>
-                    <h3 className="mb-2 text-lg font-semibold md:text-xl">
+                    <h3 className="mb-2 text-sm font-semibold md:text-xl">
                       Cloud
                     </h3>
                     <p className="mb-2 text-gray-500">
@@ -142,7 +142,7 @@ export default function Advantage() {
                   </div>
 
                   <div>
-                    <h3 className="mb-2 text-lg font-semibold md:text-xl">
+                    <h3 className="mb-2 text-sm font-semibold md:text-xl">
                       Speed
                     </h3>
                     <p className="mb-2 text-gray-500">
@@ -177,7 +177,7 @@ export default function Advantage() {
                   </div>
 
                   <div>
-                    <h3 className="mb-2 text-lg font-semibold md:text-xl">
+                    <h3 className="mb-2 text-sm font-semibold md:text-xl">
                       Support
                     </h3>
                     <p className="mb-2 text-gray-500">
@@ -212,7 +212,7 @@ export default function Advantage() {
                   </div>
 
                   <div>
-                    <h3 className="mb-2 text-lg font-semibold md:text-xl">
+                    <h3 className="mb-2 text-sm font-semibold md:text-xl">
                       Dark Mode
                     </h3>
                     <p className="mb-2 text-gray-500">
@@ -236,7 +236,7 @@ export default function Advantage() {
           style={{
             background:
               "linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)",
-              zIndex: -1,
+            zIndex: -1,
           }}
         ></div>
       </main>

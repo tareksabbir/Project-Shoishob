@@ -1,9 +1,8 @@
 export default function Content() {
   return (
     <>
-  
       <main className="relative py-10 bg-gray-900">
-        <div className="relative z-10 max-w-screen-xl mx-auto text-gray-600 sm:px-4 md:px-8">
+        <div className="relative z-10 max-w-screen-2xl mx-auto text-gray-600 sm:px-4 md:px-8">
           <div className="max-w-lg space-y-3 px-4 sm:mx-auto sm:text-center sm:px-0">
             <h3 className="text-cyan-400 font-semibold">Contact</h3>
             <p className="text-white text-3xl font-semibold sm:text-4xl">
@@ -67,7 +66,6 @@ export default function Content() {
           style={{
             background:
               "linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)",
-              
           }}
         ></div>
       </main>

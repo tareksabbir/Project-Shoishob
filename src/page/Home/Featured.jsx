@@ -56,7 +56,7 @@ export default function Featured() {
                       >
                         REGISTRATION
                       </Link>
-                      <h2 className="text-lg text-white font-medium title-font mb-4">
+                      <h2 className="text-sm text-white font-medium title-font mb-4">
                         {tur.tournament_name}
                       </h2>
                     </div>

@@ -116,7 +116,7 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
             <h3 className="font-bold text-3xl text-center mb-1 text-white">
               {turf_name}
             </h3>
-            <p className="text-lg text-center mb-5">{address}</p>
+            <p className="text-sm text-center mb-5">{address}</p>
 
             <input
               name="name"

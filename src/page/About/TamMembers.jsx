@@ -10,7 +10,7 @@ export default function TamMembers() {
                   Meet our Team
                 </h2>
 
-                <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+                <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-sm">
                   This is a section of some simple filler text, also known as
                   placeholder text. It shares some characteristics of a real
                   written text but is random or otherwise generated.
@@ -29,10 +29,10 @@ export default function TamMembers() {
                   </div>
 
                   <div>
-                    <div className="text-center font-bold text-indigo-500 md:text-lg">
+                    <div className="text-center font-bold text-indigo-500 md:text-sm">
                       John McCulling
                     </div>
-                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-base">
+                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-sm">
                       Founder / CEO
                     </p>
 
@@ -87,10 +87,10 @@ export default function TamMembers() {
                   </div>
 
                   <div>
-                    <div className="text-center font-bold text-indigo-500 md:text-lg">
+                    <div className="text-center font-bold text-indigo-500 md:text-sm">
                       Kate Berg
                     </div>
-                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-base">
+                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-sm">
                       CFO
                     </p>
 
@@ -145,10 +145,10 @@ export default function TamMembers() {
                   </div>
 
                   <div>
-                    <div className="text-center font-bold text-indigo-500 md:text-lg">
+                    <div className="text-center font-bold text-indigo-500 md:text-sm">
                       Greg Jackson
                     </div>
-                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-base">
+                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-sm">
                       CTO
                     </p>
 
@@ -203,10 +203,10 @@ export default function TamMembers() {
                   </div>
 
                   <div>
-                    <div className="text-center font-bold text-indigo-500 md:text-lg">
+                    <div className="text-center font-bold text-indigo-500 md:text-sm">
                       Robert Greyson
                     </div>
-                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-base">
+                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-sm">
                       Creative Director
                     </p>
 
@@ -261,10 +261,10 @@ export default function TamMembers() {
                   </div>
 
                   <div>
-                    <div className="text-center font-bold text-indigo-500 md:text-lg">
+                    <div className="text-center font-bold text-indigo-500 md:text-sm">
                       John Roberts
                     </div>
-                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-base">
+                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-sm">
                       Investor Relations
                     </p>
 
@@ -319,10 +319,10 @@ export default function TamMembers() {
                   </div>
 
                   <div>
-                    <div className="text-center font-bold text-indigo-500 md:text-lg">
+                    <div className="text-center font-bold text-indigo-500 md:text-sm">
                       Judy Amandez
                     </div>
-                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-base">
+                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-sm">
                       Senior Art Director
                     </p>
 
@@ -377,10 +377,10 @@ export default function TamMembers() {
                   </div>
 
                   <div>
-                    <div className="text-center font-bold text-indigo-500 md:text-lg">
+                    <div className="text-center font-bold text-indigo-500 md:text-sm">
                       Rahul Williams
                     </div>
-                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-base">
+                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-sm">
                       Creative Director
                     </p>
 
@@ -435,10 +435,10 @@ export default function TamMembers() {
                   </div>
 
                   <div>
-                    <div className="text-center font-bold text-indigo-500 md:text-lg">
+                    <div className="text-center font-bold text-indigo-500 md:text-sm">
                       Ari Ferris
                     </div>
-                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-base">
+                    <p className="mb-3 text-center text-sm text-gray-500 md:mb-4 md:text-sm">
                       Marketing Analyst
                     </p>
 
@@ -490,7 +490,7 @@ export default function TamMembers() {
           style={{
             background:
               "linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)",
-              zIndex: -1,
+            zIndex: -1,
           }}
         ></div>
       </main>
