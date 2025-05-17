@@ -3,17 +3,19 @@ import { AuthContext } from "../../../Context/AuthProvider";
 import { useQuery } from "react-query";
 import Loading from "../../Loading/Loading";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const AdminBooking = () => {
   const { user, loading } = useContext(AuthContext);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  
   const { data: owner, isLoading } = useQuery(
     ["owner", user?.email],
     async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/v1/user/email/${user?.email}`
+      const response = await axios.get(
+        `${backendUrl}/api/v1/user/email/${user?.email}`
       );
-      const data = await res.json();
-      return data.data;
+      return response.data.data;
     }
   );
 
@@ -21,11 +23,10 @@ const AdminBooking = () => {
     ["booking", owner?._id],
     async () => {
       if (owner) {
-        const res = await fetch(
-          `http://localhost:3000/api/v1/bookings/?ownerId=${owner?._id}`
+        const response = await axios.get(
+          `${backendUrl}/api/v1/bookings/?ownerId=${owner?._id}`
         );
-        const data = await res.json();
-        return data.data;
+        return response.data.data;
       }
       return [];
     }
@@ -48,12 +49,11 @@ const AdminBooking = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
-          method: "DELETE",
-        }).then(() => {
-          Swal.fire("Done!!", "Booking Deleted Successfully ", "success");
-          refetch();
-        });
+        axios.delete(`${backendUrl}/api/v1/bookings/${id}`)
+          .then(() => {
+            Swal.fire("Done!!", "Booking Deleted Successfully ", "success");
+            refetch();
+          });
       }
     });
   };

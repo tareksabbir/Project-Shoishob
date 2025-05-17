@@ -1,17 +1,20 @@
+/* eslint-disable no-unused-vars */
 import { useQuery } from "react-query";
+import axios from "axios";
 import admin from "../../../assets/icons/star (4).png";
 import userIcon from "../../../assets/icons/star (5).png";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
+  const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+  
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:3000/api/v1/user", {
+    const res = await axios.get(`${API_URL}/api/v1/user`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
     });
-    const data = await res.json();
-    return data.data;
+    return res.data.data;
   });
 
   const handleUserDetails = () => {
@@ -29,12 +32,11 @@ const AllUsers = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/v1/user/${id}`, {
-          method: "DELETE",
-        }).then(() => {
-          Swal.fire("Done!!", "User Deleted Successfully ", "success");
-          refetch();
-        });
+        axios.delete(`${API_URL}/api/v1/user/${id}`)
+          .then(() => {
+            Swal.fire("Done!!", "User Deleted Successfully ", "success");
+            refetch();
+          });
       }
     });
   };
@@ -52,15 +54,12 @@ const AllUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const makeAdmin = { role: "admin" };
-        fetch(`http://localhost:3000/api/v1/user/${id}`, {
-          method: "PATCH",
+        axios.patch(`${API_URL}/api/v1/user/${id}`, makeAdmin, {
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify(makeAdmin),
         })
-          .then((res) => res.json())
-          .then(() => {
+          .then((res) => {
             Swal.fire("Done!!", "User Become Admin Successfully ", "success");
             refetch();
             saveAdmin(user);
@@ -77,15 +76,29 @@ const AllUsers = () => {
       id: user._id,
       role: "admin",
     };
-    fetch("http://localhost:3000/api/v1/admin/create-admin", {
-      method: "POST",
+    axios.post(`${API_URL}/api/v1/admin/create-admin`, saveUserAdmin, {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(saveUserAdmin),
     })
-      .then((res) => res.json())
-      .then(() => {});
+      .then((res) => {
+        console.log(`Admin role saved for ${user.name}`);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Admin permissions saved for ${user.name}`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      })
+      .catch((error) => {
+        console.error("Error saving admin:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Failed to save admin permissions!",
+        });
+      });
   };
 
   return (

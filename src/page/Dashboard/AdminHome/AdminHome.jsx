@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { useQuery } from "react-query";
+import axios from "axios";
 import {
   BarChart,
   Bar,
@@ -15,9 +16,11 @@ import {
 import Loading from "../../Loading/Loading";
 
 const AdminHome = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const { data: adminStat, isLoading } = useQuery(["adminStat"], async () => {
-    const res = await fetch(
-      "http://localhost:3000/api/v1/stats/collection-counts",
+    const response = await axios.get(
+      `${backendUrl}/api/v1/stats/collection-counts`,
       {
         headers: {
           authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -25,8 +28,7 @@ const AdminHome = () => {
       }
     );
 
-    const data = await res.json();
-    return data.data;
+    return response.data.data;
   });
 
   if (isLoading) {

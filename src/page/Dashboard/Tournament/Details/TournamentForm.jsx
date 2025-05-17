@@ -1,120 +1,94 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../../../Context/AuthProvider";
 import { useQuery } from "react-query";
-import Loading from "../../../Loading/Loading";
 import Swal from "sweetalert2";
+import axios from "axios";
+import { AuthContext } from "../../../../Context/AuthProvider";
+import Loading from "../../../Loading/Loading";
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const TournamentForm = () => {
   const { register, handleSubmit, reset } = useForm();
   const { user, loading } = useContext(AuthContext);
+
   const { data: owner } = useQuery(["owner", user?.email], async () => {
-    const res = await fetch(
-      `http://localhost:3000/api/v1/user/email/${user?.email}`
-    );
-    const data = await res.json();
-    return data.data;
+    const res = await axios.get(`${backendURL}/api/v1/user/email/${user?.email}`);
+    return res.data.data;
   });
 
   const { data: turf = [], isLoading } = useQuery(
     ["turf", owner?.email],
     async () => {
-      if (owner) {
-        const res = await fetch(
-          `http://localhost:3000/api/v1/turf/details?searchTerm=${owner?.email}`
-        );
-        const data = await res.json();
-        return data.data;
-      }
-      return [];
-    }
+      if (!owner?.email) return [];
+      const res = await axios.get(
+        `${backendURL}/api/v1/turf/details?searchTerm=${owner?.email}`
+      );
+      return res.data.data;
+    },
+    { enabled: !!owner?.email }
   );
 
   const turfData = turf[0];
 
-  console.log(turfData);
-
-  if (loading || isLoading) {
-    return <Loading></Loading>;
-  }
+  if (loading || isLoading) return <Loading />;
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const res = await axios.post(img_hosting_url, formData);
+    return res.data.data.display_url;
+  };
+
   const handleForm = async (data) => {
-    console.log(data);
+    try {
+      Swal.fire({ title: "Uploading...", allowOutsideClick: false, didOpen: () => Swal.showLoading() });
 
-    const logoFormData = new FormData();
-    logoFormData.append("image", data.logo[0]);
+      const logoUrl = await uploadImage(data.logo[0]);
+      const coverUrl = await uploadImage(data.cover[0]);
 
-    const coverFormData = new FormData();
-    coverFormData.append("image", data.cover[0]);
+      const tournamentData = {
+        turf_name: data.turf_name,
+        email: data.email,
+        turf_id: data.turf_id,
+        ownerPhone: data.ownerPhone,
+        tournament_name: data.tournament_name,
+        registration_start: data.registration_start,
+        registration_end: data.registration_end,
+        address: data.address,
+        city: data.city,
+        price: data.price,
+        logo: logoUrl,
+        cover: coverUrl,
+        about: data.about,
+        rules: data.rules,
+        person: data.person,
+      };
 
-    // First, upload the logo image
-    fetch(img_hosting_url, {
-      method: "POST",
-      body: logoFormData,
-    })
-      .then((res) => res.json())
-      .then((logoResponse) => {
-        const logoUrl = logoResponse.data.display_url;
+      const res = await axios.post(
+        `${backendURL}/api/v1/tournament-details/post-Tournament-data`,
+        tournamentData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-        // After logo image upload, upload the cover image
-        fetch(img_hosting_url, {
-          method: "POST",
-          body: coverFormData,
-        })
-          .then((res) => res.json())
-          .then((coverResponse) => {
-            const coverUrl = coverResponse.data.display_url;
-
-            // Now, you have both logoUrl and coverUrl
-            const saveTurf = {
-              turf_name: data.turf_name,
-              email: data.email,
-              turf_id: data.turf_id,
-              ownerPhone: data.ownerPhone,
-              tournament_name: data.tournament_name,
-              registration_start: data.registration_start,
-              registration_end: data.registration_end,
-              address: data.address,
-              city: data.city,
-              price: data.price,
-              logo: logoUrl,
-              cover: coverUrl,
-              about: data.about,
-              rules: data.rules,
-              person: data.person,
-            };
-            console.log(saveTurf);
-            fetch(
-              "http://localhost:3000/api/v1/tournament-details/post-Tournament-data",
-              {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify(saveTurf),
-              }
-            )
-              .then((res) => res.json())
-              .then((data) => {
-                if (data) {
-                  reset();
-                  Swal.fire("DONE!!", "Data inserted successfully", "success");
-                } else {
-                  reset();
-                }
-              });
-          })
-          .catch((error) => {
-            console.error("Error uploading cover image:", error);
-          });
-      })
-      .catch((error) => {
-        console.error("Error uploading logo image:", error);
-      });
+      if (res.data) {
+        reset();
+        Swal.fire("Success", "Tournament created successfully!", "success");
+      } else {
+        Swal.fire("Error", "Failed to save tournament", "error");
+      }
+    } catch (error) {
+      console.error("Tournament creation error:", error);
+      Swal.fire("Error", error.message || "Something went wrong", "error");
+    }
   };
   return (
     <>

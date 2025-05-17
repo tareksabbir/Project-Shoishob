@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import axios from "axios";
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
 
 const AddTurf = () => {
   const { register, handleSubmit, reset } = useForm();
-
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
   const handleForm = async (data) => {
@@ -15,23 +16,15 @@ const AddTurf = () => {
     const coverFormData = new FormData();
     coverFormData.append("image", data.cover[0]);
 
-    // First, upload the logo image
-    fetch(img_hosting_url, {
-      method: "POST",
-      body: logoFormData,
-    })
-      .then((res) => res.json())
+    // First, upload the logo image using axios instead of fetch
+    axios.post(img_hosting_url, logoFormData)
       .then((logoResponse) => {
-        const logoUrl = logoResponse.data.display_url;
+        const logoUrl = logoResponse.data.data.display_url;
 
-        // After logo image upload, upload the cover image
-        fetch(img_hosting_url, {
-          method: "POST",
-          body: coverFormData,
-        })
-          .then((res) => res.json())
+        // After logo image upload, upload the cover image using axios
+        axios.post(img_hosting_url, coverFormData)
           .then((coverResponse) => {
-            const coverUrl = coverResponse.data.display_url;
+            const coverUrl = coverResponse.data.data.display_url;
 
             // Now, you have both logoUrl and coverUrl
             const saveTurf = {
@@ -48,21 +41,22 @@ const AddTurf = () => {
               rules: data.rules,
             };
 
-            fetch("http://localhost:3000/api/v1/turf/post-turf-data", {
-              method: "POST",
+            // Post turf data using axios
+            axios.post(`${backendUrl}/api/v1/turf/post-turf-data`, saveTurf, {
               headers: {
-                "content-type": "application/json",
+                "Content-Type": "application/json",
               },
-              body: JSON.stringify(saveTurf),
             })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data) {
+              .then((response) => {
+                if (response.data) {
                   reset();
                   Swal.fire("DONE!!", "Data inserted successfully", "success");
                 } else {
                   reset();
                 }
+              })
+              .catch((error) => {
+                console.error("Error saving turf data:", error);
               });
           })
           .catch((error) => {

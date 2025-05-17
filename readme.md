@@ -186,7 +186,7 @@ Protected routes are implemented using wrapper components that check authenticat
    VITE_MESSAGINGSENDERID=your_firebase_messaging_sender_id
    VITE_APPID=your_firebase_app_id
 
-   VITE_API_URL=http://localhost:5000
+   VITE_API_URL=
    ```
 
 ## 📁 Project Structure

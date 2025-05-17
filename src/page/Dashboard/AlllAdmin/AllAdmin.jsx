@@ -2,15 +2,19 @@ import { useQuery } from "react-query";
 import adminIcon from "../../../assets/icons/star (4).png";
 import superIcon from "../../../assets/icons/star (2).png";
 import Swal from "sweetalert2";
+import axios from "axios";
+
 const AllAdmin = () => {
+  const backendUrl =
+    import.meta.env.VITE_BACKEND_URL || "https://shoihob-backend.vercel.app";
+
   const { data: admins = [], refetch } = useQuery(["admins"], async () => {
-    const res = await fetch("http://localhost:3000/api/v1/admin", {
+    const res = await axios.get(`${backendUrl}/api/v1/admin`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
     });
-    const data = await res.json();
-    return data.data;
+    return res.data.data;
   });
 
   const handleMakeSuperAdmin = (id) => {
@@ -25,14 +29,12 @@ const AllAdmin = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const makeAdmin = { role: "superAdmin" };
-        fetch(`http://localhost:3000/api/v1/admin/${id}`, {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(makeAdmin),
-        })
-          .then((res) => res.json())
+        axios
+          .patch(`${backendUrl}/api/v1/admin/${id}`, makeAdmin, {
+            headers: {
+              "content-type": "application/json",
+            },
+          })
           .then(() => {
             Swal.fire(
               "Done!!",
@@ -61,9 +63,7 @@ const AllAdmin = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/v1/admin/${id}`, {
-          method: "DELETE",
-        }).then(() => {
+        axios.delete(`${backendUrl}/api/v1/admin/${id}`).then(() => {
           Swal.fire("Done!!", "admin Deleted Successfully ", "success");
           refetch();
           handleDelteUserFromUserDB(admin.id);
@@ -71,10 +71,9 @@ const AllAdmin = () => {
       }
     });
   };
+
   const handleDelteUserFromUserDB = (id) => {
-    fetch(`http://localhost:3000/api/v1/user/${id}`, {
-      method: "DELETE",
-    }).then(() => {});
+    axios.delete(`${backendUrl}/api/v1/user/${id}`).then(() => {});
   };
 
   return (

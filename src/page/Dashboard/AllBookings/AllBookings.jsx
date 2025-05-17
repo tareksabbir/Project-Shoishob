@@ -1,15 +1,18 @@
 import { useQuery } from "react-query";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const AllBookings = () => {
+  const backendUrl =
+    import.meta.env.VITE_BACKEND_URL || "https://shoihob-backend.vercel.app";
+
   const { data: booking = [], refetch } = useQuery(["booking"], async () => {
-    const res = await fetch("http://localhost:3000/api/v1/bookings", {
+    const res = await axios.get(`${backendUrl}/api/v1/bookings`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
     });
-    const data = await res.json();
-    return data.data;
+    return res.data.data;
   });
 
   const handleDelete = (id) => {
@@ -23,9 +26,7 @@ const AllBookings = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
-          method: "DELETE",
-        }).then(() => {
+        axios.delete(`${backendUrl}/api/v1/bookings/${id}`).then(() => {
           Swal.fire("Done!!", "Booking Deleted Successfully ", "success");
           refetch();
         });

@@ -1,7 +1,9 @@
+
 /* eslint-disable react/prop-types */
 
 import { format } from "date-fns";
 import { useState } from "react";
+import axios from "axios";
 import BookingCard from "./BookingCard";
 import BookingModal from "./BookingModal";
 import { useQuery } from "react-query";
@@ -10,6 +12,7 @@ import Loading from "../Loading/Loading";
 export default function BookingAvailableSlots({ selectedDate }) {
   const [booking, setBooking] = useState(null);
   const date = format(selectedDate, "PP");
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const {
     data: turfs = [],
@@ -18,14 +21,13 @@ export default function BookingAvailableSlots({ selectedDate }) {
   } = useQuery({
     queryKey: ["turfs", date],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:3000/api/v1/turf?date=${date}`);
-      const data = await res.json();
-      return data.data;
+      const response = await axios.get(`${backendUrl}/api/v1/turf?date=${date}`);
+      return response.data.data;
     },
   });
 
   if (isLoading) {
-    <Loading></Loading>;
+    return <Loading />;
   }
 
   return (

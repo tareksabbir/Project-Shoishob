@@ -1,27 +1,37 @@
 import { useContext, useState } from "react";
 import { useQuery } from "react-query";
+import axios from "axios";
 import Loading from "../../Loading/Loading";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const MyProfile = () => {
   const [showMore, setShowMore] = useState(false);
   const { user, loading } = useContext(AuthContext);
-  const { data: userData } = useQuery(["userData", user?.email], async () => {
-    const res = await fetch(
-      `http://localhost:3000/api/v1/user/email/${user?.email}`,
-      {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("access_token")}`,
-        },
-      }
-    );
+  const API_URL = import.meta.env.VITE_BACKEND_URL ;
 
-    const data = await res.json();
-    return data.data;
-  });
+  const { data: userData, isLoading: userDataLoading } = useQuery(
+    ["userData", user?.email],
+    async () => {
+      if (!user?.email) return null;
 
-  if (loading) {
-    return <Loading></Loading>;
+      const res = await axios.get(
+        `${API_URL}/api/v1/user/email/${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
+
+      return res.data.data;
+    },
+    {
+      enabled: !!user?.email,
+    }
+  );
+
+  if (loading || userDataLoading) {
+    return <Loading />;
   }
 
   const handleSeeMoreClick = () => {

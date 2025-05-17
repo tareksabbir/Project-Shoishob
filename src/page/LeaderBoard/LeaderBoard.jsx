@@ -1,16 +1,18 @@
 import { useQuery } from "react-query";
+import axios from "axios";
 import star from "../../assets/icons/star (4).png";
 import star2 from "../../assets/icons/star (5).png";
 
 const LeaderBoard = () => {
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   const { data: users = [] } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:3000/api/v1/user", {
+    const res = await axios.get(`${backendURL}/api/v1/user`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
     });
-    const data = await res.json();
-    return data.data;
+    return res.data.data;
   });
 
   const sortedUsers = users.slice().sort((a, b) => b.point - a.point);

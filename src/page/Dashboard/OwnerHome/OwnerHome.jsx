@@ -12,25 +12,37 @@ import {
   Pie,
 } from "recharts";
 import { useContext } from "react";
-
+import axios from "axios";
 import { useQuery } from "react-query";
 import Loading from "../../Loading/Loading";
 import { AuthContext } from "../../../Context/AuthProvider";
+
 const OwnerHome = () => {
   const { user, loading } = useContext(AuthContext);
-  const { data: owner } = useQuery(["owner", user?.email], async () => {
-    const res = await fetch(
-      `http://localhost:3000/api/v1/user/email/${user?.email}`
-    );
-    const data = await res.json();
-    return data.data;
-  });
+  const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+  
+  const { data: owner, isLoading: ownerLoading } = useQuery(
+    ["owner", user?.email], 
+    async () => {
+      if (!user?.email) return null;
+      
+      const res = await axios.get(
+        `${API_URL}/api/v1/user/email/${user?.email}`
+      );
+      return res.data.data;
+    },
+    {
+      enabled: !!user?.email,
+    }
+  );
 
-  const { data: adminStat, isLoading } = useQuery(
+  const { data: adminStat, isLoading: statsLoading } = useQuery(
     ["adminStat", owner?._id],
     async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/v1/ownerStats/owner-collection-counts/${owner?._id}`,
+      if (!owner?._id) return null;
+      
+      const res = await axios.get(
+        `${API_URL}/api/v1/ownerStats/owner-collection-counts/${owner?._id}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -38,17 +50,15 @@ const OwnerHome = () => {
         }
       );
 
-      const data = await res.json();
-      return data.data;
+      return res.data.data;
+    },
+    {
+      enabled: !!owner?._id,
     }
   );
 
-  if (isLoading || loading) {
-    return (
-      <>
-        <Loading></Loading>
-      </>
-    );
+  if (loading || ownerLoading || statsLoading) {
+    return <Loading />;
   }
   /// bar chart
 

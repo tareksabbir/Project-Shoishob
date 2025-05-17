@@ -3,31 +3,28 @@ import { useQuery } from "react-query";
 import Loading from "../Loading/Loading";
 import { Link, useParams } from "react-router-dom";
 import TournamentSponsers from "./TournamentSponsers";
+import axios from "axios";
 
 const TournamentBooking = () => {
   const { id } = useParams();
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   const { data: tournamentDetails, isLoading } = useQuery(
     ["tournamentDetails", id],
     async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/v1/tournament-details/${id}`,
-        {
-          headers: {
-            authorization: `bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
+      const res = await axios.get(`${backendURL}/api/v1/tournament-details/${id}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
 
-      const data = await res.json();
-      return data.data;
+      return res.data.data;
     }
   );
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
-
-  console.log(tournamentDetails);
 
   return (
     <>

@@ -4,27 +4,29 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { useQuery } from "react-query";
 import Loading from "../Loading/Loading";
+import axios from "axios";
 
 const RegistrationForm = () => {
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
   const { user, loading } = useContext(AuthContext);
-  const { data: userData } = useQuery(["userData", user?.email], async () => {
-    const res = await fetch(
-      `http://localhost:3000/api/v1/user/email/${user?.email}`,
-      {
+
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
+  const { data: userData } = useQuery(
+    ["userData", user?.email],
+    async () => {
+      const res = await axios.get(`${backendURL}/api/v1/user/email/${user?.email}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("access_token")}`,
         },
-      }
-    );
-
-    const data = await res.json();
-    return data.data;
-  });
+      });
+      return res.data.data;
+    }
+  );
 
   if (loading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   const handleForm = async (data) => {
@@ -45,17 +47,22 @@ const RegistrationForm = () => {
       tournamentId: id,
     };
 
-    fetch(`http://localhost:3000/api/v1/tournamentRegistration`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(registrationDataUpdate),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        window.location.replace(data.url);
-      });
+    try {
+      const res = await axios.post(
+        `${backendURL}/api/v1/tournamentRegistration`,
+        registrationDataUpdate,
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
+
+      window.location.replace(res.data.url);
+    } catch (error) {
+      console.error(error);
+      // No state to set error, just log it
+    }
   };
   return (
     <>

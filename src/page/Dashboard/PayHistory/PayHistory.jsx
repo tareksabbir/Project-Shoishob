@@ -1,25 +1,31 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { useQuery } from "react-query";
+import axios from "axios";
 import Swal from "sweetalert2";
 import coin from "../../../assets/icons/star (1).png";
 
 const PayHistory = () => {
   const { user } = useContext(AuthContext);
+  const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
 
   const { data: booking = [], refetch } = useQuery(
     ["booking", user?.email],
     async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/v1/history/email/${user?.email}`,
+      if (!user?.email) return [];
+      
+      const res = await axios.get(
+        `${API_URL}/api/v1/history/email/${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
           },
         }
       );
-      const data = await res.json();
-      return data.data;
+      return res.data.data;
+    },
+    {
+      enabled: !!user?.email,
     }
   );
 
@@ -34,12 +40,19 @@ const PayHistory = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
-          method: "DELETE",
-        }).then(() => {
-          Swal.fire("Done!!", "Booking Deleted Successfully ", "success");
-          refetch();
-        });
+        axios.delete(`${API_URL}/api/v1/bookings/${id}`)
+          .then(() => {
+            Swal.fire("Done!!", "Booking Deleted Successfully ", "success");
+            refetch();
+          })
+          .catch((error) => {
+            console.error("Error deleting booking:", error);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Failed to delete booking!",
+            });
+          });
       }
     });
   };

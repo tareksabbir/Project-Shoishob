@@ -5,45 +5,42 @@ import "boxicons";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { useQuery } from "react-query";
+import axios from "axios";
 import icon from "../assets/icons/Untitled design (2).png";
-const DashBoardLayout = () => {
-  // todo: load data for admin
 
+const DashBoardLayout = () => {
   const { user } = useContext(AuthContext);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  
+  // Axios configuration with auth token
+  const axiosConfig = {
+    headers: {
+      authorization: `bearer ${localStorage.getItem("access_token")}`,
+    },
+  };
 
   const { data: isAdmin } = useQuery(["isAdmin", user?.email], async () => {
-    const res = await fetch(
-      `http://localhost:3000/api/v1/user/${user?.email}`,
-      {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("access_token")}`,
-        },
-      }
+    const response = await axios.get(
+      `${backendUrl}/api/v1/user/${user?.email}`,
+      axiosConfig
     );
-
-    const data = await res.json();
-    return data.isAdmin;
+    return response.data.isAdmin;
   });
 
   const { data: isSuperAdmin } = useQuery(
     ["isSuperAdmin", user?.email],
     async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/v1/admin/${user?.email}`,
-        {
-          headers: {
-            authorization: `bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
+      const response = await axios.get(
+        `${backendUrl}/api/v1/admin/${user?.email}`,
+        axiosConfig
       );
-
-      const data = await res.json();
-      return data.isSuperAdmin;
+      return response.data.isSuperAdmin;
     }
   );
 
   const from = location.state?.from?.pathname || "/";
   const { logOut } = useContext(AuthContext);
+  
   const handleLogout = () => {
     logOut()
       .then(() => {

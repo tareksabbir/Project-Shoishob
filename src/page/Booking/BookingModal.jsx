@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 /* eslint-disable react/prop-types */
 const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
@@ -11,6 +12,7 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
   const date = format(selectedDate, "PP");
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleBooking = (event) => {
     event.preventDefault();
@@ -25,15 +27,15 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
     const price = form.price.value;
     const paid = false;
 
-    // const selectedDate = new Date(form.date.value);
-    // const currentDate = new Date();
+    const selectedDate = new Date(form.date.value);
+    const currentDate = new Date();
 
-    // if (selectedDate < currentDate) {
-    //     Swal.fire("Invalid Date", "Please select a date that is after the current date.", "error");
-    //     return;
-    // }
+    if (selectedDate < currentDate) {
+        Swal.fire("Invalid Date", "Please select a date that is after the current date.", "error");
+        return;
+    }
 
-    const booking = {
+    const bookingData = {
       turf,
       name,
       email,
@@ -47,25 +49,18 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
       selectedDate: date,
     };
 
-    fetch("http://localhost:3000/api/v1/bookings", {
-      method: "POST",
+    axios.post(`${backendUrl}/api/v1/bookings`, bookingData, {
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(booking),
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then((response) => {
+        const data = response.data;
         const id = data.data._id;
 
         if (data.success) {
           setBooking(null);
-          // Swal.fire(
-          //   "Congratulations!!",
-          //   "Your Booking Is fixed!",
-          //   "success"
-          // );
-
+          
           Swal.fire({
             title: "Congratulations!!",
             text: "Your Booking Is fixed!",
@@ -95,9 +90,12 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
         } else if (data.message) {
           Swal.fire("Sorry", `${data.message}`, "error");
         }
+      })
+      .catch((error) => {
+        console.error("Booking error:", error);
+        Swal.fire("Error", "Something went wrong with your booking", "error");
       });
   };
-
   return (
     <>
       <input type="checkbox" id="my_modal_7" className="modal-toggle" />

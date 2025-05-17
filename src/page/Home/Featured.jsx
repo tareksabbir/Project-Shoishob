@@ -1,19 +1,21 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Featured() {
+  const backendURL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+
   const { data: tournament = [] } = useQuery(["tournament"], async () => {
-    const res = await fetch("http://localhost:3000/api/v1/tournament-details", {
+    const res = await axios.get(`${backendURL}/api/v1/tournament-details`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
     });
-    const data = await res.json();
-    return data.data;
+    return res.data.data;
   });
 
-  console.log(tournament);
+
 
   return (
     <>

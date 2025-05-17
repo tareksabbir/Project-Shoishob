@@ -2,72 +2,77 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { useQuery } from "react-query";
 import Swal from "sweetalert2";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const UserMyBooking = () => {
   const { user } = useContext(AuthContext);
   const [currentTime, setCurrentTime] = useState(new Date());
 
+  // Update current time every minute
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(new Date());
-    }, 1000 * 60); // Update current time every minute
-
+    }, 1000 * 60);
     return () => clearInterval(interval);
   }, []);
+
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   const { data: booking = [], refetch } = useQuery(
     ["booking", user?.email],
     async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/v1/bookings/email/${user?.email}`,
+      const res = await axios.get(
+        `${backendURL}/api/v1/bookings/email/${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
           },
         }
       );
-      const data = await res.json();
-      return data.data;
+      return res.data.data;
     }
   );
 
-  //   console.log(userBooking)
-  const handleAutoDelete = (booking) => {
-    const creationTime = new Date(booking.createdAt); // Assuming createdAt field exists in your booking data
-
-    // Calculate the time difference in minutes
+  const handleAutoDelete = async (booking) => {
+    const creationTime = new Date(booking.createdAt);
     const timeDifference = Math.floor(
       (currentTime - creationTime) / (1000 * 60)
     );
 
     if (timeDifference >= 60 && booking.price && booking.paid === false) {
-      fetch(`http://localhost:3000/api/v1/bookings/${booking._id}`, {
-        method: "DELETE",
-      }).then();
+      try {
+        await axios.delete(`${backendURL}/api/v1/bookings/${booking._id}`);
+        // Optional: refetch() if you want the UI to update immediately
+      } catch (error) {
+        console.error("Auto-delete failed:", error);
+      }
     }
   };
 
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You Wanted Delete This Booking!",
+      text: "You wanted to delete this booking!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#5ac5a6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
-          method: "DELETE",
-        }).then(() => {
-          Swal.fire("Done!!", "Booking Deleted Successfully ", "success");
+        try {
+          await axios.delete(`${backendURL}/api/v1/bookings/${id}`);
+          Swal.fire("Done!!", "Booking deleted successfully.", "success");
           refetch();
-        });
+        } catch (error) {
+          console.error("Delete failed:", error);
+          Swal.fire("Error", "Something went wrong!", "error");
+        }
       }
     });
   };
+
   return (
     <>
       <div className="overflow-x-auto lg:p-20">

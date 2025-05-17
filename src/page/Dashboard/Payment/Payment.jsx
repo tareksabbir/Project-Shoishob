@@ -1,29 +1,30 @@
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
-
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import Loading from "../../Loading/Loading";
 
 const Payment = () => {
   const { id } = useParams();
   const { register, handleSubmit } = useForm();
-  const { data: booking, isLoading } = useQuery(["booking", id], async () => {
-    const res = await fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
-      headers: {
-        authorization: `bearer ${localStorage.getItem("access_token")}`,
-      },
-    });
 
-    const data = await res.json();
-    return data.data;
+  const { data: booking, isLoading } = useQuery(["booking", id], async () => {
+    const res = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/bookings/${id}`,
+      {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("access_token")}`,
+        },
+      }
+    );
+    return res.data.data;
   });
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
-  //console.log(booking);
 
-  const handleForm = (data) => {
+  const handleForm = async (data) => {
     const bookingDataUpdate = {
       phone: data.phone,
       address: data.address,
@@ -31,18 +32,25 @@ const Payment = () => {
       person: data.person,
     };
 
-    fetch(`http://localhost:3000/api/v1/bookings/${id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(bookingDataUpdate),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        window.location.replace(data.url);
-        console.log(data);
-      });
+    try {
+      const res = await axios.patch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/bookings/${id}`,
+        bookingDataUpdate,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (res.data?.url) {
+        window.location.replace(res.data.url);
+      } else {
+        console.error("No URL found in response", res.data);
+      }
+    } catch (error) {
+      console.error("Error updating booking:", error);
+    }
   };
 
   return (

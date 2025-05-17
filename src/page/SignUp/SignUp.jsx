@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../firebase/firebase.config";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const auth = getAuth(app);
 
@@ -15,103 +16,82 @@ const SignUp = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUserProfile, verifyEmail } =
-    useContext(AuthContext);
+  const { createUser, updateUserProfile, verifyEmail } = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
   const [emailAlreadyInUseError, setEmailAlreadyInUseError] = useState("");
   const [isGoogleLogin, setIsGoogleLogin] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
-
   const from = location.state?.from?.pathname || "/";
 
-  const handleSignUp = (data) => {
-    console.log(data);
+  const backendURL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+
+  const handleSignUp = async (data) => {
     setSignUpError("");
     setEmailAlreadyInUseError("");
 
-    createUser(data.email, data.password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+    try {
+      const result = await createUser(data.email, data.password);
+      const user = result.user;
+      console.log(user);
 
+      Swal.fire("Thank You!!", "Please Verify Your Email First ", "info");
+
+      const userInfo = { displayName: data.name };
+      await updateUserProfile(userInfo);
+
+      const saveUser = { name: data.name, email: data.email };
+      const response = await axios.post(`${backendURL}/api/v1/user/create-user`, saveUser, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.data.insertedId) {
+        reset();
         Swal.fire("Thank You!!", "Please Verify Your Email First ", "info");
-        const userInfo = {
-          displayName: data.name,
-        };
-        updateUserProfile(userInfo)
-          .then(() => {
-            const saveUser = { name: data.name, email: data.email };
-            fetch("http://localhost:3000/api/v1/user/create-user", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(saveUser),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.insertedId) {
-                  reset();
-                  Swal.fire(
-                    "Thank You!!",
-                    "Please Verify Your Email First ",
-                    "info"
-                  );
-                  navigate(from, { replace: true });
-                } else {
-                  reset();
-                }
-              });
-          })
-          .catch((error) => {
-            console.log(error.message);
-            setSignUpError(error.message);
-          });
-        verifyEmail()
-          .then(() => {})
-          .catch((error) => {
-            console.log(error.message);
-          });
-      })
-      .catch((error) => {
+        navigate(from, { replace: true });
+      } else {
+        reset();
+      }
+
+      await verifyEmail();
+    } catch (error) {
+      console.error(error);
+      if (error.code === "auth/email-already-in-use") {
+        setEmailAlreadyInUseError("Email Already In Use");
+      } else {
         setSignUpError(error.message);
-        if (error.code === "auth/email-already-in-use") {
-          setEmailAlreadyInUseError("Email Already In Use");
-        } else {
-          setSignUpError(error.message);
-        }
-      });
+      }
+    }
   };
 
-  const handleGoogleSignIn = () => {
+  const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        const saveUser = {
-          name: user.displayName,
-          email: user.email,
-          photo: user.photoURL,
-        };
-        fetch("http://localhost:3000/api/v1/user/create-user", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(saveUser),
-        })
-          .then((res) => res.json())
-          .then(() => {});
-        setIsGoogleLogin(true);
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        console.log("error", error);
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log(user);
+
+      const saveUser = {
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      };
+
+      await axios.post(`${backendURL}/api/v1/user/create-user`, saveUser, {
+        headers: { "Content-Type": "application/json" },
       });
+
+      setIsGoogleLogin(true);
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+    }
   };
+
+  if (isGoogleLogin) {
+    navigate(from, { replace: true });
+  }
 
   return (
     <>

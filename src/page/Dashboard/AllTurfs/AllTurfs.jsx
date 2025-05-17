@@ -1,16 +1,19 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const AllTurfs = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://shoihob-backend.vercel.app";
+  
   const { data: turfs = [] } = useQuery(["booking"], async () => {
-    const res = await fetch("http://localhost:3000/api/v1/turf/details", {
+    const res = await axios.get(`${backendUrl}/api/v1/turf/details`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("access_token")}`,
       },
     });
-    const data = await res.json();
-    return data.data;
+    return res.data.data;
   });
+
 
   return (
     <>

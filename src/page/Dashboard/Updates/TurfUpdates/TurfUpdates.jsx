@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import axios from "axios";
 
-const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
+const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
 const TurfUpdates = () => {
   const [turfDetails, setTurfDetails] = useState([]);
@@ -11,80 +14,69 @@ const TurfUpdates = () => {
 
   const { register, handleSubmit, reset } = useForm();
 
-  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
-
   const handleForm = async (data) => {
-    const logoFormData = new FormData();
-    logoFormData.append("image", data.logo[0]);
+    try {
+      // Upload logo image
+      const logoFormData = new FormData();
+      logoFormData.append("image", data.logo[0]);
 
-    const coverFormData = new FormData();
-    coverFormData.append("image", data.cover[0]);
+      const logoResponse = await axios.post(img_hosting_url, logoFormData);
+      const logoUrl = logoResponse.data.data.display_url;
 
-    // First, upload the logo image
-    fetch(img_hosting_url, {
-      method: "POST",
-      body: logoFormData,
-    })
-      .then((res) => res.json())
-      .then((logoResponse) => {
-        const logoUrl = logoResponse.data.display_url;
+      // Upload cover image
+      const coverFormData = new FormData();
+      coverFormData.append("image", data.cover[0]);
 
-        // After logo image upload, upload the cover image
-        fetch(img_hosting_url, {
-          method: "POST",
-          body: coverFormData,
-        })
-          .then((res) => res.json())
-          .then((coverResponse) => {
-            const coverUrl = coverResponse.data.display_url;
+      const coverResponse = await axios.post(img_hosting_url, coverFormData);
+      const coverUrl = coverResponse.data.data.display_url;
 
-            // Now, you have both logoUrl and coverUrl
-            const saveTurf = {
-              turf_name: data.turf_name,
-              ownerPhone: data.ownerPhone,
-              address: data.address,
-              city: data.city,
-              price: data.price,
-              logo: logoUrl,
-              cover: coverUrl,
-              about: data.about,
-              rules: data.rules,
-            };
+      // Create turf object
+      const saveTurf = {
+        turf_name: data.turf_name,
+        ownerPhone: data.ownerPhone,
+        address: data.address,
+        city: data.city,
+        price: data.price,
+        logo: logoUrl,
+        cover: coverUrl,
+        about: data.about,
+        rules: data.rules,
+      };
 
-            fetch(`http://localhost:3000/api/v1/turf/${id}`, {
-              method: "PATCH",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(saveTurf),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data) {
-                  reset();
-                  Swal.fire("DONE!!", "Data Updated successfully", "success");
-                } else {
-                  reset();
-                }
-              });
-          })
-          .catch((error) => {
-            console.error("Error uploading cover image:", error);
-          });
-      })
-      .catch((error) => {
-        console.error("Error uploading logo image:", error);
+      // Send PATCH request to update turf
+      const response = await axios.patch(`${BACKEND_URL}/api/v1/turf/${id}`, saveTurf, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+
+      if (response.data) {
+        reset();
+        Swal.fire("DONE!!", "Data Updated successfully", "success");
+      } else {
+        reset();
+      }
+    } catch (error) {
+      console.error("Error updating turf:", error);
+      Swal.fire("Oops", "Something went wrong while updating.", "error");
+    }
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/turf/${id}`, {
-      headers: {
-        authorization: `bearer ${localStorage.getItem("access_token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setTurfDetails(data.data));
+    const fetchTurfDetails = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/api/v1/turf/${id}`, {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("access_token")}`,
+          },
+        });
+        setTurfDetails(response.data.data);
+      } catch (error) {
+        console.error("Error fetching turf details:", error);
+      }
+    };
+
+    fetchTurfDetails();
   }, [id]);
 
   return (

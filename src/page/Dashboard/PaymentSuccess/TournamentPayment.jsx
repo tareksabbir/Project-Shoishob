@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 
 import print from "../../../assets/icons/icons8-print-48.png";
 import coin from "../../../assets/icons/star (1).png";
@@ -13,23 +14,22 @@ const TournamentPayment = () => {
   const { data: booking = [], isLoading } = useQuery(
     ["booking", transactionId],
     async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/v1/tournamentRegistration/payment/details/${transactionId}`,
+      const res = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/tournamentRegistration/payment/details/${transactionId}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
           },
         }
       );
-      const data = await res.json();
-      return data.data;
+      return res.data.data;
     }
   );
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
-  console.log(booking);
+
   return (
     <>
       <div className="overflow-x-auto lg:p-20 lg:py-40">

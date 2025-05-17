@@ -1,10 +1,11 @@
 import { useQuery } from "react-query";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 import print from "../../../assets/icons/icons8-print-48.png";
 import coin from "../../../assets/icons/star (1).png";
 import Loading from "../../Loading/Loading";
-import Swal from "sweetalert2";
 
 const PaymentSuccess = () => {
   const location = useLocation();
@@ -14,24 +15,23 @@ const PaymentSuccess = () => {
   const { data: booking = [], isLoading } = useQuery(
     ["booking", transactionId],
     async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/v1/bookings/payment/details/${transactionId}`,
+      const res = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/bookings/payment/details/${transactionId}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
           },
         }
       );
-      const data = await res.json();
-      return data.data;
+      return res.data.data;
     }
   );
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
-  const handlePayHistory = (pay) => {
+  const handlePayHistory = async (pay) => {
     const payHistory = {
       name: pay.name,
       email: pay.email,
@@ -42,20 +42,25 @@ const PaymentSuccess = () => {
       turf: pay.turf,
       price: pay.price,
     };
-    console.log(payHistory);
-    fetch("http://localhost:3000/api/v1/history/post-pay-data", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(payHistory),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          Swal.fire("Done!", "Your Invoice Is Saved", "success");
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/history/post-pay-data`,
+        payHistory,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
+
+      if (res.data) {
+        Swal.fire("Done!", "Your Invoice Is Saved", "success");
+      }
+    } catch (error) {
+      console.error("Error saving payment history:", error);
+      Swal.fire("Error!", "Failed to save invoice", "error");
+    }
   };
 
   return (

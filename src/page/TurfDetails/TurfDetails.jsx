@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import PlayZone from "../Home/PlayZone";
 import GoBooking from "./GoBooking";
 import Heading from "../Home/Heading";
+import axios from "axios";
 
 const TurfDetails = () => {
   const [turfDetails, setTurfDetails] = useState([]);
@@ -11,13 +12,15 @@ const TurfDetails = () => {
   const { cover, logo, turf_name, address, about, rules } = turfDetails;
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/turf/${id}`, {
-      headers: {
-        authorization: `bearer ${localStorage.getItem("access_token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setTurfDetails(data.data));
+    const backendURL = import.meta.env.VITE_BACKEND_URL;
+
+    axios
+      .get(`${backendURL}/api/v1/turf/${id}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((res) => setTurfDetails(res.data.data));
   }, [id]);
 
   return (
