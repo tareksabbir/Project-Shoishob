@@ -17,6 +17,7 @@ import axios from "axios";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -52,30 +53,28 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      //setUser(currentUser);
-      console.log("user observing");
-      if (currentUser === null || currentUser.emailVerified) {
-        setUser(currentUser);
-      }
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser === null || currentUser.emailVerified) {
+      setUser(currentUser);
+    }
 
-      if (currentUser) {
-        axios
-          .post("http://localhost:3000/api/v1/jwt", {
-            email: currentUser.email,
-          })
-          .then((data) => {
-            localStorage.setItem("access_token", data.data.token);
-            setLoading(false);
-          });
-      } else {
-        localStorage.removeItem("access_token");
-      }
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
+    if (currentUser) {
+      axios
+        .post(`${API_URL}/api/v1/jwt`, {
+          email: currentUser.email,
+        })
+        .then((data) => {
+          localStorage.setItem("access_token", data.data.token);
+          setLoading(false);
+        });
+    } else {
+      localStorage.removeItem("access_token");
+    }
+    setLoading(false);
+  });
+  return () => unsubscribe();
+}, []);
 
   const authInfo = {
     createUser,
