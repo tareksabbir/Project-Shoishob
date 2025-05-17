@@ -8,7 +8,7 @@ export default function Bannar() {
     <>
       <main className="relative bg-nearest-rgb-23-32-49">
         <section className="relative">
-          <section className=" flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16 lg:px-20 px-10">
+          <section className=" flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16 lg:px-10 px-10">
             <div className="xl:w-11/12 flex flex-col justify-center items-center lg:items-start sm:text-center lg:text-left lg:py-8 xl:py-10 lg:mb-10">
               <h1 className="mt-10  text-black-800 text-4xl sm:text-5xl md:text-7xl mb-8 md:mb-12 font-extrabold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text lg:mt-16">
                 Nothing But Sports..
@@ -20,7 +20,7 @@ export default function Bannar() {
                 across the night sky. Its in those moments of decision, when you
                 choose to act, that greatness is born.
               </p>
-              <div className="flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-2.5">
+              <div className="flex flex-row  sm:justify-center lg:justify-start gap-6">
                 <Link
                   to="/"
                   className="inline-block bg-blue-500 hover:bg-gradient-to-r from-black to-indigo-500 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-sm font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
