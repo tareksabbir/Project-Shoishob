@@ -57,10 +57,10 @@ const TurfDetails = () => {
       try {
         setLoading(true);
         setError(null);
-        
+
         const backendURL = import.meta.env.VITE_BACKEND_URL;
         const token = localStorage.getItem("access_token");
-        
+
         if (!token) {
           throw new Error("Authentication token not found");
         }
@@ -74,7 +74,11 @@ const TurfDetails = () => {
         setTurfDetails(response.data.data);
       } catch (err) {
         console.error("Error fetching turf details:", err);
-        setError(err.response?.data?.message || err.message || "Failed to load turf details");
+        setError(
+          err.response?.data?.message ||
+            err.message ||
+            "Failed to load turf details"
+        );
       } finally {
         setLoading(false);
       }
@@ -92,13 +96,25 @@ const TurfDetails = () => {
         <div className=" px-5 py-12 md:py-24 mx-auto flex flex-col items-center justify-center">
           <div className="text-center">
             <div className="w-16 h-16 mx-auto mb-4 bg-red-500 rounded-full flex items-center justify-center">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <svg
+                className="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-white mb-2">Oops! Something went wrong</h2>
+            <h2 className="text-2xl font-bold text-white mb-2">
+              Oops! Something went wrong
+            </h2>
             <p className="text-gray-400 mb-6">{error}</p>
-            <button 
+            <button
               onClick={() => window.location.reload()}
               className="px-6 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors duration-200"
             >
@@ -117,12 +133,12 @@ const TurfDetails = () => {
         <div className="container px-5 py-24 mx-auto flex flex-col">
           <div className="lg:w-full mx-auto">
             <ImageSkeleton />
-            
+
             <div className="flex flex-col sm:flex-row mt-10">
               <ProfileSkeleton />
               <ContentSkeleton />
             </div>
-            
+
             <RulesSkeleton />
           </div>
         </div>
@@ -135,7 +151,7 @@ const TurfDetails = () => {
             zIndex: -4,
           }}
         />
-        
+
         {/* Loading skeleton for other components */}
         <div className="h-32 bg-gray-800 animate-pulse rounded-lg mx-5 mb-8"></div>
         <div className="h-64 bg-gray-800 animate-pulse rounded-lg mx-5 mb-8"></div>
@@ -151,7 +167,7 @@ const TurfDetails = () => {
       <div className="container px-5 py-0 md:py-12 mx-auto flex flex-col">
         <div className="lg:w-full mx-auto">
           {/* Cover Image */}
-          <div className="rounded-lg h-64 overflow-hidden shadow-2xl">
+          <div className="rounded-lg h-[500px] overflow-hidden shadow-2xl">
             <img
               alt={`${turf_name} cover`}
               className="object-cover object-center h-full w-full transition-transform duration-300 hover:scale-105"
@@ -188,7 +204,9 @@ const TurfDetails = () => {
                     <>
                       {address}
                       <br />
-                      <span className="text-cyan-400">Chittagong, Bangladesh</span>
+                      <span className="text-cyan-400">
+                        Chittagong, Bangladesh
+                      </span>
                     </>
                   )}
                 </p>
@@ -197,7 +215,9 @@ const TurfDetails = () => {
 
             {/* About Section */}
             <div className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-600 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-              <h3 className="text-white font-semibold text-lg mb-3">About This Turf</h3>
+              <h3 className="text-white font-semibold text-lg mb-3">
+                About This Turf
+              </h3>
               <p className="leading-relaxed text-gray-300 text-sm mb-4 text-justify">
                 {about || "No description available for this turf."}
               </p>
@@ -207,9 +227,10 @@ const TurfDetails = () => {
           {/* Rules Section */}
           {rules && (
             <blockquote className="mb-6 border-l-4 border-cyan-500 pl-4 italic text-gray-400 text-sm md:mb-8 md:pl-6 text-justify lg:mt-5 bg-gray-800/30 py-3 rounded-r-lg">
-              <span className="text-cyan-400 font-semibold not-italic">Rules:</span>
-              <br />
-              "{rules}"
+              <span className="text-cyan-400 font-semibold not-italic">
+                Rules:
+              </span>
+              <br />"{rules}"
             </blockquote>
           )}
         </div>
@@ -226,8 +247,8 @@ const TurfDetails = () => {
       />
 
       {/* Other Components */}
-      <GoBooking />
       <Heading />
+      <GoBooking />
       <PlayZone />
     </section>
   );
