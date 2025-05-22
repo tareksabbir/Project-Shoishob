@@ -1,6 +1,7 @@
 import Turf from "./Turf";
 import Bannar from "./Bannar";
 import Featured from "./Featured";
+
 import Heading from "./Heading";
 
 export default function Home() {
@@ -12,7 +13,6 @@ export default function Home() {
         <Heading />
       </div>
       <Featured></Featured>
-      {/* <EmailCollect></EmailCollect> */}
     </>
   );
 }
