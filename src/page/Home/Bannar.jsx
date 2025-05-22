@@ -11,14 +11,11 @@ export default function Bannar() {
           <section className=" flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16 lg:px-10 px-10">
             <div className="xl:w-11/12 flex flex-col justify-center items-center lg:items-start sm:text-center lg:text-left lg:py-8 xl:py-10 lg:mb-10">
               <h1 className="mt-10  text-black-800 text-4xl sm:text-5xl md:text-7xl mb-8 md:mb-12 font-extrabold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text lg:mt-16">
-                Nothing But Sports..
+                The Magic We Once Knew.
               </h1>
 
               <p className="lg:w-4/5 text-gray-400 xl:text-sm leading-relaxed mb-8 md:mb-12 ">
-                Seize the moment and embrace the possibilities that lie before
-                you. Opportunities come and go, fleeting like shooting stars
-                across the night sky. Its in those moments of decision, when you
-                choose to act, that greatness is born.
+                Childhood friendships are irreplaceable. Life scattered your squad, but the bond remains unbreakable. Our platform bridges distance and time, letting you rediscover authentic joy with the people who truly know you. Everyone deserves to feel like a kid again with the friends who made childhood magical.
               </p>
               <div className="flex flex-row  sm:justify-center lg:justify-start gap-6">
                 <Link
