@@ -20,8 +20,8 @@ const AddTurf = () => {
   const [selectedFiles, setSelectedFiles] = useState({ logo: null, cover: null });
   
   // Mock environment variables - replace with actual values
-  const img_hosting_token = "your_imgbb_token";
-  const backendUrl = "your_backend_url";
+  const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN ;
+  const backendUrl = import.meta.env.VITE_BACKEND_URL ;
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
   const showAlert = (title, text) => {
@@ -171,19 +171,8 @@ const AddTurf = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black py-12 px-4">
-      <div className="max-w-screen-2xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl mb-6 shadow-lg shadow-cyan-500/25">
-            <Building className="w-6 h-6 text-white" />
-          </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
-            Add New Turf
-          </h1>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            Create and manage your turf facility with our comprehensive registration system.
-          </p>
-        </div>
+      <div className=" px-10 mx-auto">
+     
 
         {/* Form */}
         <div className="bg-gray-900/50 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50 overflow-hidden">
