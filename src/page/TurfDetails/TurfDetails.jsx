@@ -59,17 +59,19 @@ const TurfDetails = () => {
         setError(null);
 
         const backendURL = import.meta.env.VITE_BACKEND_URL;
-        const token = localStorage.getItem("access_token");
+        // const token = localStorage.getItem("access_token");
 
-        if (!token) {
-          throw new Error("Authentication token not found");
-        }
+        // if (!token) {
+        //   throw new Error("Authentication token not found");
+        // }
 
-        const response = await axios.get(`${backendURL}/api/v1/turf/${id}`, {
-          headers: {
-            authorization: `bearer ${token}`,
-          },
-        });
+        // const response = await axios.get(`${backendURL}/api/v1/turf/${id}`, {
+        //   headers: {
+        //     authorization: `bearer ${token}`,
+        //   },
+        // });
+
+        const response = await axios.get(`${backendURL}/api/v1/turf/${id}`);
 
         setTurfDetails(response.data.data);
       } catch (err) {
