@@ -495,7 +495,7 @@ const AllUsers = () => {
                   {user.role !== "admin" && (
                     <button
                       onClick={() => handleMakeAdmin(user)}
-                      className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-green-500/25"
+                      className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-green-500/25"
                     >
                       <Shield size={16} />
                       <span>Make Admin</span>
