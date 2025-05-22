@@ -1,12 +1,39 @@
 [
   {
-
+    "_id": {"$oid": "64d2650c1da87da8565d0f52"},
     "turf_name": "Sicho Arena",
+    "email": "shoishobturf@gmail.com",
+    "ownerPhone": "01632773003",
     "address": "Shangkar Bazar",
-    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
-    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    "city": "chittagong",
+    "price": "3000",
+    "person": ["12", "14", "16"],
+    "slots": [
+      "04.00 PM - 5.00 PM",
+      "05.00 PM - 6.00 PM",
+      "06.00 PM - 7.00 PM",
+      "08.00 PM - 9.00 PM",
+      "09.00 PM - 10.00 PM",
+      "10.00 PM - 11.00 PM",
+      "11.00 PM - 12.00 AM",
+      "12.00 AM - 1.00 AM"
+    ],
     "logo": "https://i.postimg.cc/MZCF9mmT/sico.jpg",
     "cover": "https://images.unsplash.com/photo-1529900748604-07564a03e7a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
+    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
+    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    "ownerId": {"$oid": "682ef9e346b21819f1d00a00"},
+    "createdAt": {"$date": {"$numberLong": "1691603212000"}},
+    "updatedAt": {"$date": {"$numberLong": "1691603212000"}},
+    "__v": {"$numberInt": "0"}
+  },
+  {
+    "_id": {"$oid": "64d2650c1da87da8565d0f53"},
+    "turf_name": "ChattoTurf",
+    "email": "chattoturf@gmail.com",
+    "ownerPhone": "01700000000",
+    "address": "2 no. Gate Moar",
+    "city": "chittagong",
     "price": "3000",
     "person": ["12", "14", "16"],
     "slots": [
@@ -18,16 +45,23 @@
       "10.00 PM - 11.00 PM",
       "11.00 PM - 12.00 AM",
       "12.00 AM - 1.00 AM"
-    ]
-  },
-  {
-  
-    "turf_name": "ChattoTurf",
-    "address": "2 no. Gate Moar",
-    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
-    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    ],
     "logo": "https://i.postimg.cc/fTkRvZ5Z/ctgt.jpg",
     "cover": "https://images.unsplash.com/photo-1529900672901-908be5302554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
+    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
+    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    "ownerId": {"$oid": "682ef9e346b21819f1d00a00"},
+    "createdAt": {"$date": {"$numberLong": "1691603213000"}},
+    "updatedAt": {"$date": {"$numberLong": "1691603213000"}},
+    "__v": {"$numberInt": "0"}
+  },
+  {
+    "_id": {"$oid": "64d2650c1da87da8565d0f54"},
+    "turf_name": "AKC PLAY",
+    "email": "akcplay@gmail.com",
+    "ownerPhone": "01700000001",
+    "address": "Shangkar Bazar",
+    "city": "chittagong",
     "price": "3000",
     "person": ["12", "14", "16"],
     "slots": [
@@ -39,16 +73,23 @@
       "10.00 PM - 11.00 PM",
       "11.00 PM - 12.00 AM",
       "12.00 AM - 1.00 AM"
-    ]
-  },
-  {
-   
-    "turf_name": "AKC PLAY",
-    "address": "Shangkar Bazar",
-    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
-    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    ],
     "logo": "https://i.postimg.cc/xdLB5470/akc.jpg",
     "cover": "https://images.unsplash.com/photo-1616514169928-a1e40c6f791c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
+    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
+    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    "ownerId": {"$oid": "682ef9e346b21819f1d00a00"},
+    "createdAt": {"$date": {"$numberLong": "1691603214000"}},
+    "updatedAt": {"$date": {"$numberLong": "1691603214000"}},
+    "__v": {"$numberInt": "0"}
+  },
+  {
+    "_id": {"$oid": "64d2650c1da87da8565d0f55"},
+    "turf_name": "ACM Turf",
+    "email": "acmturf@gmail.com",
+    "ownerPhone": "01700000002",
+    "address": "Road No: 4, Katalganj",
+    "city": "chittagong",
     "price": "3000",
     "person": ["12", "14", "16"],
     "slots": [
@@ -60,16 +101,23 @@
       "10.00 PM - 11.00 PM",
       "11.00 PM - 12.00 AM",
       "12.00 AM - 1.00 AM"
-    ]
-  },
-  {
-   
-    "turf_name": "ACM Turf",
-    "address": "Road No: 4, Katalganj",
-    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
-    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    ],
     "logo": "https://i.postimg.cc/T3Vc4vRH/acm.jpg",
     "cover": "https://images.unsplash.com/photo-1536122985607-4fe00b283652?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
+    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
+    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    "ownerId": {"$oid": "682ef9e346b21819f1d00a00"},
+    "createdAt": {"$date": {"$numberLong": "1691603215000"}},
+    "updatedAt": {"$date": {"$numberLong": "1691603215000"}},
+    "__v": {"$numberInt": "0"}
+  },
+  {
+    "_id": {"$oid": "64d2650c1da87da8565d0f56"},
+    "turf_name": "Chattoground",
+    "email": "chattoground@gmail.com",
+    "ownerPhone": "01700000003",
+    "address": "Bayjid Bostami",
+    "city": "chittagong",
     "price": "3000",
     "person": ["12", "14", "16"],
     "slots": [
@@ -81,16 +129,23 @@
       "10.00 PM - 11.00 PM",
       "11.00 PM - 12.00 AM",
       "12.00 AM - 1.00 AM"
-    ]
-  },
-  {
- 
-    "turf_name": "Chattoground",
-    "address": "Bayjid Bostami",
-    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
-    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    ],
     "logo": "https://i.postimg.cc/3RcjvKBW/ctgg.jpg",
     "cover": "https://images.unsplash.com/photo-1506079906501-adbb5907b720?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
+    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
+    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    "ownerId": {"$oid": "682ef9e346b21819f1d00a00"},
+    "createdAt": {"$date": {"$numberLong": "1691603216000"}},
+    "updatedAt": {"$date": {"$numberLong": "1691603216000"}},
+    "__v": {"$numberInt": "0"}
+  },
+  {
+    "_id": {"$oid": "64d2650c1da87da8565d0f57"},
+    "turf_name": "Fortune Arena",
+    "email": "fortunearena@gmail.com",
+    "ownerPhone": "01700000004",
+    "address": "Chandgaon R/A 4212",
+    "city": "chittagong",
     "price": "3000",
     "person": ["12", "14", "16"],
     "slots": [
@@ -102,16 +157,23 @@
       "10.00 PM - 11.00 PM",
       "11.00 PM - 12.00 AM",
       "12.00 AM - 1.00 AM"
-    ]
-  },
-  {
-    
-    "turf_name": "Fortune Arena",
-    "address": "Chandgaon R/A 4212",
-    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
-    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    ],
     "logo": "https://i.postimg.cc/SKZ1gbdb/fortune.jpg",
     "cover": "https://images.unsplash.com/photo-1509419573860-712f07d5310f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
+    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
+    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    "ownerId": {"$oid": "682ef9e346b21819f1d00a00"},
+    "createdAt": {"$date": {"$numberLong": "1691603217000"}},
+    "updatedAt": {"$date": {"$numberLong": "1691603217000"}},
+    "__v": {"$numberInt": "0"}
+  },
+  {
+    "_id": {"$oid": "64d2650c1da87da8565d0f58"},
+    "turf_name": "GR Sports",
+    "email": "grsports@gmail.com",
+    "ownerPhone": "01700000005",
+    "address": "Kalamiya Bazar",
+    "city": "chittagong",
     "price": "3000",
     "person": ["12", "14", "16"],
     "slots": [
@@ -123,16 +185,23 @@
       "10.00 PM - 11.00 PM",
       "11.00 PM - 12.00 AM",
       "12.00 AM - 1.00 AM"
-    ]
-  },
-  {
-  
-    "turf_name": "GR Sports",
-    "address": "Kalamiya Bazar",
-    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
-    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    ],
     "logo": "https://i.postimg.cc/vHsBQJ7s/GR-Sports.jpg",
     "cover": "https://images.unsplash.com/photo-1514514757092-71ebbc3db4e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
+    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
+    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    "ownerId": {"$oid": "682ef9e346b21819f1d00a00"},
+    "createdAt": {"$date": {"$numberLong": "1691603218000"}},
+    "updatedAt": {"$date": {"$numberLong": "1691603218000"}},
+    "__v": {"$numberInt": "0"}
+  },
+  {
+    "_id": {"$oid": "64d2650c1da87da8565d0f59"},
+    "turf_name": "Khulshi Arena",
+    "email": "khulshiarena@gmail.com",
+    "ownerPhone": "01700000006",
+    "address": "465, Habib Lane",
+    "city": "chittagong",
     "price": "3000",
     "person": ["12", "14", "16"],
     "slots": [
@@ -144,16 +213,23 @@
       "10.00 PM - 11.00 PM",
       "11.00 PM - 12.00 AM",
       "12.00 AM - 1.00 AM"
-    ]
-  },
-  {
-   
-    "turf_name": "Khulshi Arena",
-    "address": "465, Habib Lane",
-    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
-    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    ],
     "logo": "https://i.postimg.cc/TP88vDWY/khulshi.jpg",
     "cover": "https://images.unsplash.com/photo-1540753003857-32db1552eead?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
+    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
+    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    "ownerId": {"$oid": "682ef9e346b21819f1d00a00"},
+    "createdAt": {"$date": {"$numberLong": "1691603219000"}},
+    "updatedAt": {"$date": {"$numberLong": "1691603219000"}},
+    "__v": {"$numberInt": "0"}
+  },
+  {
+    "_id": {"$oid": "64d2650c1da87da8565d0f60"},
+    "turf_name": "6ix CT",
+    "email": "6ixct@gmail.com",
+    "ownerPhone": "01700000007",
+    "address": "Chawk Bazar",
+    "city": "chittagong",
     "price": "3000",
     "person": ["12", "14", "16"],
     "slots": [
@@ -165,37 +241,23 @@
       "10.00 PM - 11.00 PM",
       "11.00 PM - 12.00 AM",
       "12.00 AM - 1.00 AM"
-    ]
-  },
-  {
-
-    "turf_name": "6ix CT",
-    "address": "Chawk Bazar",
-    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
-    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    ],
     "logo": "https://i.postimg.cc/ry77r4QG/Chawk-Bazar.jpg",
     "cover": "https://images.unsplash.com/photo-1605135693932-f1d6fb1be3cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
-    "price": "3000",
-    "person": ["12", "14", "16"],
-    "slots": [
-      "04.00 PM - 5.00 PM",
-      "05.00 PM - 6.00 PM",
-      "06.00 PM - 7.00 PM",
-      "08.00 PM - 9.00 PM",
-      "09.00 PM - 10.00 PM",
-      "10.00 PM - 11.00 PM",
-      "11.00 PM - 12.00 AM",
-      "12.00 AM - 1.00 AM"
-    ]
-  },
-  {
-    
-    "turf_name": "Sports Club ctg",
-    "address": "Choudhury Para",
     "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
     "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
-    "logo": "https://i.postimg.cc/Mp9Dy2zk/Choudhury.jpg",
-    "cover": "https://images.unsplash.com/photo-1587329310686-91414b8e3cb7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
+    "ownerId": {"$oid": "682ef9e346b21819f1d00a00"},
+    "createdAt": {"$date": {"$numberLong": "1691603220000"}},
+    "updatedAt": {"$date": {"$numberLong": "1691603220000"}},
+    "__v": {"$numberInt": "0"}
+  },
+  {
+    "_id": {"$oid": "64d2650c1da87da8565d0f61"},
+    "turf_name": "Sports Club ctg",
+    "email": "sportsclubctg@gmail.com",
+    "ownerPhone": "01700000008",
+    "address": "Choudhury Para",
+    "city": "chittagong",
     "price": "3000",
     "person": ["12", "14", "16"],
     "slots": [
@@ -207,6 +269,14 @@
       "10.00 PM - 11.00 PM",
       "11.00 PM - 12.00 AM",
       "12.00 AM - 1.00 AM"
-    ]
+    ],
+    "logo": "https://i.postimg.cc/Mp9Dy2zk/Choudhury.jpg",
+    "cover": "https://images.unsplash.com/photo-1587329310686-91414b8e3cb7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=500",
+    "about": "Our turf facility is a sports enthusiast's haven, equipped with cutting-edge synthetic turf that sets the stage for extraordinary athletic experiences. With versatility at its core, the field caters to various sports like soccer, football, lacrosse, and more. Engineered to perfection, the surface ensures optimal performance, reducing injuries and enhancing gameplay. From aspiring athletes honing their skills to seasoned professionals, everyone finds a nurturing environment to thrive. Immerse yourself in the thrill of competition, camaraderie, and achievement. Our turf facility fosters a sense of community, bringing together passionate individuals to embrace the joy of sports and elevate their abilities to new heights.",
+    "rules": "Smoking, eating, and drinking (except for water) are not permitted on the field. Pets are not allowed to maintain a clean environment. Respectful behavior towards fellow users and staff is essential to promote a positive atmosphere. Any damages caused intentionally or through misuse will be subject to appropriate penalties. By adhering to these guidelines, we create an environment where athletes and visitors can make the most of their time on the turf while preserving its quality for everyone's benefit.",
+    "ownerId": {"$oid": "682ef9e346b21819f1d00a00"},
+    "createdAt": {"$date": {"$numberLong": "1691603221000"}},
+    "updatedAt": {"$date": {"$numberLong": "1691603221000"}},
+    "__v": {"$numberInt": "0"}
   }
 ]
