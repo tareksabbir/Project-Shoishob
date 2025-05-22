@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
 
 import { useQuery } from "react-query";
-import axios from "axios";
 import {
   BarChart,
   Bar,
@@ -12,14 +13,32 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
+  LineChart,
+  Line,
+  Area,
+  AreaChart,
+  Tooltip,
+  Legend
 } from "recharts";
-import Loading from "../../Loading/Loading";
+import { 
+  TrendingUp, 
+  Users, 
+  Calendar, 
+  DollarSign, 
+  MapPin, 
+  CreditCard,
+  AlertCircle,
+  Activity,
+  ArrowUpRight,
+  ArrowDownRight,
+  RefreshCw
+} from "lucide-react";
 
 const AdminHome = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const { data: adminStat, isLoading } = useQuery(["adminStat"], async () => {
-    const response = await axios.get(
+    const response = await fetch(
       `${backendUrl}/api/v1/stats/collection-counts`,
       {
         headers: {
@@ -27,294 +46,356 @@ const AdminHome = () => {
         },
       }
     );
-
-    return response.data.data;
+    
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    
+    const data = await response.json();
+    return data.data;
   });
+
+  // Mock data for additional charts and enhanced UI
+  const mockData = {
+    monthlyRevenue: [
+      { month: 'Jan', revenue: 45000, bookings: 120 },
+      { month: 'Feb', revenue: 52000, bookings: 135 },
+      { month: 'Mar', revenue: 48000, bookings: 128 },
+      { month: 'Apr', revenue: 61000, bookings: 158 },
+      { month: 'May', revenue: 55000, bookings: 145 },
+      { month: 'Jun', revenue: 67000, bookings: 172 }
+    ],
+    turfUtilization: [
+      { name: 'Football', value: 45, color: '#3B82F6' },
+      { name: 'Cricket', value: 30, color: '#10B981' },
+      { name: 'Basketball', value: 15, color: '#F59E0B' },
+      { name: 'Tennis', value: 10, color: '#EF4444' }
+    ],
+    recentActivity: [
+      { id: 1, action: 'New booking created', user: 'John Doe', time: '2 min ago', type: 'booking' },
+      { id: 2, action: 'Payment received', user: 'Jane Smith', time: '5 min ago', type: 'payment' },
+      { id: 3, action: 'New user registered', user: 'Mike Johnson', time: '10 min ago', type: 'user' },
+      { id: 4, action: 'Turf maintenance scheduled', user: 'Admin', time: '15 min ago', type: 'maintenance' },
+      { id: 5, action: 'Booking cancelled', user: 'Sarah Wilson', time: '20 min ago', type: 'cancellation' }
+    ],
+    weeklyStats: [
+      { day: 'Mon', bookings: 25, revenue: 8500 },
+      { day: 'Tue', bookings: 32, revenue: 10200 },
+      { day: 'Wed', bookings: 28, revenue: 9100 },
+      { day: 'Thu', bookings: 35, revenue: 11500 },
+      { day: 'Fri', bookings: 42, revenue: 13800 },
+      { day: 'Sat', bookings: 58, revenue: 18900 },
+      { day: 'Sun', bookings: 48, revenue: 15600 }
+    ]
+  };
 
   if (isLoading) {
     return (
-      <>
-        <Loading></Loading>
-      </>
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <RefreshCw className="h-12 w-12 text-blue-500 animate-spin mx-auto mb-4" />
+          <p className="text-gray-400 text-lg">Loading dashboard...</p>
+        </div>
+      </div>
     );
   }
 
-  /// bar chart
-
-  const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
-
-  const getPath = (x, y, width, height) => {
-    return `M${x},${y + height}C${x + width / 3},${y + height} ${
-      x + width / 2
-    },${y + height / 3}
-  ${x + width / 2}, ${y}
-  C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
-      x + width
-    }, ${y + height}
-  Z`;
-  };
-
-  const TriangleBar = (props) => {
-    const { fill, x, y, width, height } = props;
-
-    return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
-  };
-  const data = [
+  const statsCards = [
     {
-      name: "Bookings",
-      uv: adminStat.bookingCount,
-    },
-
-    {
-      name: "Paid",
-      uv: adminStat.totalPaidCount,
+      title: "Total Revenue",
+      value: `BDT ${adminStat?.paidSum?.toLocaleString() || 0}`,
+      icon: DollarSign,
+      change: "+12.5%",
+      trend: "up",
+      bgGradient: "from-green-500 to-emerald-600",
+      description: "This month"
     },
     {
-      name: "Unpaid",
-      uv: adminStat.totalUnPaidCount,
+      title: "Total Users",
+      value: adminStat?.usersCount?.toLocaleString() || 0,
+      icon: Users,
+      change: "+8.2%",
+      trend: "up",
+      bgGradient: "from-blue-500 to-cyan-600",
+      description: "Active users"
     },
+    {
+      title: "Total Turfs",
+      value: adminStat?.totalTurfCount || 0,
+      icon: MapPin,
+      change: "+3.1%",
+      trend: "up",
+      bgGradient: "from-purple-500 to-indigo-600",
+      description: "Available turfs"
+    },
+    {
+      title: "Total Bookings",
+      value: adminStat?.bookingCount?.toLocaleString() || 0,
+      icon: Calendar,
+      change: "+15.3%",
+      trend: "up",
+      bgGradient: "from-orange-500 to-red-600",
+      description: "All time"
+    },
+    {
+      title: "Paid Bookings",
+      value: adminStat?.totalPaidCount?.toLocaleString() || 0,
+      icon: CreditCard,
+      change: "+9.7%",
+      trend: "up",
+      bgGradient: "from-teal-500 to-green-600",
+      description: "Completed"
+    },
+    {
+      title: "Unpaid Bookings",
+      value: adminStat?.totalUnPaidCount?.toLocaleString() || 0,
+      icon: AlertCircle,
+      change: "-5.2%",
+      trend: "down",
+      bgGradient: "from-red-500 to-pink-600",
+      description: "Pending payment"
+    }
   ];
 
-  /// pi chart
-  const data2 = [
-    { name: "Group A", value: 400 },
-    { name: "Group B", value: 300 },
-    { name: "Group C", value: 300 },
-    { name: "Group D", value: 200 },
+  const chartData = [
+    { name: "Total Bookings", value: adminStat?.bookingCount || 0, color: "#3B82F6" },
+    { name: "Paid", value: adminStat?.totalPaidCount || 0, color: "#10B981" },
+    { name: "Unpaid", value: adminStat?.totalUnPaidCount || 0, color: "#EF4444" }
   ];
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-gray-800 border border-gray-600 rounded-lg p-4 shadow-xl">
+          <p className="text-gray-300 font-medium">{label}</p>
+          {payload.map((entry, index) => (
+            <p key={index} className="text-white" style={{ color: entry.color }}>
+              {entry.dataKey}: {entry.value?.toLocaleString()}
+            </p>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
 
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
+  const CustomPieTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-gray-800 border border-gray-600 rounded-lg p-3 shadow-xl">
+          <p className="text-white font-medium">{payload[0].name}</p>
+          <p className="text-gray-300">{payload[0].value}%</p>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
-    <>
-      <section>
-        <div
-          id="main"
-          className="main-content flex-1  mt-12 md:mt-2 pb-24 md:pb-5"
-        >
-          <div className="flex flex-wrap lg:p-24">
-            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-              <div className="bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600 rounded-lg shadow-xl p-5">
-                <div className="flex flex-row items-center">
-                  <div className="flex-shrink pr-4">
-                    <div className="rounded-full p-5 bg-green-600">
-                      <i className="fa fa-wallet fa-2x fa-inverse"></i>
-                    </div>
-                  </div>
-                  <div className="flex-1 text-right md:text-center">
-                    <h2 className="font-bold uppercase text-gray-900">
-                      Total Revenue
-                    </h2>
-                    <p className="font-bold text-xl text-gray-900">
-                      BDT {adminStat.paidSum}
-                    </p>
-                  </div>
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* Header */}
+      <div className="bg-gray-800 border-b border-gray-700 px-6 py-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
+            <p className="text-gray-400 mt-2">Welcome back! Here's what's happening with your turf business.</p>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="bg-gray-700 rounded-lg px-4 py-2 border border-gray-600">
+              <span className="text-gray-300 text-sm">Last updated: Just now</span>
+            </div>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+              <RefreshCw className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="p-6">
+        {/* Stats Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
+          {statsCards.map((stat, index) => (
+            <div key={index} className="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-lg">
+              <div className="flex items-center justify-between mb-4">
+                <div className={`p-3 rounded-lg bg-gradient-to-r ${stat.bgGradient} shadow-lg`}>
+                  <stat.icon className="h-6 w-6 text-white" />
+                </div>
+                <div className={`flex items-center space-x-1 text-sm font-medium ${stat.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+                  {stat.trend === 'up' ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
+                  <span>{stat.change}</span>
                 </div>
               </div>
-            </div>
-            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-              <div className="bg-gradient-to-b from-pink-200 to-pink-100 border-b-4 border-pink-500 rounded-lg shadow-xl p-5">
-                <div className="flex flex-row items-center">
-                  <div className="flex-shrink pr-4">
-                    <div className="rounded-full p-5 bg-pink-600">
-                      <i className="fas fa-users fa-2x fa-inverse"></i>
-                    </div>
-                  </div>
-                  <div className="flex-1 text-right md:text-center">
-                    <h2 className="font-bold uppercase text-gray-800">
-                      Total Users
-                    </h2>
-                    <p className="font-bold text-xl text-gray-800">
-                      {adminStat.usersCount}
-                      <span className="text-pink-500 ml-3">
-                        <i className="fas fa-exchange-alt"></i>
-                      </span>
-                    </p>
-                  </div>
-                </div>
+              <div>
+                <p className="text-gray-400 text-sm font-medium">{stat.title}</p>
+                <p className="text-2xl font-bold text-white mt-1">{stat.value}</p>
+                <p className="text-gray-500 text-xs mt-1">{stat.description}</p>
               </div>
             </div>
-            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-              <div className="bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600 rounded-lg shadow-xl p-5">
-                <div className="flex flex-row items-center">
-                  <div className="flex-shrink pr-4">
-                    <div className="rounded-full p-5 bg-yellow-600">
-                      <i className="fas fa-user-plus fa-2x fa-inverse"></i>
-                    </div>
-                  </div>
-                  <div className="flex-1 text-right md:text-center">
-                    <h2 className="font-bold uppercase text-gray-800">
-                      Total Turfs
-                    </h2>
-                    <p className="font-bold text-xl text-gray-800">
-                      {adminStat.totalTurfCount}
-                      <span className="text-yellow-600">
-                        <i className="fas fa-caret-up ml-3"></i>
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-              <div className="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5">
-                <div className="flex flex-row items-center">
-                  <div className="flex-shrink pr-4">
-                    <div className="rounded-full p-5 bg-blue-600">
-                      <i className="fas fa-server fa-2x fa-inverse"></i>
-                    </div>
-                  </div>
-                  <div className="flex-1 text-right md:text-center">
-                    <h2 className="font-bold uppercase text-gray-800">
-                      Total Bookings
-                    </h2>
-                    <p className="font-bold text-xl text-gray-800">
-                      {adminStat.bookingCount}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-              <div className="bg-gradient-to-b from-indigo-200 to-indigo-100 border-b-4 border-indigo-500 rounded-lg shadow-xl p-5">
-                <div className="flex flex-row items-center">
-                  <div className="flex-shrink pr-4">
-                    <div className="rounded-full p-5 bg-indigo-600">
-                      <i className="fas fa-tasks fa-2x fa-inverse"></i>
-                    </div>
-                  </div>
-                  <div className="flex-1 text-right md:text-center">
-                    <h2 className="font-bold uppercase text-gray-800">
-                      Paid Bookings
-                    </h2>
-                    <p className="font-bold text-xl text-gray-900">
-                      {adminStat.totalPaidCount}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
-              <div className="bg-gradient-to-b from-red-200 to-red-100 border-b-4 border-red-500 rounded-lg shadow-xl p-5">
-                <div className="flex flex-row items-center">
-                  <div className="flex-shrink pr-4">
-                    <div className="rounded-full p-5 bg-red-600">
-                      <i className="fas fa-inbox fa-2x fa-inverse"></i>
-                    </div>
-                  </div>
-                  <div className="flex-1 text-right md:text-center">
-                    <h2 className="font-bold uppercase text-gray-800">
-                      UnPaid Bookings
-                    </h2>
-                    <p className="font-bold text-xl text-gray-900">
-                      {adminStat.totalUnPaidCount}
-                      <span className="text-red-500">
-                        <i className="fas fa-caret-up ml-3"></i>
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-full  md:w-1/2 xl:w-1/3 p-6">
-              <div className="bg-slate-100 rounded-xl">
-                <BarChart
-                  width={250}
-                  height={200}
-                  data={data}
-                  margin={{
-                    top: 40,
-                    right: 5,
-                    left: 0,
-                    bottom: 20,
-                  }}
+          ))}
+        </div>
+
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
+          {/* Monthly Revenue Chart */}
+          <div className="lg:col-span-2 bg-gray-800 rounded-xl p-6 border border-gray-700">
+            <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+              <TrendingUp className="h-6 w-6 mr-3 text-blue-400" />
+              Monthly Revenue Trend
+            </h3>
+            <ResponsiveContainer width="100%" height={350}>
+              <AreaChart data={mockData.monthlyRevenue}>
+                <defs>
+                  <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.05}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="month" stroke="#9CA3AF" />
+                <YAxis stroke="#9CA3AF" />
+                <Tooltip content={<CustomTooltip />} />
+                <Area 
+                  type="monotone" 
+                  dataKey="revenue" 
+                  stroke="#3B82F6" 
+                  strokeWidth={3}
+                  fillOpacity={1} 
+                  fill="url(#colorRevenue)" 
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Turf Utilization Pie Chart */}
+          <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+              <Activity className="h-6 w-6 mr-3 text-green-400" />
+              Turf Utilization
+            </h3>
+            <ResponsiveContainer width="100%" height={350}>
+              <PieChart>
+                <Pie
+                  data={mockData.turfUtilization}
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={100}
+                  fill="#8884d8"
+                  dataKey="value"
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                 >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Bar
-                    dataKey="uv"
-                    fill="#8884d8"
-                    shape={<TriangleBar />}
-                    label={{ position: "top" }}
-                  >
-                    {data.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={colors[index % colors.length]}
-                      />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </div>
-            </div>
-            <div className="w-full  md:w-1/2 xl:w-1/3 p-6">
-              <ResponsiveContainer width="100%" height="100%" color="white">
-                <BarChart width={150} height={40} data={data}>
-                  <Bar dataKey="uv" fill="#8884d8" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="w-full  md:w-1/2 xl:w-1/3 p-6">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart width={400} height={400}>
-                  <Pie
-                    data={data2}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    label={renderCustomizedLabel}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                  >
-                    {data.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
+                  {mockData.turfUtilization.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip content={<CustomPieTooltip />} />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {/* Booking Status Chart */}
+          <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+              <Calendar className="h-6 w-6 mr-3 text-purple-400" />
+              Booking Status
+            </h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="name" stroke="#9CA3AF" />
+                <YAxis stroke="#9CA3AF" />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                  {chartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Weekly Performance Chart */}
+          <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+              <TrendingUp className="h-6 w-6 mr-3 text-orange-400" />
+              Weekly Performance
+            </h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={mockData.weeklyStats}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="day" stroke="#9CA3AF" />
+                <YAxis stroke="#9CA3AF" />
+                <Tooltip content={<CustomTooltip />} />
+                <Line 
+                  type="monotone" 
+                  dataKey="bookings" 
+                  stroke="#F59E0B" 
+                  strokeWidth={3}
+                  dot={{ fill: '#F59E0B', strokeWidth: 2, r: 4 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Recent Activity */}
+          <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+              <Activity className="h-6 w-6 mr-3 text-cyan-400" />
+              Recent Activity
+            </h3>
+            <div className="space-y-4 max-h-80 overflow-y-auto">
+              {mockData.recentActivity.map((activity) => (
+                <div key={activity.id} className="flex items-start space-x-3 p-4 bg-gray-700 rounded-lg hover:bg-gray-650 transition-colors">
+                  <div className={`w-3 h-3 rounded-full mt-2 flex-shrink-0 ${
+                    activity.type === 'booking' ? 'bg-blue-400' :
+                    activity.type === 'payment' ? 'bg-green-400' :
+                    activity.type === 'user' ? 'bg-purple-400' :
+                    activity.type === 'cancellation' ? 'bg-red-400' :
+                    'bg-orange-400'
+                  }`}></div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white text-sm font-medium">{activity.action}</p>
+                    <p className="text-gray-400 text-xs mt-1">{activity.user} • {activity.time}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div
-          className="absolute inset-0 blur-[118px] max-w-lg h-[1400px] mx-auto sm:max-w-3xl sm:h-[400px]"
-          style={{
-            background:
-              "linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)",
-          }}
-        ></div>
-      </section>
-    </>
+
+        {/* Performance Metrics */}
+        <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+          <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+            <Activity className="h-6 w-6 mr-3 text-blue-400" />
+            Performance Metrics
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="text-center p-4 bg-gray-700 rounded-lg">
+              <div className="text-3xl font-bold text-green-400 mb-2">98.5%</div>
+              <div className="text-gray-400 text-sm font-medium">System Uptime</div>
+              <div className="text-gray-500 text-xs mt-1">Last 30 days</div>
+            </div>
+            <div className="text-center p-4 bg-gray-700 rounded-lg">
+              <div className="text-3xl font-bold text-blue-400 mb-2">4.8</div>
+              <div className="text-gray-400 text-sm font-medium">Average Rating</div>
+              <div className="text-gray-500 text-xs mt-1">Customer feedback</div>
+            </div>
+            <div className="text-center p-4 bg-gray-700 rounded-lg">
+              <div className="text-3xl font-bold text-purple-400 mb-2">2.3s</div>
+              <div className="text-gray-400 text-sm font-medium">Response Time</div>
+              <div className="text-gray-500 text-xs mt-1">API average</div>
+            </div>
+            <div className="text-center p-4 bg-gray-700 rounded-lg">
+              <div className="text-3xl font-bold text-orange-400 mb-2">67%</div>
+              <div className="text-gray-400 text-sm font-medium">Conversion Rate</div>
+              <div className="text-gray-500 text-xs mt-1">Bookings to visits</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
