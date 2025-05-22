@@ -118,7 +118,7 @@ const DashBoardLayout = () => {
     { icon: "badge-check", label: "Turf Profile", gradient: "from-green-500 to-emerald-500" },
     { to: "/dashboard/ownerbookings", icon: "calendar-event", label: "All Booking", gradient: "from-indigo-500 to-blue-500" },
     { to: "/dashboard/addTournament", icon: "add-to-queue", label: "Registration", gradient: "from-orange-500 to-amber-500" },
-    { icon: "trophy", label: "Leader Board", gradient: "from-yellow-500 to-orange-500" },
+    {to: "/dashboard/leaderboard", icon: "trophy", label: "Leader Board", gradient: "from-yellow-500 to-orange-500" },
     { icon: "purchase-tag", label: "Pay History", gradient: "from-pink-500 to-rose-500" },
   ];
 
