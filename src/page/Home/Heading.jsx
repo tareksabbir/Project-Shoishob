@@ -62,7 +62,7 @@ const Heading = () => {
               Your health is of great importance to us
             </h1>
 
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-gray-300 text-lg font-light">
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-gray-300 text-normal font-light">
               At our core, your well-being holds utmost significance. We
               prioritize and deeply care about your health, ensuring every
               effort is made to safeguard and enhance it. With unwavering
