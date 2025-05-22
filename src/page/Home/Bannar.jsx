@@ -15,18 +15,22 @@ export default function Bannar() {
               </h1>
 
               <p className="lg:w-4/5 text-gray-400 xl:text-sm leading-relaxed mb-8 md:mb-12 ">
-                Childhood friendships are irreplaceable. Life scattered your squad, but the bond remains unbreakable. Our platform bridges distance and time, letting you rediscover authentic joy with the people who truly know you. Everyone deserves to feel like a kid again with the friends who made childhood magical.
+                Childhood friendships are irreplaceable. Life scattered your
+                squad, but the bond remains unbreakable. Our platform bridges
+                distance and time, letting you rediscover authentic joy with the
+                people who truly know you. Everyone deserves to feel like a kid
+                again with the friends who made childhood magical.
               </p>
               <div className="flex flex-row  sm:justify-center lg:justify-start gap-6">
                 <Link
-                  to="/"
+                  to="/booking"
                   className="inline-block bg-blue-500 hover:bg-gradient-to-r from-black to-indigo-500 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-sm font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
                 >
                   Book now
                 </Link>
 
                 <Link
-                  to="/"
+                  to="/turf/64c95f27f0e4e8b26e102d07"
                   className="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-500 active:text-gray-700 text-sm md:text-sm font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
                 >
                   Take tour
