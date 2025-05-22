@@ -9,7 +9,7 @@ const Turf = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const backendURL = import.meta.env.VITE_BACKEND_URL;
-
+  const [hoveredCard, setHoveredCard] = useState(null);
   useEffect(() => {
     const fetchTurfs = async () => {
       setIsLoading(true);
@@ -46,9 +46,15 @@ const Turf = () => {
           ) : turfs.length === 0 ? (
             <div className="text-center text-white">No turf records found</div>
           ) : (
-            <div className="flex flex-wrap -m-3">
-              {reversedTurfs.map((turf) => (
-                <TurfCard key={turf._id} turf={turf} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
+              {reversedTurfs.map((turf, index) => (
+                <TurfCard
+                  key={turf._id}
+                  turf={turf}
+                  index={index}
+                  hoveredCard={hoveredCard}
+                  setHoveredCard={setHoveredCard}
+                />
               ))}
             </div>
           )}
