@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Bannar() {
   return (
     <>
-      <main className="relative bg-nearest-rgb-23-32-49">
+      <main className="relative bg-nearest-rgb-23-32-49 ">
         <section className="relative">
           <section className=" flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16 lg:px-10 px-10">
             <div className="xl:w-11/12 flex flex-col justify-center items-center lg:items-start sm:text-center lg:text-left lg:py-8 xl:py-10 lg:mb-10">
