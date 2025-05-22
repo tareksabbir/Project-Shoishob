@@ -1,12 +1,35 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unknown-property */
 
 import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
-import "boxicons";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { useQuery } from "react-query";
 import axios from "axios";
 import icon from "../assets/icons/Untitled design (2).png";
+
+// Import Lucide React icons to replace boxicons
+import {
+  Home,
+  Hexagon,
+  Plus,
+  Users,
+  Shield,
+  Bookmark,
+  Trophy,
+  CreditCard,
+  User,
+  BadgeCheck,
+  Calendar,
+  UserPlus,
+  MessageCircle,
+  Briefcase,
+  MessageSquare,
+  Tag,
+  Mail,
+  Menu,
+  LogOut
+} from "lucide-react";
 
 const DashBoardLayout = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -54,11 +77,34 @@ const DashBoardLayout = () => {
     return location.pathname === path;
   };
 
+  // Icon mapping for Lucide icons
+  const iconMap = {
+    home: Home,
+    hive: Hexagon,
+    component: Plus,
+    'user-circle': User,
+    'shield-quarter': Shield,
+    bookmark: Bookmark,
+    trophy: Trophy,
+    'purchase-tag': CreditCard,
+    'badge-check': BadgeCheck,
+    'calendar-event': Calendar,
+    'add-to-queue': UserPlus,
+    user: User,
+    comment: MessageCircle,
+    briefcase: Briefcase,
+    'message-square-edit': MessageSquare,
+    label: Tag,
+    'mail-send': Mail,
+    menu: Menu,
+    'log-out': LogOut,
+  };
+
   // Menu items configuration with colors and gradients
   const superAdminMenuItems = [
     { to: "/dashboard/adminHome", icon: "home", label: "Dashboard", gradient: "from-blue-500 to-cyan-500" },
     { to: "/dashboard/allTurfs", icon: "hive", label: "All Turf", gradient: "from-green-500 to-emerald-500" },
-    { to: "/dashboard/addTurf", icon: "component", label: "Add Turf", type: "solid", gradient: "from-purple-500 to-violet-500" },
+    { to: "/dashboard/addTurf", icon: "component", label: "Add Turf", gradient: "from-purple-500 to-violet-500" },
     { to: "/dashboard/allUsers", icon: "user-circle", label: "All User", gradient: "from-orange-500 to-amber-500" },
     { to: "/dashboard/allAdmin", icon: "shield-quarter", label: "All Admin", gradient: "from-red-500 to-rose-500" },
     { to: "/dashboard/allBookings", icon: "bookmark", label: "All Booking", gradient: "from-indigo-500 to-blue-500" },
@@ -104,8 +150,9 @@ const DashBoardLayout = () => {
     return { role: "User", badge: "from-green-500 to-teal-500" };
   };
 
-  const renderMenuItem = ({ to, icon, label, type = "regular", gradient }) => {
+  const renderMenuItem = ({ to, icon, label, gradient }) => {
     const isActive = to && isActiveRoute(to);
+    const IconComponent = iconMap[icon] || Home;
     
     return (
       <li key={label} className="mb-2">
@@ -133,13 +180,12 @@ const DashBoardLayout = () => {
                 : `group-hover:bg-gradient-to-r group-hover:${gradient} group-hover:text-white`
               }
             `}>
-              <box-icon 
-                name={icon} 
-                type={type} 
-                color={isActive ? "white" : "#9ca3af"} 
-                size="20px"
-                className="group-hover:text-white transition-colors duration-300"
-              ></box-icon>
+              <IconComponent 
+                size={20}
+                className={`transition-colors duration-300 ${
+                  isActive ? 'text-white' : 'text-gray-400 group-hover:text-white'
+                }`}
+              />
             </div>
             
             <span className="font-medium flex-1">{label}</span>
@@ -158,13 +204,10 @@ const DashBoardLayout = () => {
               relative p-2 rounded-lg transition-all duration-300
               group-hover:bg-gradient-to-r group-hover:${gradient} group-hover:text-white
             `}>
-              <box-icon 
-                name={icon} 
-                type={type} 
-                color="#9ca3af" 
-                size="20px"
-                className="group-hover:text-white transition-colors duration-300"
-              ></box-icon>
+              <IconComponent 
+                size={20}
+                className="text-gray-400 group-hover:text-white transition-colors duration-300"
+              />
             </div>
             <span className="font-medium flex-1">{label}</span>
           </a>
@@ -208,7 +251,7 @@ const DashBoardLayout = () => {
                 htmlFor="dashboard-drawer"
                 className="btn btn-square btn-ghost text-white hover:bg-white/10"
               >
-                <box-icon name="menu" color="white" size="24px"></box-icon>
+                <Menu size={24} className="text-white" />
               </label>
             </div>
             <div className="flex-1">
@@ -231,7 +274,7 @@ const DashBoardLayout = () => {
           </div>
           
           {/* Page content */}
-          <div className="flex-1 p-6 lg:p-8">
+          <div className="flex-1">
             <Outlet />
           </div>
         </div>
@@ -260,7 +303,7 @@ const DashBoardLayout = () => {
               <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 p-4 rounded-xl backdrop-blur-sm border border-slate-600/30">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                    <box-icon name="user" color="white" size="20px"></box-icon>
+                    <User size={20} className="text-white" />
                   </div>
                   <div className="flex-1">
                     <p className="text-white font-medium text-sm truncate">
@@ -305,7 +348,7 @@ const DashBoardLayout = () => {
                   className="flex items-center gap-4 px-4 py-3 w-full text-gray-400 transition-all duration-300 hover:text-red-400 hover:bg-red-500/10 rounded-xl group relative overflow-hidden border border-transparent hover:border-red-500/30"
                 >
                   <div className="relative p-2 rounded-lg transition-all duration-300 group-hover:bg-red-500/20">
-                    <box-icon name="log-out" color="#ef4444" size="20px"></box-icon>
+                    <LogOut size={20} className="text-red-500" />
                   </div>
                   <span className="font-medium flex-1 text-left">Logout</span>
                   <div className="w-2 h-2 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
