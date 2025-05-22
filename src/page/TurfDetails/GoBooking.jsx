@@ -1,115 +1,183 @@
 import { Link } from "react-router-dom";
+import { Clock, Users, Star, Calendar } from "lucide-react";
 
 const GoBooking = () => {
   return (
-    <>
-      <section className="text-gray-600 body-font py-12">
-        <div className=" px-5  mx-auto">
-          <div className="flex flex-col text-center w-full mb-20">
-            <h1 className="sm:text-4xl text-3xl text-white font-medium title-font mb-2 text-">
-              Pricing
-            </h1>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-gray-400">
-              Banh mi cornhole echo park skateboard authentic crucifix neutra
-              tilde lyft biodiesel artisan direct trade mumblecore 3 wolf moon
-              twee
-            </p>
+    <section className=" text-white py-16 min-h-screen">
+      <div className=" px-6 mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-16">
+         
+          <p className="text-xl text-white max-w-2xl mx-auto leading-relaxed">
+            Premium football turf facilities with state-of-the-art amenities. 
+            Book your slot and experience the best playing surface in the city.
+          </p>
+          <div className="flex justify-center items-center mt-6 space-x-6 ">
+            <div className="flex items-center">
+              <Star className="w-5 h-5 mr-2 text-yellow-400" />
+              <span className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font">4.8/5 Rating</span>
+            </div>
+            <div className="flex items-center">
+              <Calendar className="w-5 h-5 mr-2" />
+              <span className="tracking-widest bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-xs font-medium title-font">Online Booking</span>
+            </div>
           </div>
-          <div className="lg:w-3/4 w-full mx-auto overflow-auto">
-            <table className="table-auto w-full text-center">
+        </div>
+
+        {/* Pricing Table */}
+        <div className="bg-gray-800 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+          <div className="overflow-x-auto">
+            <table className="w-full text-center">
               <thead>
-                <tr>
-                  <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
-                    Plan
+                <tr className="border-b border-purple-400/30">
+                  <th className="px-6 py-4 text-lg font-semibold text-purple-100 text-left">
+                    Package
                   </th>
-                  <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                    Person
+                  <th className="px-6 py-4 text-lg font-semibold text-purple-100">
+                    <div className="flex items-center justify-center">
+                      <Users className="w-5 h-5 mr-2" />
+                      Players
+                    </div>
                   </th>
-                  <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm bg-gray-100">
-                    Time
+                  <th className="px-6 py-4 text-lg font-semibold text-purple-100">
+                    <div className="flex items-center justify-center">
+                      <Clock className="w-5 h-5 mr-2" />
+                      Duration
+                    </div>
                   </th>
-                  <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
-                    Price
+                  <th className="px-6 py-4 text-lg font-semibold text-purple-100">
+                    Price (BDT)
                   </th>
                 </tr>
               </thead>
-              <tbody className="mx-auto">
-                <tr>
-                  <td className="px-4 py-3 text-gray-400">Start</td>
-                  <td className="px-4 py-3 text-gray-400">10</td>
-                  <td className="px-4 py-3 text-gray-400">60 min</td>
-                  <td className="px-4 py-3 text-sm text-gray-400">3000</td>
-                </tr>
-                <tr>
-                  <td className="border-t-2 border-gray-600 px-4 py-3 text-gray-400">
-                    Pro
+              <tbody>
+                <tr className="border-b border-purple-400/20 hover:bg-white/5 transition-colors">
+                  <td className="px-6 py-5">
+                    <div className="text-left">
+                      <div className="text-lg font-medium text-white">Basic</div>
+                      <div className="text-sm text-purple-200">Perfect for casual games</div>
+                    </div>
                   </td>
-                  <td className="border-t-2 border-gray-600 px-4 py-3 text-gray-400">
-                    12
-                  </td>
-                  <td className="border-t-2 border-gray-600 px-4 py-3 text-gray-400">
-                    60 min
-                  </td>
-                  <td className="border-t-2 border-gray-600 px-4 py-3 text-sm text-gray-400">
-                    3400
+                  <td className="px-6 py-5 text-purple-100 font-medium">10</td>
+                  <td className="px-6 py-5 text-purple-100 font-medium">60 min</td>
+                  <td className="px-6 py-5">
+                    <span className="text-2xl font-bold text-purple-300">৳3,000</span>
                   </td>
                 </tr>
-                <tr>
-                  <td className="border-t-2 border-gray-600 px-4 py-3 text-gray-400">
-                    Business
+                <tr className="border-b border-purple-400/20 hover:bg-white/5 transition-colors bg-purple-800/30">
+                  <td className="px-6 py-5">
+                    <div className="text-left">
+                      <div className="text-lg font-medium text-white flex items-center">
+                        Standard 
+                        <span className="ml-2 px-2 py-1 bg-blue-500 text-xs rounded-full">POPULAR</span>
+                      </div>
+                      <div className="text-sm text-purple-200">Most chosen package</div>
+                    </div>
                   </td>
-                  <td className="border-t-2 border-gray-600 px-4 py-3 text-gray-400">
-                    14
-                  </td>
-                  <td className="border-t-2 border-gray-600 px-4 py-3 text-gray-400">
-                    60min
-                  </td>
-                  <td className="border-t-2 border-gray-600 px-4 py-3 text-sm text-gray-400">
-                    3800
+                  <td className="px-6 py-5 text-purple-100 font-medium">12</td>
+                  <td className="px-6 py-5 text-purple-100 font-medium">60 min</td>
+                  <td className="px-6 py-5">
+                    <span className="text-2xl font-bold text-purple-300">৳3,400</span>
                   </td>
                 </tr>
-                <tr>
-                  <td className="border-t-2 border-b-2 border-gray-600 px-4 py-3 text-gray-400">
-                    Exclusive
+                <tr className="border-b border-purple-400/20 hover:bg-white/5 transition-colors">
+                  <td className="px-6 py-5">
+                    <div className="text-left">
+                      <div className="text-lg font-medium text-white">Premium</div>
+                      <div className="text-sm text-purple-200">Extended play time</div>
+                    </div>
                   </td>
-                  <td className="border-t-2 border-b-2 border-gray-600 px-4 py-3 text-gray-400">
-                    16
+                  <td className="px-6 py-5 text-purple-100 font-medium">14</td>
+                  <td className="px-6 py-5 text-purple-100 font-medium">60 min</td>
+                  <td className="px-6 py-5">
+                    <span className="text-2xl font-bold text-purple-300">৳3,800</span>
                   </td>
-                  <td className="border-t-2 border-b-2 border-gray-600 px-4 py-3 text-gray-400">
-                    60 min
+                </tr>
+                <tr className="hover:bg-white/5 transition-colors">
+                  <td className="px-6 py-5">
+                    <div className="text-left">
+                      <div className="text-lg font-medium text-white flex items-center">
+                        Exclusive
+                        <span className="ml-2 px-2 py-1 bg-yellow-500 text-black text-xs rounded-full font-medium">VIP</span>
+                      </div>
+                      <div className="text-sm text-purple-200">Full amenities included</div>
+                    </div>
                   </td>
-                  <td className="border-t-2 border-b-2 border-gray-600 px-4 py-3 text-sm text-gray-400">
-                    4000
+                  <td className="px-6 py-5 text-purple-100 font-medium">16</td>
+                  <td className="px-6 py-5 text-purple-100 font-medium">60 min</td>
+                  <td className="px-6 py-5">
+                    <span className="text-2xl font-bold text-purple-300">৳4,000</span>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div className="flex pl-4 mt-4 lg:w-3/4 w-full mx-auto">
-            <a className="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0">
-              Learn More
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-4 h-4 ml-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
-            <Link
-              to="/booking"
-              className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
-            >
-              Book Now
-            </Link>
+        </div>
+
+        {/* Features */}
+        <div className="mt-12 grid md:grid-cols-3 gap-6 text-center">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+            <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Users className="w-6 h-6 text-white" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Professional Turf</h3>
+            <p className="text-purple-200 text-sm">FIFA standard artificial grass surface</p>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+            <div className="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Clock className="w-6 h-6 text-white" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Flexible Timing</h3>
+            <p className="text-purple-200 text-sm">Available 6 AM to 12 AM daily</p>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+            <div className="w-12 h-12 bg-violet-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Star className="w-6 h-6 text-white" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Premium Facilities</h3>
+            <p className="text-purple-200 text-sm">Changing rooms, parking & refreshments</p>
           </div>
         </div>
-      </section>
-    </>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+          <a 
+            href="#details" 
+            className="inline-flex items-center justify-center px-8 py-3 text-purple-300 border-2 border-purple-300 rounded-full hover:bg-purple-300 hover:text-purple-900 transition-all duration-300 font-medium"
+          >
+            View Details
+            <svg
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              className="w-5 h-5 ml-2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <Link
+            to="/booking"
+            className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-purple-500 to-violet-500 text-white rounded-full hover:from-purple-600 hover:to-violet-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            Book Now
+            <Calendar className="w-5 h-5 ml-2" />
+          </Link>
+        </div>
+
+        {/* Additional Info */}
+        <div className="mt-12 text-center">
+          <p className="text-purple-200 text-sm">
+            * All prices include basic equipment. Advanced booking required.
+          </p>
+          <p className="text-purple-300 text-sm mt-2">
+            📞 For group bookings and corporate events, call: +88 01XXX-XXXXXX
+          </p>
+        </div>
+      </div>
+    </section>
   );
 };
 
