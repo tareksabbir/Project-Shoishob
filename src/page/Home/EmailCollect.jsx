@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import contact from "../../assets/images/hero5.png";
 import ApplePlayStore from "../../Svg/ApplePlayStore";
 import GooglePlay from "../../Svg/GooglePlay";
@@ -5,68 +6,94 @@ import GooglePlay from "../../Svg/GooglePlay";
 export default function EmailCollect() {
   return (
     <div className="relative ">
-      <section className="max-w-7xl mx-auto px-5 py-20 flex flex-col-reverse md:flex-row items-center">
-        {/* Text + Form */}
-        <div className="md:w-1/2 flex flex-col md:items-start items-center text-center md:text-left mb-10 md:mb-0">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">
-            Learn more about us
-          </h1>
-          <p className="text-gray-400 mb-8 max-w-md">
-            Your curiosity is important to us, and we’re here to provide you with the insights you seek.
-          </p>
-
-          {/* Email Form */}
-          <form className="flex w-full max-w-md gap-3 flex-col sm:flex-row">
-            <div className="flex-1">
-              <label htmlFor="email" className="block text-sm text-gray-300 mb-1">
-                Your Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                className="w-full px-4 py-2 text-sm text-gray-700 bg-gray-100 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white transition"
-              />
+      <section className="relative max-w-screen-2xl mx-auto px-5 md:px-10 py-20 lg:py-32">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+          {/* Text + Form */}
+          <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
+            {/* Heading */}
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-transparent bg-clip-text">
+                  Learn more
+                </span>
+                <br />
+                <span className="text-white">about us</span>
+              </h1>
+              <p className="text-gray-300 text-lg max-w-lg leading-relaxed">
+                Your curiosity is important to us, and we're here to provide you
+                with the insights you seek. Join our community today.
+              </p>
             </div>
-            <button
-              type="submit"
-              className="shrink-0 mt-2 sm:mt-6 sm:ml-2 py-2 px-6 text-white bg-indigo-600 hover:bg-indigo-700 rounded text-sm transition"
-            >
-              Submit
-            </button>
-          </form>
-          <p className="text-sm text-gray-500 mt-2">Please provide your email here</p>
 
-          {/* App Buttons */}
-          <div className="flex flex-wrap gap-4 mt-8">
-            <button className="bg-gray-100 hover:bg-gray-200 py-3 px-5 rounded-lg flex items-center focus:outline-none transition">
-              <GooglePlay />
-              <span className="ml-4 text-left">
-                <span className="text-xs text-gray-600 block">GET IT ON</span>
-                <span className="font-medium text-sm">Google Play</span>
-              </span>
-            </button>
-            <button className="bg-gray-100 hover:bg-gray-200 py-3 px-5 rounded-lg flex items-center focus:outline-none transition">
-              <ApplePlayStore />
-              <span className="ml-4 text-left">
-                <span className="text-xs text-gray-600 block">Download on the</span>
-                <span className="font-medium text-sm">App Store</span>
-              </span>
-            </button>
+            {/* Email Form */}
+            <div className="w-full max-w-md space-y-4">
+              <form className="space-y-4">
+                <div className="space-y-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-300"
+                  >
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email address"
+                      className="w-full px-4 py-3 text-white bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300 placeholder-gray-400"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full py-3 px-6 text-white font-medium bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 shadow-lg hover:shadow-cyan-500/25"
+                >
+                  Get Started
+                </button>
+              </form>
+              <p className="text-sm text-gray-400 text-center lg:text-left">
+                We respect your privacy. Unsubscribe at any time.
+              </p>
+            </div>
+
+            {/* App Store Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
+              <button className="flex-1 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 py-3 px-4 rounded-xl flex items-center justify-center gap-3 focus:outline-none transition-all duration-300 group">
+                <GooglePlay />
+                <div className="text-left">
+                  <div className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors">
+                    GET IT ON
+                  </div>
+                  <div className="font-semibold text-sm text-white">
+                    Google Play
+                  </div>
+                </div>
+              </button>
+
+              <button className="flex-1 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 py-3 px-4 rounded-xl flex items-center justify-center gap-3 focus:outline-none transition-all duration-300 group">
+                <ApplePlayStore />
+                <div className="text-left">
+                  <div className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors">
+                    Download on the
+                  </div>
+                  <div className="font-semibold text-sm text-white">
+                    App Store
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* Image Section */}
+          <div className="lg:w-1/2 w-full">
+            <img
+              src={contact}
+              alt="Contact Illustration"
+              className="w-full h-auto object-cover rounded-xl "
+            />
           </div>
         </div>
-
-        {/* Image Section */}
-        <div className="md:w-1/2 w-full">
-          <img
-            src={contact}
-            alt="Contact Illustration"
-            className="w-full h-auto object-cover object-center rounded"
-          />
-        </div>
       </section>
-
-     
     </div>
   );
 }
