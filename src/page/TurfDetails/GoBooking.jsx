@@ -4,7 +4,7 @@ import { Clock, Users, Star, Calendar } from "lucide-react";
 const GoBooking = () => {
   return (
     <section className=" text-white py-16 min-h-screen">
-      <div className=" px-6 mx-auto max-w-7xl">
+      <div className=" px-6 mx-auto ">
         {/* Header */}
         <div className="text-center mb-16">
          
