@@ -122,7 +122,7 @@ export default function Featured() {
               <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
             </div>
             <div className="lg:w-1/2 w-full flex items-center">
-              <p className="leading-relaxed text-gray-300 text-base lg:text-lg font-light">
+              <p className="leading-relaxed text-gray-300 text-base lg:text-normal font-light">
                 Stay updated on our upcoming events and tournaments, where you
                 can participate and showcase your skills. Join us for thrilling
                 competitions, engaging activities, and memorable experiences.
