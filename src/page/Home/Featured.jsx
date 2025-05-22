@@ -3,6 +3,7 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import EmailCollect from "../Home/EmailCollect";
 import axios from "axios";
 
 export default function Featured() {
@@ -113,7 +114,6 @@ export default function Featured() {
           <div className="flex flex-col lg:flex-row w-full mb-12 lg:mb-16">
             <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl title-font mb-4 font-extrabold">
-               
                 <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-transparent bg-clip-text">
                   Upcoming
                 </span>{" "}
@@ -242,6 +242,7 @@ export default function Featured() {
             </div>
           )}
         </div>
+        <EmailCollect></EmailCollect>
       </section>
 
       {/* Enhanced Background Gradient */}
