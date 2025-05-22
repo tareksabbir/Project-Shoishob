@@ -202,12 +202,12 @@ const AllUsers = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
           <div className="flex flex-col items-center space-y-6">
             <div className="relative">
-              <div className="animate-spin rounded-full h-16 w-16 border-4 border-purple-400 border-t-transparent"></div>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 opacity-20 animate-pulse"></div>
+              <div className="animate-spin rounded-full h-16 w-16 border-4 border-purple-900 border-t-transparent"></div>
+             
             </div>
             <div className="text-center">
               <p className="text-white text-xl font-semibold">

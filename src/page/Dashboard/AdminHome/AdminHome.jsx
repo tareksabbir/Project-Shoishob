@@ -194,7 +194,7 @@ const AdminHome = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
-      <div className="bg-gray-800 border-b border-gray-700 px-6 py-6">
+      <div className="bg-gray-900 border-b border-gray-700 px-6 py-6">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>

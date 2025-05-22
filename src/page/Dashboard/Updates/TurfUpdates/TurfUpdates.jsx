@@ -1,9 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { Save, MapPin, DollarSign, Users, FileText, Image, Mail, User, Phone, Building } from "lucide-react";
+import { Save, MapPin, DollarSign, Users, FileText, Image, Mail, User, Phone, Building, RefreshCw } from "lucide-react";
 
 const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -162,10 +163,31 @@ const TurfUpdates = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black py-12 px-4">
+    <div className="min-h-screen bg-slate-900 py-12 px-4">
       <div className="px-10 mx-auto">
         {/* Header */}
-    
+    <div className="bg-gray-900  px-6 py-6 ">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-white">
+                Update Turf Details
+              </h1>
+              <p className="text-gray-400 mt-2">
+                Welcome back! Here's what's happening with your turf business.
+              </p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="bg-gray-700 rounded-lg px-4 py-2 border border-gray-600">
+                <span className="text-gray-300 text-sm">
+                  Last updated: Just now
+                </span>
+              </div>
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                <RefreshCw className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* Form */}
         <div className="bg-gray-900/50 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50 overflow-hidden">

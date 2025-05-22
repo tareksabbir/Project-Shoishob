@@ -108,7 +108,7 @@ const DashBoardLayout = () => {
     { to: "/dashboard/allUsers", icon: "user-circle", label: "All User", gradient: "from-orange-500 to-amber-500" },
     { to: "/dashboard/allAdmin", icon: "shield-quarter", label: "All Admin", gradient: "from-red-500 to-rose-500" },
     { to: "/dashboard/allBookings", icon: "bookmark", label: "All Booking", gradient: "from-indigo-500 to-blue-500" },
-    { icon: "trophy", label: "Leader Board", gradient: "from-yellow-500 to-orange-500" },
+    {to: "/dashboard/leaderboard", icon: "trophy", label: "Leader Board", gradient: "from-yellow-500 to-orange-500" },
     { icon: "purchase-tag", label: "Payment", gradient: "from-pink-500 to-rose-500" },
   ];
 
