@@ -38,7 +38,7 @@ const Turf = () => {
   return (
     <main className="relative bg-nearest-rgb-23-32-49 ">
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container  py-24 mx-auto">
           {isLoading ? (
             <TurfCardSkeleton />
           ) : error ? (
@@ -46,7 +46,7 @@ const Turf = () => {
           ) : turfs.length === 0 ? (
             <div className="text-center text-white">No turf records found</div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 ">
               {reversedTurfs.map((turf, index) => (
                 <TurfCard
                   key={turf._id}
