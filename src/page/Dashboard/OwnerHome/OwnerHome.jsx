@@ -51,8 +51,9 @@ const OwnerHome = () => {
       if (!user?.email) return null;
       
       const res = await axios.get(
-        `${API_URL}/api/v1/user/email/${user?.email}`
+        `${API_URL}/api/v1/admin/email/${user?.email}`
       );
+      console.log(res.data.data);
       return res.data.data;
     },
     {
