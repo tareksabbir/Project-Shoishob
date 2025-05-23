@@ -38,7 +38,7 @@ const Turf = () => {
   return (
     <main className="relative bg-nearest-rgb-23-32-49 ">
       <section className="text-gray-600 body-font">
-        <div className="container  py-24 mx-auto">
+        <div className=" py-24 mx-auto">
           {isLoading ? (
             <TurfCardSkeleton />
           ) : error ? (
