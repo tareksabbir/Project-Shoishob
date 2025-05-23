@@ -4,7 +4,19 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { Save, MapPin, DollarSign, Users, FileText, Image, Mail, User, Phone, Building, RefreshCw } from "lucide-react";
+import {
+  Save,
+  MapPin,
+  DollarSign,
+  Users,
+  FileText,
+  Image,
+  Mail,
+  User,
+  Phone,
+  Building,
+  RefreshCw,
+} from "lucide-react";
 
 const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -14,8 +26,14 @@ const TurfUpdates = () => {
   const [turfDetails, setTurfDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState({ logo: false, cover: false });
-  const [selectedFiles, setSelectedFiles] = useState({ logo: null, cover: null });
+  const [uploadProgress, setUploadProgress] = useState({
+    logo: false,
+    cover: false,
+  });
+  const [selectedFiles, setSelectedFiles] = useState({
+    logo: null,
+    cover: null,
+  });
   const { id } = useParams();
 
   const { register, handleSubmit, setValue, watch } = useForm();
@@ -35,32 +53,32 @@ const TurfUpdates = () => {
   const uploadImage = async (imageFile, type) => {
     const formDataUpload = new FormData();
     formDataUpload.append("image", imageFile);
-    
-    setUploadProgress(prev => ({ ...prev, [type]: true }));
-    
+
+    setUploadProgress((prev) => ({ ...prev, [type]: true }));
+
     try {
       const response = await fetch(img_hosting_url, {
-        method: 'POST',
-        body: formDataUpload
+        method: "POST",
+        body: formDataUpload,
       });
-      
+
       if (!response.ok) {
         throw new Error(`Failed to upload ${type} image`);
       }
-      
+
       const data = await response.json();
       return data.data.display_url;
     } catch (error) {
       console.error(`Error uploading ${type} image:`, error);
       throw error;
     } finally {
-      setUploadProgress(prev => ({ ...prev, [type]: false }));
+      setUploadProgress((prev) => ({ ...prev, [type]: false }));
     }
   };
 
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
-    setSelectedFiles(prev => ({ ...prev, [type]: file }));
+    setSelectedFiles((prev) => ({ ...prev, [type]: file }));
   };
 
   const handleForm = async (data) => {
@@ -71,12 +89,12 @@ const TurfUpdates = () => {
 
       // Upload logo image if new file is selected
       if (selectedFiles.logo) {
-        logoUrl = await uploadImage(selectedFiles.logo, 'logo');
+        logoUrl = await uploadImage(selectedFiles.logo, "logo");
       }
 
       // Upload cover image if new file is selected
       if (selectedFiles.cover) {
-        coverUrl = await uploadImage(selectedFiles.cover, 'cover');
+        coverUrl = await uploadImage(selectedFiles.cover, "cover");
       }
 
       // Create turf object
@@ -96,19 +114,27 @@ const TurfUpdates = () => {
       };
 
       // Send PATCH request to update turf
-      const response = await axios.patch(`${BACKEND_URL}/api/v1/turf/${id}`, saveTurf, {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
+      const response = await axios.patch(
+        `${BACKEND_URL}/api/v1/turf/${id}`,
+        saveTurf,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
 
       if (response.data) {
         showAlert("Success!", "Turf updated successfully", "success");
       }
     } catch (error) {
       console.error("Error updating turf:", error);
-      showAlert("Error!", "Something went wrong while updating the turf", "error");
+      showAlert(
+        "Error!",
+        "Something went wrong while updating the turf",
+        "error"
+      );
     } finally {
       setSubmitting(false);
     }
@@ -124,11 +150,16 @@ const TurfUpdates = () => {
         });
         const data = response.data.data;
         setTurfDetails(data);
-        
+
         // Set form values
         setValue("turf_name", data.turf_name || "");
         setValue("email", data.email || "");
-        setValue("ownerId", data.ownerId || "");
+        setValue(
+          "ownerId",
+          typeof data.ownerId === "object"
+            ? data.ownerId._id
+            : data.ownerId || ""
+        );
         setValue("ownerPhone", data.ownerPhone || "");
         setValue("address", data.address || "");
         setValue("city", data.city || "");
@@ -136,7 +167,7 @@ const TurfUpdates = () => {
         setValue("person", data.person || "");
         setValue("about", data.about || "");
         setValue("rules", data.rules || "");
-        
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching turf details:", error);
@@ -148,7 +179,8 @@ const TurfUpdates = () => {
     fetchTurfDetails();
   }, [id, setValue]);
 
-  const inputClasses = "w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300 text-white placeholder-gray-400 hover:border-gray-500";
+  const inputClasses =
+    "w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300 text-white placeholder-gray-400 hover:border-gray-500";
   const labelClasses = "block text-sm font-medium text-gray-300 mb-2";
 
   if (loading) {
@@ -166,7 +198,7 @@ const TurfUpdates = () => {
     <div className="min-h-screen bg-slate-900 py-12 px-4">
       <div className="px-10 mx-auto">
         {/* Header */}
-    <div className="bg-gray-900  px-6 py-6 ">
+        <div className="bg-gray-900  px-6 py-6 ">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-white">
@@ -194,22 +226,25 @@ const TurfUpdates = () => {
           <div className="bg-gradient-to-r from-cyan-500/10 to-purple-600/10 p-1 rounded-3xl">
             <div className="bg-gray-900 rounded-3xl p-8">
               <form onSubmit={handleSubmit(handleForm)} className="space-y-10">
-                
                 {/* Basic Information */}
                 <div className="space-y-6">
                   <div className="flex items-center space-x-3 mb-8">
                     <div className="p-2 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg">
                       <Building className="w-6 h-6 text-white" />
                     </div>
-                    <h2 className="text-2xl font-bold text-white">Basic Information</h2>
+                    <h2 className="text-2xl font-bold text-white">
+                      Basic Information
+                    </h2>
                   </div>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className={labelClasses}>Turf Name *</label>
                       <input
                         type="text"
-                        {...register("turf_name", { required: "Turf name is required" })}
+                        {...register("turf_name", {
+                          required: "Turf name is required",
+                        })}
                         className={inputClasses}
                         placeholder="Enter turf name"
                       />
@@ -222,7 +257,9 @@ const TurfUpdates = () => {
                       </label>
                       <input
                         type="email"
-                        {...register("email", { required: "Email is required" })}
+                        {...register("email", {
+                          required: "Email is required",
+                        })}
                         className={inputClasses}
                         placeholder="owner@example.com"
                       />
@@ -235,7 +272,9 @@ const TurfUpdates = () => {
                       </label>
                       <input
                         type="text"
-                        {...register("ownerId", { required: "Owner ID is required" })}
+                        {...register("ownerId", {
+                          required: "Owner ID is required",
+                        })}
                         className={inputClasses}
                         placeholder="Enter owner ID"
                       />
@@ -248,7 +287,9 @@ const TurfUpdates = () => {
                       </label>
                       <input
                         type="tel"
-                        {...register("ownerPhone", { required: "Phone number is required" })}
+                        {...register("ownerPhone", {
+                          required: "Phone number is required",
+                        })}
                         className={inputClasses}
                         placeholder="+1 (555) 123-4567"
                       />
@@ -262,14 +303,18 @@ const TurfUpdates = () => {
                     <div className="p-2 bg-gradient-to-r from-green-500 to-blue-600 rounded-lg">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
-                    <h2 className="text-2xl font-bold text-white">Location & Pricing</h2>
+                    <h2 className="text-2xl font-bold text-white">
+                      Location & Pricing
+                    </h2>
                   </div>
 
                   <div>
                     <label className={labelClasses}>Full Address *</label>
                     <input
                       type="text"
-                      {...register("address", { required: "Address is required" })}
+                      {...register("address", {
+                        required: "Address is required",
+                      })}
                       className={inputClasses}
                       placeholder="Enter complete address"
                     />
@@ -293,7 +338,9 @@ const TurfUpdates = () => {
                       </label>
                       <input
                         type="number"
-                        {...register("price", { required: "Price is required" })}
+                        {...register("price", {
+                          required: "Price is required",
+                        })}
                         className={inputClasses}
                         placeholder="0"
                       />
@@ -306,7 +353,9 @@ const TurfUpdates = () => {
                       </label>
                       <input
                         type="number"
-                        {...register("person", { required: "Person count is required" })}
+                        {...register("person", {
+                          required: "Person count is required",
+                        })}
                         className={inputClasses}
                         placeholder="0"
                       />
@@ -331,7 +380,7 @@ const TurfUpdates = () => {
                           <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => handleFileChange(e, 'logo')}
+                            onChange={(e) => handleFileChange(e, "logo")}
                             className="w-full px-4 py-6 border-2 border-dashed border-gray-600 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/20 file:text-cyan-400 hover:file:bg-cyan-500/30 bg-gray-800/50 text-gray-300"
                           />
                           {uploadProgress.logo && (
@@ -342,9 +391,9 @@ const TurfUpdates = () => {
                         </div>
                         {turfDetails.logo && (
                           <div className="relative inline-block">
-                            <img 
-                              src={turfDetails.logo} 
-                              alt="Current logo" 
+                            <img
+                              src={turfDetails.logo}
+                              alt="Current logo"
                               className="w-20 h-20 object-cover rounded-xl border border-gray-600"
                             />
                             <span className="absolute -top-2 -right-2 bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-xs px-2 py-1 rounded-full font-medium">
@@ -362,7 +411,7 @@ const TurfUpdates = () => {
                           <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => handleFileChange(e, 'cover')}
+                            onChange={(e) => handleFileChange(e, "cover")}
                             className="w-full px-4 py-6 border-2 border-dashed border-gray-600 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/20 file:text-cyan-400 hover:file:bg-cyan-500/30 bg-gray-800/50 text-gray-300"
                           />
                           {uploadProgress.cover && (
@@ -373,9 +422,9 @@ const TurfUpdates = () => {
                         </div>
                         {turfDetails.cover && (
                           <div className="relative inline-block">
-                            <img 
-                              src={turfDetails.cover} 
-                              alt="Current cover" 
+                            <img
+                              src={turfDetails.cover}
+                              alt="Current cover"
                               className="w-32 h-20 object-cover rounded-xl border border-gray-600"
                             />
                             <span className="absolute -top-2 -right-2 bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-xs px-2 py-1 rounded-full font-medium">
@@ -402,12 +451,16 @@ const TurfUpdates = () => {
                       <label className={labelClasses}>About Turf *</label>
                       <textarea
                         rows="4"
-                        {...register("about", { required: "About section is required" })}
+                        {...register("about", {
+                          required: "About section is required",
+                        })}
                         className={inputClasses + " resize-none"}
                         placeholder="Describe your turf, facilities, and what makes it special..."
                       ></textarea>
                       <div className="flex justify-between items-center mt-1">
-                        <span className="text-sm text-gray-500 ml-auto">{watch("about")?.length || 0}/500</span>
+                        <span className="text-sm text-gray-500 ml-auto">
+                          {watch("about")?.length || 0}/1000
+                        </span>
                       </div>
                     </div>
 
@@ -415,12 +468,16 @@ const TurfUpdates = () => {
                       <label className={labelClasses}>Turf Rules *</label>
                       <textarea
                         rows="4"
-                        {...register("rules", { required: "Rules section is required" })}
+                        {...register("rules", {
+                          required: "Rules section is required",
+                        })}
                         className={inputClasses + " resize-none"}
                         placeholder="List the rules and regulations for using this turf..."
                       ></textarea>
                       <div className="flex justify-between items-center mt-1">
-                        <span className="text-sm text-gray-500 ml-auto">{watch("rules")?.length || 0}/500</span>
+                        <span className="text-sm text-gray-500 ml-auto">
+                          {watch("rules")?.length || 0}/1000
+                        </span>
                       </div>
                     </div>
                   </div>

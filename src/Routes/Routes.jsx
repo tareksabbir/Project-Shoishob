@@ -33,6 +33,7 @@ import TournamentPayment from "../page/Dashboard/PaymentSuccess/TournamentPaymen
 import LeaderBoard from "../page/LeaderBoard/LeaderBoard";
 import TurfUpdates from "../page/Dashboard/Updates/TurfUpdates/TurfUpdates";
 import PayHistory from "../page/Dashboard/PayHistory/PayHistory";
+import OwnerTurfData from "../page/Dashboard/OwnerTurf/OwnerTurfData";
 
 const router = createBrowserRouter([
   {
@@ -145,6 +146,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/myProfile",
         element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "/dashboard/OwnerTurfData",
+        element: <OwnerTurfData/>,
       },
 
       {

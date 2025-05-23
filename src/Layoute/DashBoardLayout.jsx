@@ -115,7 +115,7 @@ const DashBoardLayout = () => {
   const adminMenuItems = [
     { to: "/dashboard/ownerHome", icon: "home", label: "Dashboard", gradient: "from-blue-500 to-cyan-500" },
     { to: "/dashboard/myProfile", icon: "user-circle", label: "My Profile", gradient: "from-purple-500 to-violet-500" },
-    { icon: "badge-check", label: "Turf Profile", gradient: "from-green-500 to-emerald-500" },
+    {to: "/dashboard/OwnerTurfData", icon: "badge-check", label: "Turf Profile", gradient: "from-green-500 to-emerald-500" },
     { to: "/dashboard/ownerbookings", icon: "calendar-event", label: "All Booking", gradient: "from-indigo-500 to-blue-500" },
     { to: "/dashboard/addTournament", icon: "add-to-queue", label: "Registration", gradient: "from-orange-500 to-amber-500" },
     {to: "/dashboard/leaderboard", icon: "trophy", label: "Leader Board", gradient: "from-yellow-500 to-orange-500" },
