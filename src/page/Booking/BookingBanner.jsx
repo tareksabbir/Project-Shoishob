@@ -2,19 +2,25 @@
 import booking from "../../assets/images/hero7.png";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { format,isBefore, isToday} from "date-fns";
+import { format, isBefore, isToday, startOfDay } from "date-fns";
 
 const BookingBanner = ({ selectedDate, setSelectedDate }) => {
-  const today = new Date() ;
-
+  const today = startOfDay(new Date()); // Use startOfDay to normalize time
 
   const isDisabled = (date) => {
-    return isBefore(date, today) && !isToday(date);
+    return isBefore(startOfDay(date), today) && !isToday(date);
+  };
+
+  // Handle date selection to ensure we always have a valid date
+  const handleDateSelect = (date) => {
+    if (date && date instanceof Date && !isNaN(date)) {
+      setSelectedDate(date);
+    }
   };
 
   let footer = <p>Please pick a day.</p>;
 
-  if (selectedDate) {
+  if (selectedDate && selectedDate instanceof Date && !isNaN(selectedDate)) {
     footer = (
       <p className="mt-2 mb-5">You picked {format(selectedDate, "PP")}.</p>
     );
@@ -26,17 +32,16 @@ const BookingBanner = ({ selectedDate, setSelectedDate }) => {
         <section className="relative">
           <section className="flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16 px-10 lg:px-32 mb-10 ">
             <div className="xl:w-5/12 flex flex-col justify-center lg:items-start sm:text-center lg:text-left lg:py-10 xl:py-10">
-              <h1 className="font-extrabold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text lg:mt-16text-3xl sm:text-4xl md:text-4xl mb-4 md:mb-12 lg:mb-2  px-10 lg:px-0 lg:mt-14">
+              <h1 className="font-extrabold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-3xl sm:text-4xl md:text-4xl mb-4 md:mb-12 lg:mb-2 px-10 lg:px-0 lg:mt-14">
                 Pick Your Date
               </h1>
 
               <div className="mx-auto">
                 <DayPicker
                   mode="single"
-                  disabled={ isDisabled }
+                  disabled={isDisabled}
                   selected={selectedDate}
-                  onSelect={setSelectedDate}
-                  
+                  onSelect={handleDateSelect}
                 />
               </div>
               {footer}
@@ -46,7 +51,7 @@ const BookingBanner = ({ selectedDate, setSelectedDate }) => {
               <img
                 src={booking}
                 loading="lazy"
-                alt=""
+                alt="Booking illustration"
                 className="w-full h-full object-cover object-center"
               />
             </div>
