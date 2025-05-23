@@ -29,8 +29,9 @@ const PayHistory = () => {
     async () => {
       if (!user?.email) return [];
 
+      // Changed from /history/email/ to /bookings/user/
       const res = await axios.get(
-        `${API_URL}/api/v1/history/email/${user?.email}`,
+        `${API_URL}/api/v1/bookings/user/${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("access_token")}`,
@@ -46,7 +47,6 @@ const PayHistory = () => {
 
   // Calculate total spent
   const totalSpent = booking.reduce((sum, item) => sum + (item.price || 0), 0);
-
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -61,7 +61,11 @@ const PayHistory = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`${API_URL}/api/v1/bookings/${id}`)
+          .delete(`${API_URL}/api/v1/bookings/${id}`, {
+            headers: {
+              authorization: `bearer ${localStorage.getItem("access_token")}`,
+            },
+          })
           .then(() => {
             Swal.fire({
               title: "Deleted!",
@@ -85,7 +89,6 @@ const PayHistory = () => {
       }
     });
   };
-
   return (
     <div className="min-h-screen bg-slate-900 p-4 lg:p-8 relative">
       {/* Background Blur Effect */}
