@@ -6,18 +6,18 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
 import coin from "../../../assets/icons/star (1).png";
-import { 
-  Calendar, 
-  Clock, 
-  Mail, 
-  Phone, 
-  Trash2, 
-  CreditCard, 
-  CheckCircle, 
-  Receipt, 
+import {
+  Calendar,
+  Clock,
+  Mail,
+  Phone,
+  Trash2,
+  CreditCard,
+  CheckCircle,
+  Receipt,
   Star,
   TrendingUp,
-  DollarSign
+  DollarSign,
 } from "lucide-react";
 
 const PayHistory = () => {
@@ -28,7 +28,7 @@ const PayHistory = () => {
     ["booking", user?.email],
     async () => {
       if (!user?.email) return [];
-      
+
       const res = await axios.get(
         `${API_URL}/api/v1/history/email/${user?.email}`,
         {
@@ -60,7 +60,8 @@ const PayHistory = () => {
       color: "#f1f5f9",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`${API_URL}/api/v1/bookings/${id}`)
+        axios
+          .delete(`${API_URL}/api/v1/bookings/${id}`)
           .then(() => {
             Swal.fire({
               title: "Deleted!",
@@ -115,32 +116,34 @@ const PayHistory = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-slate-400 text-sm">Total Payments</p>
-                <p className="text-2xl font-bold text-white">{booking.length}</p>
+                <p className="text-2xl font-bold text-white">
+                  {booking.length}
+                </p>
               </div>
               <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
                 <Receipt className="w-6 h-6 text-green-500" />
               </div>
             </div>
           </div>
-          
+
           <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-slate-400 text-sm">Total Spent</p>
                 <p className="text-2xl font-bold text-white">৳{totalSpent}</p>
               </div>
-              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                <DollarSign className="w-6 h-6 text-blue-500" />
-              </div>
             </div>
           </div>
-          
+
           <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-purple-500 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-slate-400 text-sm">Average Payment</p>
                 <p className="text-2xl font-bold text-white">
-                  ৳{booking.length > 0 ? Math.round(totalSpent / booking.length) : 0}
+                  ৳
+                  {booking.length > 0
+                    ? Math.round(totalSpent / booking.length)
+                    : 0}
                 </p>
               </div>
               <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
@@ -179,15 +182,15 @@ const PayHistory = () => {
                 </thead>
                 <tbody className="divide-y divide-slate-700">
                   {booking.map((booked, index) => (
-                    <tr 
-                      key={booked._id} 
+                    <tr
+                      key={booked._id}
                       className="hover:bg-slate-700/50 transition-all duration-200 group"
                     >
                       <td className="px-6 py-4">
                         <div className="space-y-2">
                           <div className="flex items-center space-x-2">
                             <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                              {booked?.name?.charAt(0)?.toUpperCase() || 'U'}
+                              {booked?.name?.charAt(0)?.toUpperCase() || "U"}
                             </div>
                             <div className="font-semibold text-white group-hover:text-blue-400 transition-colors duration-200">
                               {booked?.name}
@@ -203,12 +206,14 @@ const PayHistory = () => {
                           </div>
                         </div>
                       </td>
-                      
+
                       <td className="px-6 py-4">
                         <div className="space-y-2">
                           <div className="flex items-center space-x-2">
                             <CreditCard className="w-4 h-4 text-green-500" />
-                            <span className="text-sm font-medium text-slate-300">Transaction ID</span>
+                            <span className="text-sm font-medium text-slate-300">
+                              Transaction ID
+                            </span>
                           </div>
                           <div className="bg-slate-700 rounded-lg p-2 border border-slate-600">
                             <code className="text-xs text-green-400 font-mono">
@@ -217,36 +222,43 @@ const PayHistory = () => {
                           </div>
                         </div>
                       </td>
-                      
+
                       <td className="px-6 py-4">
                         <div className="space-y-2">
                           <div className="flex items-center space-x-2">
                             <Calendar className="w-4 h-4 text-blue-500" />
-                            <span className="text-white font-medium">{booked.date}</span>
+                            <span className="text-white font-medium">
+                              {booked.date}
+                            </span>
                           </div>
                           <div className="flex items-center space-x-2">
                             <Clock className="w-4 h-4 text-purple-500" />
-                            <span className="text-slate-400 text-sm">{booked.slots}</span>
+                            <span className="text-slate-400 text-sm">
+                              {booked.slots}
+                            </span>
                           </div>
                         </div>
                       </td>
-                      
+
                       <td className="px-6 py-4">
                         <div className="space-y-2">
-                          <div className="font-semibold text-white">{booked.turf}</div>
+                          <div className="font-semibold text-white">
+                            {booked.turf}
+                          </div>
                           <div className="flex items-center space-x-1">
-                            <DollarSign className="w-4 h-4 text-green-500" />
-                            <span className="text-green-400 font-bold text-lg">৳{booked.price}</span>
+                            <span className="text-green-400 font-bold text-lg">
+                              ৳{booked.price}
+                            </span>
                           </div>
                         </div>
                       </td>
-                      
+
                       <td className="px-6 py-4">
                         <div className="flex items-center space-x-2">
                           <div className="relative">
-                            <img 
-                              src={coin} 
-                              className="w-8 h-8 animate-pulse" 
+                            <img
+                              src={coin}
+                              className="w-8 h-8 animate-pulse"
                               alt="Payment success"
                             />
                             <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border border-slate-800"></div>
@@ -257,9 +269,9 @@ const PayHistory = () => {
                           </div>
                         </div>
                       </td>
-                      
+
                       <td className="px-6 py-4">
-                        <button 
+                        <button
                           onClick={() => handleDelete(booked._id)}
                           className="group bg-slate-700 hover:bg-red-500 text-slate-400 hover:text-white p-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-red-500/25 hover:-translate-y-0.5"
                           title="Delete payment record"
@@ -278,8 +290,12 @@ const PayHistory = () => {
             <div className="w-24 h-24 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-6">
               <Receipt className="w-9 h-9 text-slate-400" />
             </div>
-            <h3 className="text-2xl font-semibold text-white mb-2">No Payment History</h3>
-            <p className="text-slate-400 mb-6">You haven't made any payments yet.</p>
+            <h3 className="text-2xl font-semibold text-white mb-2">
+              No Payment History
+            </h3>
+            <p className="text-slate-400 mb-6">
+              You haven't made any payments yet.
+            </p>
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-green-500/25">
               <CreditCard className="w-5 h-5" />
               <span>Make Your First Payment</span>
