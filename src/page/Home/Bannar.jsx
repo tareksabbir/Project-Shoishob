@@ -10,7 +10,7 @@ export default function Bannar() {
         <section className="relative">
           <section className=" flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16 lg:px-10 px-10">
             <div className="xl:w-11/12 flex flex-col justify-center items-center lg:items-start sm:text-center lg:text-left lg:py-8 xl:py-10 lg:mb-10">
-              <h1 className="mt-10  text-black-800 text-4xl sm:text-5xl md:text-7xl mb-8 md:mb-12 font-extrabold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text lg:mt-16">
+              <h1 className="mt-10  text-black-800 text-5xl sm:text-5xl md:text-7xl mb-8 md:mb-12 font-extrabold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text lg:mt-16">
                 The Magic We Once Knew.
               </h1>
 
