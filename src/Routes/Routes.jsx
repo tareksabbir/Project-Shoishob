@@ -1,214 +1,181 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react/prop-types */
+// router.js
 import { createBrowserRouter } from "react-router-dom";
-
-import Home from "../page/Home/Home";
-import About from "../page/About/About";
-
-import Contact from "../page/Contact/Contact";
-import Login from "../page/Login/Login";
-import SignUp from "../page/SignUp/SignUp";
-import Review from "../page/Review/Review";
-import Dashboard from "../page/Dashboard/Dashboard/Dashboard";
+import { lazy, Suspense } from "react";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import DashBoardLayout from "../Layoute/DashBoardLayout";
-import TurfDetails from "../page/TurfDetails/TurfDetails";
-import AllUsers from "../page/Dashboard/AllUsers/AllUsers";
-import AllAdmin from "../page/Dashboard/AlllAdmin/AllAdmin";
-import AllBookings from "../page/Dashboard/AllBookings/AllBookings";
+import AdminRoute from "./AdminRoute/AdminRoute";
 import SuperAdminRoute from "./SuperAdminRoute/SuperAdminRoute";
-import MyProfile from "../page/Dashboard/MyProfile/MyProfile";
 import Main from "../Layoute/Main";
-import UserMyBooking from "../page/Dashboard/UserMyBooking/UserMyBooking";
-import AllTurfs from "../page/Dashboard/AllTurfs/AllTurfs";
-import AddTurf from "../page/Dashboard/AddTurf/AddTurf";
-import AdminBooking from "../page/Dashboard/AdminBooking/AdminBooking";
-import Payment from "../page/Dashboard/Payment/Payment";
-import PaymentSuccess from "../page/Dashboard/PaymentSuccess/PaymentSuccess";
-import UserHome from "../page/Dashboard/UserHome/UserHome";
-import OwnerHome from "../page/Dashboard/OwnerHome/OwnerHome";
-import AdminHome from "../page/Dashboard/AdminHome/AdminHome";
-import TournamentForm from "../page/Dashboard/Tournament/Details/TournamentForm";
-import TournamentBooking from "../page/TournamentBooking/TournamentBooking";
-import RegistrationForm from "../page/TournamentBooking/RegistrationForm";
-import TournamentPayment from "../page/Dashboard/PaymentSuccess/TournamentPayment";
-import LeaderBoard from "../page/LeaderBoard/LeaderBoard";
-import TurfUpdates from "../page/Dashboard/Updates/TurfUpdates/TurfUpdates";
-import PayHistory from "../page/Dashboard/PayHistory/PayHistory";
-import OwnerTurfData from "../page/Dashboard/OwnerTurf/OwnerTurfData";
-import BookingHero from "../page/Booking/BookingHero";
+import DashBoardLayout from "../Layoute/DashBoardLayout";
+import Loading from "../page/Loading/Loading";
 
+// Lazy load components for better performance
+const Home = lazy(() => import("../page/Home/Home"));
+const About = lazy(() => import("../page/About/About"));
+const Contact = lazy(() => import("../page/Contact/Contact"));
+const Login = lazy(() => import("../page/Login/Login"));
+const SignUp = lazy(() => import("../page/SignUp/SignUp"));
+const Review = lazy(() => import("../page/Review/Review"));
+const Dashboard = lazy(() => import("../page/Dashboard/Dashboard/Dashboard"));
+const TurfDetails = lazy(() => import("../page/TurfDetails/TurfDetails"));
+const AllUsers = lazy(() => import("../page/Dashboard/AllUsers/AllUsers"));
+const AllAdmin = lazy(() => import("../page/Dashboard/AlllAdmin/AllAdmin"));
+const AllBookings = lazy(() => import("../page/Dashboard/AllBookings/AllBookings"));
+const MyProfile = lazy(() => import("../page/Dashboard/MyProfile/MyProfile"));
+const UserMyBooking = lazy(() => import("../page/Dashboard/UserMyBooking/UserMyBooking"));
+const AllTurfs = lazy(() => import("../page/Dashboard/AllTurfs/AllTurfs"));
+const AddTurf = lazy(() => import("../page/Dashboard/AddTurf/AddTurf"));
+const AdminBooking = lazy(() => import("../page/Dashboard/AdminBooking/AdminBooking"));
+const Payment = lazy(() => import("../page/Dashboard/Payment/Payment"));
+const PaymentSuccess = lazy(() => import("../page/Dashboard/PaymentSuccess/PaymentSuccess"));
+const UserHome = lazy(() => import("../page/Dashboard/UserHome/UserHome"));
+const OwnerHome = lazy(() => import("../page/Dashboard/OwnerHome/OwnerHome"));
+const AdminHome = lazy(() => import("../page/Dashboard/AdminHome/AdminHome"));
+const TournamentForm = lazy(() => import("../page/Dashboard/Tournament/Details/TournamentForm"));
+const TournamentBooking = lazy(() => import("../page/TournamentBooking/TournamentBooking"));
+const RegistrationForm = lazy(() => import("../page/TournamentBooking/RegistrationForm"));
+const TournamentPayment = lazy(() => import("../page/Dashboard/PaymentSuccess/TournamentPayment"));
+const LeaderBoard = lazy(() => import("../page/LeaderBoard/LeaderBoard"));
+const TurfUpdates = lazy(() => import("../page/Dashboard/Updates/TurfUpdates/TurfUpdates"));
+const PayHistory = lazy(() => import("../page/Dashboard/PayHistory/PayHistory"));
+const OwnerTurfData = lazy(() => import("../page/Dashboard/OwnerTurf/OwnerTurfData"));
+const BookingHero = lazy(() => import("../page/Booking/BookingHero"));
+
+// Wrapper component for lazy loading with suspense
+const LazyWrapper = ({ children }) => (
+  <Suspense fallback={<Loading />}>
+    {children}
+  </Suspense>
+);
+
+// Route protection wrapper
+const ProtectedRoute = ({ children, protection = "private" }) => {
+  const protectionComponents = {
+    private: PrivateRoute,
+    admin: AdminRoute,
+    superAdmin: SuperAdminRoute,
+  };
+
+  const ProtectionComponent = protectionComponents[protection];
+  
+  return (
+    <LazyWrapper>
+      <ProtectionComponent>
+        {children}
+      </ProtectionComponent>
+    </LazyWrapper>
+  );
+};
+
+// Public routes configuration
+const publicRoutes = [
+  { path: "/", element: <Home /> },
+  { path: "/contact", element: <Contact /> },
+  { path: "/about", element: <About /> },
+  { path: "/login", element: <Login /> },
+  { path: "/signup", element: <SignUp /> },
+  { path: "/review", element: <Review /> },
+  { path: "/leaderBoard", element: <LeaderBoard /> },
+  { path: "/turf/:id", element: <TurfDetails /> },
+];
+
+// Private routes configuration
+const privateRoutes = [
+  { path: "/tournament-booking/:id", element: <TournamentBooking /> },
+  { path: "/registration-form/:id", element: <RegistrationForm /> },
+  { path: "/booking", element: <BookingHero /> },
+];
+
+// Payment routes (accessible without dashboard layout)
+const paymentRoutes = [
+  { path: "/dashboard/payment/success", element: <PaymentSuccess /> },
+  { path: "/dashboard/tournament/payment/success", element: <TournamentPayment /> },
+];
+
+// Dashboard routes configuration
+const dashboardRoutes = [
+  { path: "/dashboard", element: <Dashboard /> },
+  { path: "/dashboard/myProfile", element: <MyProfile /> },
+  { path: "/dashboard/history", element: <PayHistory /> },
+  { path: "/dashboard/leaderBoard", element: <LeaderBoard /> },
+];
+
+// User-specific dashboard routes
+const userDashboardRoutes = [
+  { path: "/dashboard/userHome", element: <UserHome /> },
+  { path: "/dashboard/usermybookings", element: <UserMyBooking /> },
+  { path: "/dashboard/payment/:id", element: <Payment /> },
+];
+
+// Owner-specific dashboard routes
+const ownerDashboardRoutes = [
+  { path: "/dashboard/ownerHome", element: <OwnerHome /> },
+  { path: "/dashboard/OwnerTurfData", element: <OwnerTurfData /> },
+  { path: "/dashboard/ownerbookings", element: <AdminBooking /> },
+  { path: "/dashboard/addTurf", element: <AddTurf /> },
+  { path: "/dashboard/turfUpdate/:id", element: <TurfUpdates /> },
+];
+
+// Admin-specific dashboard routes
+const adminDashboardRoutes = [
+  { path: "/dashboard/adminHome", element: <AdminHome /> },
+  { path: "/dashboard/allTurfs", element: <AllTurfs /> },
+  { path: "/dashboard/addTournament", element: <TournamentForm /> },
+];
+
+// Super admin routes
+const superAdminRoutes = [
+  { path: "/dashboard/allUsers", element: <AllUsers />, protection: "superAdmin" },
+  { path: "/dashboard/allAdmin", element: <AllAdmin />, protection: "superAdmin" },
+  { path: "/dashboard/allBookings", element: <AllBookings />, protection: "superAdmin" },
+];
+
+// Create route objects with proper protection
+const createRoutes = (routes, defaultProtection = "private") =>
+  routes.map(({ path, element, protection = defaultProtection }) => ({
+    path,
+    element: protection ? (
+      <ProtectedRoute protection={protection}>
+        {element}
+      </ProtectedRoute>
+    ) : (
+      <LazyWrapper>{element}</LazyWrapper>
+    ),
+  }));
+
+// Main router configuration
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main></Main>,
+    element: <Main />,
     children: [
-      {
-        path: "/",
-        element: <Home></Home>,
-      },
-      {
-        path: "/contact",
-        element: <Contact></Contact>,
-      },
-      {
-        path: "/about",
-        element: <About></About>,
-      },
-      {
-        path: "/tournament-booking/:id",
-        element: (
-          <PrivateRoute>
-            <TournamentBooking></TournamentBooking>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/registration-form/:id",
-        element: (
-          <PrivateRoute>
-            <RegistrationForm></RegistrationForm>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/booking",
-        element: (
-          <PrivateRoute>
-            <BookingHero></BookingHero>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/login",
-        element: <Login></Login>,
-      },
-      {
-        path: "/signup",
-        element: <SignUp></SignUp>,
-      },
-      {
-        path: "/review",
-        element: <Review></Review>,
-      },
-      {
-        path: "/leaderBoard",
-        element: <LeaderBoard></LeaderBoard>,
-      },
-      {
-        path: "/turf/:id",
-        element: <TurfDetails></TurfDetails>,
-      },
-      {
-        path: "/dashboard/payment/success",
-        element: <PaymentSuccess></PaymentSuccess>,
-      },
-      {
-        path: "/dashboard/tournament/payment/success",
-        element: <TournamentPayment></TournamentPayment>,
-      },
+      // Public routes (no protection)
+      ...createRoutes(publicRoutes, null),
+      // Private routes
+      ...createRoutes(privateRoutes),
+      // Payment routes (private but outside dashboard)
+      ...createRoutes(paymentRoutes),
     ],
   },
   {
     path: "/dashboard",
     element: (
-      <PrivateRoute>
-        <DashBoardLayout></DashBoardLayout>
-      </PrivateRoute>
+      <ProtectedRoute>
+        <DashBoardLayout />
+      </ProtectedRoute>
     ),
     children: [
-      {
-        path: "/dashboard",
-        element: <Dashboard></Dashboard>,
-      },
-      {
-        path: "/dashboard/turfUpdate/:id",
-        element: <TurfUpdates></TurfUpdates>,
-      },
-      {
-        path: "/dashboard/leaderBoard",
-        element: <LeaderBoard></LeaderBoard>,
-      },
-      {
-        path: "/dashboard/history",
-        element: <PayHistory></PayHistory>,
-      },
-      {
-        path: "/dashboard/userHome",
-        element: <UserHome></UserHome>,
-      },
-      {
-        path: "/dashboard/ownerHome",
-        element: <OwnerHome></OwnerHome>,
-      },
-      {
-        path: "/dashboard/adminHome",
-        element: <AdminHome></AdminHome>,
-      },
-
-      {
-        path: "/dashboard/myProfile",
-        element: <MyProfile></MyProfile>,
-      },
-      {
-        path: "/dashboard/OwnerTurfData",
-        element: <OwnerTurfData/>,
-      },
-
-      {
-        path: "/dashboard/allTurfs",
-        element: <AllTurfs></AllTurfs>,
-      },
-      {
-        path: "/dashboard/addTournament",
-        element: <TournamentForm></TournamentForm>,
-      },
-      {
-        path: "/dashboard/addTurf",
-        element: <AddTurf></AddTurf>,
-      },
-      {
-        path: "/dashboard/usermybookings",
-        element: <UserMyBooking></UserMyBooking>,
-      },
-      {
-        path: "/dashboard/ownerbookings",
-        element: <AdminBooking></AdminBooking>,
-      },
-      {
-        path: "/dashboard/payment/:id",
-        element: <Payment></Payment>,
-      },
-      {
-        path: "/dashboard/allUsers",
-        element: (
-          <SuperAdminRoute>
-            <AllUsers></AllUsers>
-          </SuperAdminRoute>
-        ),
-      },
-      {
-        path: "/dashboard/allAdmin",
-        element: (
-          <SuperAdminRoute>
-            <AllAdmin></AllAdmin>
-          </SuperAdminRoute>
-        ),
-      },
-      {
-        path: "/dashboard/allUsers",
-        element: <AllUsers></AllUsers>,
-      },
-      {
-        path: "/dashboard/allAdmin",
-        element: <AllAdmin></AllAdmin>,
-      },
-      {
-        path: "/dashboard/allBookings",
-        element: (
-          <SuperAdminRoute>
-            <AllBookings></AllBookings>
-          </SuperAdminRoute>
-        ),
-      },
+      // Common dashboard routes
+      ...createRoutes(dashboardRoutes),
+      // User dashboard routes
+      ...createRoutes(userDashboardRoutes),
+      // Owner dashboard routes
+      ...createRoutes(ownerDashboardRoutes),
+      // Admin dashboard routes
+      ...createRoutes(adminDashboardRoutes),
+      // Super admin routes
+      ...createRoutes(superAdminRoutes, "superAdmin"),
     ],
   },
 ]);
