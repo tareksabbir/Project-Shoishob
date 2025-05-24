@@ -7,6 +7,10 @@ export default function Bannar() {
   return (
     <>
       <main className="relative bg-nearest-rgb-23-32-49 ">
+        <div className="fixed top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="fixed bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+
+        <div className="fixed z-10 max-w-screen-xl mx-auto px-4 md:px-8"></div>
         <section className="relative">
           <section className=" flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16 lg:px-10 px-10">
             <div className="xl:w-11/12 flex flex-col justify-center items-center lg:items-start sm:text-center lg:text-left lg:py-8 xl:py-10 lg:mb-10">
@@ -164,14 +168,6 @@ export default function Bannar() {
             </div>
           </section>
         </section>
-        <div
-          className="absolute inset-0 blur-[118px] max-w-lg h-[1400px] mx-auto sm:max-w-3xl sm:h-[400px]"
-          style={{
-            background:
-              "linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)",
-            zIndex: -4,
-          }}
-        ></div>
       </main>
     </>
   );

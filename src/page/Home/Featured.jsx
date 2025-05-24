@@ -76,7 +76,7 @@ export default function Featured() {
 
   if (isError) {
     return (
-      <main className="relative bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 min-h-screen flex items-center justify-center">
+      <main className="relative min-h-screen flex items-center justify-center">
         <div className="text-center max-w-md mx-auto px-6">
           <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
             <span className="text-3xl">⚠️</span>
@@ -100,7 +100,7 @@ export default function Featured() {
   }
 
   return (
-    <main className="relative bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 min-h-screen overflow-hidden py-24 px-5 md:px-10">
+    <main className="relative bg-slate-900 overflow-hidden py-24 px-5 md:px-10">
       {/* Enhanced Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>

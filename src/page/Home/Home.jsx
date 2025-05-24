@@ -13,7 +13,6 @@ export default function Home() {
         <Heading />
       </div>
       <Featured></Featured>
-
     </>
   );
 }
