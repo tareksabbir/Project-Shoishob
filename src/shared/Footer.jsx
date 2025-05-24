@@ -32,6 +32,18 @@ export default function Footer() {
 
   const socialLinks = [
     {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/md-tarek/",
+      label: "LinkedIn",
+      color: "hover:text-blue-500",
+    },
+    {
+      icon: Github,
+      href: "https://github.com/tareksabbir",
+      label: "GitHub",
+      color: "hover:text-purple-400",
+    },
+    {
       icon: Instagram,
       href: "/",
       label: "Instagram",
@@ -42,18 +54,6 @@ export default function Footer() {
       href: "/",
       label: "Twitter",
       color: "hover:text-blue-400",
-    },
-    {
-      icon: Linkedin,
-      href: "/",
-      label: "LinkedIn",
-      color: "hover:text-blue-500",
-    },
-    {
-      icon: Github,
-      href: "/",
-      label: "GitHub",
-      color: "hover:text-purple-400",
     },
   ];
 
@@ -118,41 +118,6 @@ export default function Footer() {
           <div className="absolute top-40 right-20 w-64 h-64 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-4000"></div>
         </div>
 
-        {/* Newsletter Section */}
-        {/* <div className="relative z-10 border-b border-white/10">
-          <div className="max-w-screen-2xl px-6 md:px-8 mx-auto py-16">
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12">
-              <div className="text-center max-w-3xl mx-auto">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-full border border-purple-500/30 mb-6">
-                  <Sparkles className="w-4 h-4 text-purple-400" />
-                  <span className="text-purple-300 text-sm font-medium">
-                    Stay Connected
-                  </span>
-                </div>
-
-                <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent mb-4">
-                  Join Our Newsletter
-                </h2>
-                <p className="text-slate-400 text-lg mb-8">
-                  Get the latest updates, exclusive offers, and insights
-                  delivered straight to your inbox.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 px-6 py-4 bg-slate-800/50 border border-slate-700 rounded-xl text-white placeholder-slate-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300"
-                  />
-                  <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 text-white rounded-xl hover:from-purple-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 font-medium">
-                    Subscribe
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
         {/* Main Footer Content */}
         <footer className="relative z-10 max-w-screen-2xl px-6 md:px-8 mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8 pt-16 lg:pt-20 mb-16">
@@ -189,15 +154,15 @@ export default function Footer() {
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3 text-slate-400 hover:text-purple-400 transition-colors duration-300">
                   <Mail className="w-5 h-5" />
-                  <span>hello@shoishob.com</span>
+                  <span>tareksabbir4599@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3 text-slate-400 hover:text-purple-400 transition-colors duration-300">
                   <Phone className="w-5 h-5" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+880 163-2773003</span>
                 </div>
                 <div className="flex items-center gap-3 text-slate-400 hover:text-purple-400 transition-colors duration-300">
                   <MapPin className="w-5 h-5" />
-                  <span>123 Innovation Street, Tech City</span>
+                  <span>Agrabad, Chittagong</span>
                 </div>
               </div>
 
