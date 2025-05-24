@@ -232,6 +232,7 @@ const BookingHero = () => {
           )}
         </section>
       </section>
+      
     </main>
   );
 };
