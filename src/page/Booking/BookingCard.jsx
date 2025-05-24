@@ -33,7 +33,7 @@ const BookingCard = ({ turf, setBooking }) => {
               className={`relative w-20 h-20 rounded-2xl p-1 ${
                 isFullyBooked
                   ? "bg-gradient-to-r from-gray-600 to-gray-700"
-                  : "bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500"
+                  : "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 shadow-lg hover:shadow-cyan-500/25"
               } group-hover:animate-pulse`}
             >
               <img
@@ -112,7 +112,7 @@ const BookingCard = ({ turf, setBooking }) => {
         {/* Price Section */}
         <div className="text-center mb-6">
           <div className="relative inline-block">
-            <div className="text-3xl font-black text-white mb-1">{price}</div>
+            <div className="text-3xl font-black text-white mb-1">৳ {price}</div>
             <div className="text-gray-400 text-sm font-medium">per hour</div>
             <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </div>
@@ -126,7 +126,7 @@ const BookingCard = ({ turf, setBooking }) => {
           className={`relative w-full py-4 px-6 rounded-2xl font-bold text-sm transition-all duration-300 overflow-hidden ${
             isFullyBooked
               ? 'bg-slate-700/50 text-gray-500 cursor-not-allowed border border-slate-600/30'
-              : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-500 hover:to-purple-500 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 active:scale-95'
+              : 'text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 shadow-lg hover:shadow-cyan-500/25shadow-lg hover:shadow-2xl transform hover:-translate-y-1 active:scale-95'
           }`}
         >
       
