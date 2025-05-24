@@ -7,12 +7,14 @@ import Heading from "./Heading";
 export default function Home() {
   return (
     <>
-      <Bannar></Bannar>
-      <Turf></Turf>
-      <Heading />
+      <div className="px-5 md:px-10">
+        <Bannar></Bannar>
+        <Turf></Turf>
+        <Heading />
 
-      <Featured></Featured>
-      <EmailCollect></EmailCollect>
+        <Featured></Featured>
+        <EmailCollect></EmailCollect>
+      </div>
     </>
   );
 }
