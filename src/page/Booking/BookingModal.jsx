@@ -20,7 +20,7 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
   const date = format(selectedDate, "PP");
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-
+  const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
   // Format price as currency
   const formatPrice = (price) => {
     const numPrice = typeof price === "string" ? parseFloat(price) : price;
@@ -93,7 +93,7 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/bookings", {
+      const response = await fetch(`${API_URL}/api/v1/bookings`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -147,7 +147,7 @@ const BookingModal = ({ booking, selectedDate, setBooking, refetch }) => {
       console.error("Booking error:", error);
       Swal.fire({
         title: "❌ Booking Failed",
-        text:  "You can not book a turf more than once in a day. Please try again tomorrow.",
+        text: "You can not book a turf more than once in a day. Please try again tomorrow.",
         icon: "error",
         background: "#1e293b",
         color: "#ffffff",
