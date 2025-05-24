@@ -41,11 +41,24 @@ const Login = () => {
 
         if (user.emailVerified) {
           navigate(from, { replace: true });
-          Swal.fire("welcome!!", "login Successfully ", "success");
+          Swal.fire({
+            title: "Welcome!!",
+            text: "Login Successfully",
+            icon: "success",
+            background: "#1e293b", // Dark slate background
+            color: "#f1f5f9", // Light text
+            confirmButtonColor: "#5ac5a6", // Teal-green button color
+          });
           reset();
         } else {
-          Swal.fire("Thank You!!", "Please Verify Your Email First ", "info");
-          reset();
+          Swal.fire({
+            title: "Thank You!!",
+            text: "Please Verify Your Email First",
+            icon: "success",
+            background: "#1e293b", // dark background (slate-800)
+            color: "#f1f5f9", // text color (slate-100)
+            confirmButtonColor: "#5ac5a6", // soft green (teal-400 style)
+          });
         }
         reset();
       })
@@ -62,9 +75,23 @@ const Login = () => {
         if (user) {
           setIsGoogleLogin(true);
           navigate(from, { replace: true });
-          Swal.fire("welcome!!", "login Successfully ", "success");
+          Swal.fire({
+            title: "Welcome!!",
+            text: "Login Successfully",
+            icon: "success",
+            background: "#1e293b", // Dark slate background
+            color: "#f1f5f9", // Light text
+            confirmButtonColor: "#5ac5a6", // Teal-green button color
+          });
         } else {
-          Swal.fire("sorry", "you are not registered", "error");
+          Swal.fire({
+            title: "Sorry",
+            text: "You are not registered",
+            icon: "error",
+            background: "#1e293b", // Dark slate background
+            color: "#f1f5f9", // Light text color
+            confirmButtonColor: "#ef4444", // Red-500 styled button (tailwind style)
+          });
         }
       })
       .catch((error) => {
@@ -88,19 +115,25 @@ const Login = () => {
     fetchSignInMethodsForEmail(auth, email)
       .then((signInMethods) => {
         if (signInMethods.length === 0) {
-          Swal.fire(
-            "User Not Found",
-            "There is no user associated with this email address.",
-            "error"
-          );
+          Swal.fire({
+            title: "User Not Found",
+            text: "There is no user associated with this email address.",
+            icon: "error",
+            background: "#1e293b", // Dark slate (Tailwind slate-800)
+            color: "#f1f5f9", // Light text (Tailwind slate-100)
+            confirmButtonColor: "#ef4444", // Red (Tailwind red-500)
+          });
         } else {
           sendPasswordResetEmail(auth, email)
             .then(() => {
-              Swal.fire(
-                "Password Reset Email Sent",
-                "Please check your email to reset your password.",
-                "success"
-              );
+              Swal.fire({
+                title: "Password Reset Email Sent",
+                text: "Please check your email to reset your password.",
+                icon: "success",
+                background: "#1e293b", // Dark background (slate-800)
+                color: "#f1f5f9", // Light text (slate-100)
+                confirmButtonColor: "#5ac5a6", // Teal-green confirm button
+              });
             })
             .catch((error) => {
               setLoginError(error.message);
@@ -116,15 +149,17 @@ const Login = () => {
     <>
       <main className="relative min-h-screen py-12  pt-24">
         {/* Background Effects */}
-     
+
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
-        
+
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 md:px-8">
           {/* Header Section */}
           <div className="max-w-lg space-y-4 mx-auto text-center mb-12">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-400/20 backdrop-blur-sm">
-              <span className="text-cyan-400 font-semibold text-sm tracking-wide">LOGIN</span>
+              <span className="text-cyan-400 font-semibold text-sm tracking-wide">
+                LOGIN
+              </span>
             </div>
             <h1 className="text-white text-4xl font-bold sm:text-5xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Welcome Back
@@ -154,19 +189,39 @@ const Login = () => {
                         placeholder="Enter your email"
                         className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200"
                         {...register("email", {
-                          required: isGoogleLogin ? false : "Email Address is required",
+                          required: isGoogleLogin
+                            ? false
+                            : "Email Address is required",
                         })}
                       />
                       <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                        <svg
+                          className="w-5 h-5 text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                          />
                         </svg>
                       </div>
                     </div>
                     {errors.email && !isGoogleLogin && (
                       <p className="text-red-400 text-sm flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                         {errors.email?.message}
                       </p>
@@ -188,7 +243,9 @@ const Login = () => {
                         placeholder="Enter your password"
                         className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200"
                         {...register("password", {
-                          required: isGoogleLogin ? false : "Password is required",
+                          required: isGoogleLogin
+                            ? false
+                            : "Password is required",
                           minLength: {
                             value: 8,
                             message: "Password must be 8 characters or longer.",
@@ -196,15 +253,33 @@ const Login = () => {
                         })}
                       />
                       <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        <svg
+                          className="w-5 h-5 text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                          />
                         </svg>
                       </div>
                     </div>
                     {errors.password && !isGoogleLogin && (
                       <p className="text-red-400 text-sm flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                         {errors.password?.message}
                       </p>
@@ -215,8 +290,16 @@ const Login = () => {
                   {loginError && (
                     <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
                       <p className="text-red-400 text-sm flex items-center gap-2">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                        <svg
+                          className="w-5 h-5"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                         {loginError}
                       </p>
@@ -237,7 +320,9 @@ const Login = () => {
                       <div className="w-full border-t border-gray-600"></div>
                     </div>
                     <div className="relative bg-gray-800 px-4">
-                      <span className="text-sm text-gray-400">Or continue with</span>
+                      <span className="text-sm text-gray-400">
+                        Or continue with
+                      </span>
                     </div>
                   </div>
 
@@ -305,7 +390,7 @@ const Login = () => {
           <div className="fixed inset-0 z-50 overflow-y-auto">
             <div className="flex min-h-screen items-center justify-center p-4">
               {/* Backdrop */}
-              <div 
+              <div
                 className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
                 onClick={handleResetModalClose}
               ></div>
@@ -314,17 +399,35 @@ const Login = () => {
               <div className="relative bg-gray-800 rounded-2xl shadow-2xl border border-gray-700 w-full max-w-md p-6 transform transition-all">
                 <div className="text-center mb-6">
                   <div className="mx-auto w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    <svg
+                      className="w-8 h-8 text-cyan-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                      />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Reset Password</h3>
-                  <p className="text-gray-400 text-sm">Enter your email address and we'll send you a link to reset your password.</p>
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    Reset Password
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    Enter your email address and we'll send you a link to reset
+                    your password.
+                  </p>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="reset-email" className="block text-sm font-medium text-gray-300 mb-2">
+                    <label
+                      htmlFor="reset-email"
+                      className="block text-sm font-medium text-gray-300 mb-2"
+                    >
                       Email Address
                     </label>
                     <input

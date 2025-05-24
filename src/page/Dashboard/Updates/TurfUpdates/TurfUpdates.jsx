@@ -38,16 +38,35 @@ const TurfUpdates = () => {
 
   const { register, handleSubmit, setValue, watch } = useForm();
 
-  const showAlert = (title, text, type = "success") => {
-    const config = {
+  const showAlert = ({
+    title,
+    text,
+    type = "success", // success | error | warning | info | question
+    timer = null, // auto-close after ms (e.g., 3000)
+    toast = false, // toast-style alert (top-end position)
+    position = "center", // default for modal, "top-end" for toast
+    showConfirmButton = true, // hide if auto-dismiss
+  }) => {
+    Swal.fire({
       title,
       text,
       icon: type,
-      background: "#1f2937",
-      color: "#fff",
-      confirmButtonColor: type === "success" ? "#059669" : "#dc2626",
-    };
-    Swal.fire(config);
+      background: "#1f2937", // slate-800
+      color: "#f1f5f9", // slate-100
+      toast,
+      position,
+      timer,
+      showConfirmButton,
+      timerProgressBar: !!timer,
+      confirmButtonColor:
+        type === "success"
+          ? "#10b981" // green-500
+          : type === "error"
+          ? "#ef4444" // red-500
+          : type === "info"
+          ? "#3b82f6" // blue-500
+          : "#f59e0b", // amber-500 for warning/default
+    });
   };
 
   const uploadImage = async (imageFile, type) => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -37,9 +38,14 @@ const SignUp = () => {
     try {
       const result = await createUser(data.email, data.password);
       const user = result.user;
-      console.log(user);
-
-      Swal.fire("Thank You!!", "Please Verify Your Email First ", "info");
+      Swal.fire({
+        title: "Thank You!!",
+        text: "Please Verify Your Email First",
+        icon: "success",
+        background: "#1e293b", // dark background (slate-800)
+        color: "#f1f5f9", // text color (slate-100)
+        confirmButtonColor: "#5ac5a6", // soft green (teal-400 style)
+      });
 
       const userInfo = { displayName: data.name };
       await updateUserProfile(userInfo);
@@ -55,7 +61,14 @@ const SignUp = () => {
 
       if (response.data.insertedId) {
         reset();
-        Swal.fire("Thank You!!", "Please Verify Your Email First ", "info");
+        Swal.fire({
+          title: "Thank You!!",
+          text: "Please Verify Your Email First",
+          icon: "success",
+          background: "#1e293b", // dark background (slate-800)
+          color: "#f1f5f9", // text color (slate-100)
+          confirmButtonColor: "#5ac5a6", // soft green (teal-400 style)
+        });
         navigate(from, { replace: true });
       } else {
         reset();

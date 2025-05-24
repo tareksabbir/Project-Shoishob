@@ -27,7 +27,12 @@ const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const TournamentForm = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const { user, loading } = useContext(AuthContext);
   const [uploadProgress, setUploadProgress] = useState({
     logo: false,
@@ -35,7 +40,9 @@ const TournamentForm = () => {
   });
 
   const { data: owner } = useQuery(["owner", user?.email], async () => {
-    const res = await axios.get(`${backendURL}/api/v1/user/email/${user?.email}`);
+    const res = await axios.get(
+      `${backendURL}/api/v1/user/email/${user?.email}`
+    );
     return res.data.data;
   });
 
@@ -72,7 +79,11 @@ const TournamentForm = () => {
 
   const handleForm = async (data) => {
     try {
-      Swal.fire({ title: "Uploading...", allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+      Swal.fire({
+        title: "Uploading...",
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading(),
+      });
 
       const logoUrl = await uploadImage(data.logo[0], "logo");
       const coverUrl = await uploadImage(data.cover[0], "cover");
@@ -107,13 +118,33 @@ const TournamentForm = () => {
 
       if (res.data) {
         reset();
-        Swal.fire("Success", "Tournament created successfully!", "success");
+        Swal.fire({
+          title: "Success",
+          text: "Tournament created successfully!",
+          icon: "success",
+          background: "#1e293b", // Dark slate background
+          color: "#f1f5f9", // Light text
+          confirmButtonColor: "#5ac5a6", // Teal-green confirm button
+        });
       } else {
-        Swal.fire("Error", "Failed to save tournament", "error");
+        Swal.fire({
+          title: "Error",
+          text: "Failed to save tournament",
+          icon: "error",
+          background: "#1e293b", // Dark slate background
+          color: "#f1f5f9", // Light text
+          confirmButtonColor: "#ef4444", // Red confirm button
+        });
       }
     } catch (error) {
-      console.error("Tournament creation error:", error);
-      Swal.fire("Error", error.message || "Something went wrong", "error");
+      Swal.fire({
+        title: "Error",
+        text: error?.message || "Something went wrong",
+        icon: "error",
+        background: "#1e293b",
+        color: "#f1f5f9",
+        confirmButtonColor: "#ef4444",
+      });
     }
   };
 
@@ -152,7 +183,6 @@ const TournamentForm = () => {
           <div className="bg-gradient-to-r from-cyan-500/10 to-purple-600/10 p-1 rounded-3xl">
             <div className="bg-gray-900 rounded-3xl p-8">
               <form onSubmit={handleSubmit(handleForm)} className="space-y-10">
-                
                 {/* Tournament Information */}
                 <div className="space-y-6">
                   <div className="flex items-center space-x-3 mb-8">
@@ -338,7 +368,9 @@ const TournamentForm = () => {
                     <div className="p-2 bg-gradient-to-r from-pink-500 to-rose-600 rounded-lg">
                       <Image className="w-6 h-6 text-white" />
                     </div>
-                    <h2 className="text-2xl font-bold text-white">Tournament Images</h2>
+                    <h2 className="text-2xl font-bold text-white">
+                      Tournament Images
+                    </h2>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -384,12 +416,16 @@ const TournamentForm = () => {
                     <div className="p-2 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg">
                       <FileText className="w-6 h-6 text-white" />
                     </div>
-                    <h2 className="text-2xl font-bold text-white">Tournament Details</h2>
+                    <h2 className="text-2xl font-bold text-white">
+                      Tournament Details
+                    </h2>
                   </div>
 
                   <div className="space-y-6">
                     <div>
-                      <label className={labelClasses}>Tournament Details *</label>
+                      <label className={labelClasses}>
+                        Tournament Details *
+                      </label>
                       <textarea
                         rows="4"
                         className={inputClasses + " resize-none"}
@@ -420,7 +456,6 @@ const TournamentForm = () => {
                     <span>Create Tournament</span>
                   </button>
                 </div>
-
               </form>
             </div>
           </div>
