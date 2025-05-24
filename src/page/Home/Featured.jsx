@@ -3,7 +3,7 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import EmailCollect from "../Home/EmailCollect";
+
 import axios from "axios";
 
 export default function Featured() {
@@ -32,7 +32,7 @@ export default function Featured() {
   // Enhanced loading skeleton
   if (isLoading) {
     return (
-      <main className="relative bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 py-12 md:py-24 overflow-hidden  ">
+      <main className="relative  py-12 md:py-24 overflow-hidden  ">
         {/* Animated Background */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -100,14 +100,7 @@ export default function Featured() {
   }
 
   return (
-    <main className="relative bg-slate-900 overflow-hidden py-24 px-5 md:px-10">
-      {/* Enhanced Animated Background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
-      </div>
-
+    <main className="relative   overflow-hidden py-24 px-5 md:px-10">
       <section className="relative z-10 text-gray-600 body-font ">
         <div className="max-w-screen-2xl px-5 md:px-10 py-12 sm:py-16 lg:py-24 mx-auto">
           {/* Enhanced Header */}
@@ -242,23 +235,8 @@ export default function Featured() {
             </div>
           )}
         </div>
-        <EmailCollect></EmailCollect>
+    
       </section>
-
-      {/* Enhanced Background Gradient */}
-      <div
-        className="absolute inset-0 blur-[150px] max-w-4xl h-full mx-auto opacity-20"
-        style={{
-          background:
-            "linear-gradient(106.89deg, rgba(59, 130, 246, 0.4) 15.73%, rgba(147, 51, 234, 0.5) 35.74%, rgba(236, 72, 153, 0.4) 65.49%, rgba(16, 185, 129, 0.3) 85.91%)",
-          zIndex: -1,
-        }}
-      ></div>
-
-      {/* Floating Elements */}
-      <div className="absolute top-10 right-10 w-4 h-4 bg-blue-400 rounded-full animate-bounce opacity-60"></div>
-      <div className="absolute bottom-10 left-10 w-6 h-6 bg-purple-400 rounded-full animate-bounce delay-300 opacity-40"></div>
-      <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-pink-400 rounded-full animate-bounce delay-700 opacity-50"></div>
     </main>
   );
 }
