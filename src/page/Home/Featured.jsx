@@ -100,9 +100,9 @@ export default function Featured() {
   }
 
   return (
-    <main className="relative   overflow-hidden py-24 px-5 md:px-10">
+    <main className="relative   overflow-hidden py-24 ">
       <section className="relative z-10 text-gray-600 body-font ">
-        <div className="max-w-screen-2xl px-5 md:px-10 py-12 sm:py-16 lg:py-24 mx-auto">
+        <div className="max-w-screen-2xl px-0 md:px-5 py-12 sm:py-16 lg:py-24 mx-auto">
           {/* Enhanced Header */}
           <div className="flex flex-col lg:flex-row w-full mb-12 lg:mb-16">
             <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
