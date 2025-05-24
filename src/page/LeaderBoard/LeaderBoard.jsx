@@ -7,7 +7,13 @@ import {
   TrendingUp,
   TrendingDown,
   Minus,
+  ArrowDown,
+  MapPin,
+  Play,
+  Users,
+  Sparkles,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const LeaderBoard = () => {
   const backendURL = import.meta.env.VITE_BACKEND_URL;
@@ -64,8 +70,82 @@ const LeaderBoard = () => {
         <div className="fixed bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
 
         <div className="fixed z-10 max-w-screen-xl mx-auto px-4 md:px-8"></div>
+
+        <div className="relative py-24 flex items-center justify-center">
+          <div className="relative max-w-8xl mx-auto px-8 py-20 text-center">
+            {/* Badge */}
+            <div className="mb-12 animate-fade-in">
+              <span className="inline-flex items-center px-8 py-4  rounded-full border border-blue-500/50 text-blue-300 font-medium text-xs md:text-xl backdrop-blur-sm">
+                <Sparkles className="w-5 h-5 mr-3 animate-spin-slow" />
+                Please Login to see the Leaderboard
+                <Sparkles className="w-5 h-5 ml-3 animate-spin-slow" />
+              </span>
+            </div>
+
+            {/* Main Title */}
+            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-12 leading-tight ">
+              The Leaders of
+              <span className="block bg-gradient-to-r from-pink-500  to-purple-400 text-transparent bg-clip-text animate-pulse">
+                Shoishob
+              </span>
+            </h1>
+
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-300 to-purple-400 mx-auto rounded-full mb-12" />
+
+            {/* Subtitle */}
+            <div className="max-w-6xl mx-auto mb-16 animate-fade-in-up delay-300">
+              <p className="text-2xl lg:text-3xl xl:text-3xl text-slate-200 leading-relaxed font-light mb-16">
+                The Shoishob Sports Leaderboard honors those who not only play
+                to win, but reconnect to relive .
+                <span className="text-white  font-bold">
+                  {" "}
+                  These are the champions keeping childhood alive—on the field,
+                  in the heart, and across time.{" "}
+                </span>
+                Because true friendship never leaves the game.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 text-lg text-slate-400">
+                <span className="flex items-center px-4 py-2 bg-slate-800/50 rounded-full border border-slate-700/50">
+                  <Users className="w-4 h-4 mr-2" /> 5,00+ Active Kids
+                </span>
+                <span className="flex items-center px-4 py-2 bg-slate-800/50 rounded-full border border-slate-700/50">
+                  <MapPin className="w-4 h-4 mr-2" /> 10+ Locations
+                </span>
+                <span className="flex items-center px-4 py-2 bg-slate-800/50 rounded-full border border-slate-700/50">
+                  <Trophy className="w-4 h-4 mr-2" /> 10+ Sports
+                </span>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-fade-in-up delay-500">
+              <Link
+                to={"/booking"}
+                className="group relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-12 py-6 rounded-2xl font-bold text-xl transition-all transform hover:scale-105 hover:-translate-y-1 shadow-2xl hover:shadow-blue-500/30 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative flex items-center justify-center">
+                  <Play className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
+                  Start Your Journey
+                </div>
+              </Link>
+              <button className="group bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600 hover:border-blue-500/50 px-12 py-6 rounded-2xl font-bold text-xl transition-all backdrop-blur-sm hover:shadow-xl hover:shadow-blue-500/10">
+                <div className="flex items-center justify-center">
+                  <MapPin className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
+                  Explore Zones
+                </div>
+              </button>
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className="animate-bounce">
+              <ArrowDown className="w-8 h-8 mx-auto text-slate-400" />
+            </div>
+          </div>
+        </div>
         {/* Top 3 Podium */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+       <section className="min-h-screen">
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           {sortedUsers.slice(0, 3).map((user, index) => {
             const positions = [1, 0, 2]; // Second, First, Third
             const actualIndex = positions[index];
@@ -120,7 +200,7 @@ const LeaderBoard = () => {
         </div>
 
         {/* Main Leaderboard Table */}
-        <div className="bg-slate-800/60 backdrop-blur-sm rounded-2xl border border-slate-700/50 overflow-hidden">
+        <div className="bg-slate-800/60 backdrop-blur-sm rounded-2xl border border-slate-700/50 overflow-hidden ">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -260,13 +340,14 @@ const LeaderBoard = () => {
                 : 0}
             </p>
           </div>
-          <div className="bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50">
+          <div className="bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50 ">
             <h3 className="text-slate-400 text-sm mb-2">Top Score</h3>
             <p className="text-2xl font-bold text-white">
               {sortedUsers.length > 0 ? sortedUsers[0].point : 0}
             </p>
           </div>
         </div>
+       </section>
       </div>
     </div>
   );
