@@ -191,7 +191,7 @@ const AboutUs = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center justify-center">
+      <div className="relative py-24 flex items-center justify-center">
         <div className="relative max-w-8xl mx-auto px-8 py-20 text-center">
           {/* Badge */}
           <div className="mb-12 animate-fade-in">
@@ -203,20 +203,20 @@ const AboutUs = () => {
           </div>
 
           {/* Main Title */}
-          <h1 className="text-7xl lg:text-8xl xl:text-9xl font-black mb-12 animate-fade-in-up">
-            <span className="bg-gradient-to-r from-cyan-500 to-purple-600 transform transition-transform duration-300 hover:scale-105 bg-clip-text text-transparent leading-tight block">
-              SHOISHOB
-            </span>
-            <span className="text-6xl lg:text-7xl xl:text-8xl bg-gradient-to-r from-cyan-400 to-blue-500 transform transition-transform duration-300 hover:scale-105 bg-clip-text text-transparent block mt-4">
-              ZONES
-            </span>
-          </h1>
+          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-12 leading-tight ">
+                  Shoishob
+                  <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 text-transparent bg-clip-text animate-pulse">
+                    Zones
+                  </span>
+                </h1>
+
+                <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-12" />
 
           {/* Subtitle */}
-          <div className="max-w-7xl mx-auto mb-16 animate-fade-in-up delay-300">
-            <p className="text-2xl lg:text-3xl xl:text-4xl text-slate-200 leading-relaxed font-light mb-8">
+          <div className="max-w-6xl mx-auto mb-16 animate-fade-in-up delay-300">
+            <p className="text-2xl lg:text-3xl xl:text-3xl text-slate-200 leading-relaxed font-light mb-16">
               Breaking the screen addiction cycle by creating
-              <span className="text-transparent bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text font-semibold">
+              <span className="text-white  font-bold">
                 {" "}
                 revolutionary sports experiences{" "}
               </span>
