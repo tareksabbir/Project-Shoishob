@@ -66,36 +66,11 @@ const BookingHero = () => {
     );
   }
   return (
-    <main className="relative bg-gradient-to-br from-slate-900 via-blue-900/10 to-slate-900 min-h-screen overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Main gradient orb */}
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-cyan-500/30 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-rose-500/20 rounded-full blur-3xl animate-pulse" />
+    <main className="relative bg-slate-900min-h-screen overflow-hidden">
+      <div className="fixed top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="fixed bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
 
-        {/* Floating particles effect */}
-        <div
-          className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400/60 rounded-full animate-bounce"
-          style={{ animationDelay: "0s" }}
-        />
-        <div
-          className="absolute top-1/3 right-1/3 w-1 h-1 bg-purple-400/60 rounded-full animate-bounce"
-          style={{ animationDelay: "1s" }}
-        />
-        <div
-          className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-cyan-400/60 rounded-full animate-bounce"
-          style={{ animationDelay: "2s" }}
-        />
-
-        {/* Grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-      </div>
-
+      <div className="fixed z-10 max-w-screen-xl mx-auto px-4 md:px-8"></div>
       <section className="relative z-10">
         {/* Hero Header Section */}
         <section className="relative">
@@ -125,7 +100,7 @@ const BookingHero = () => {
 
               {/* Main Title */}
               <div className="text-center mb-8">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight">
+                <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-6 leading-tight">
                   Available
                   <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 text-transparent bg-clip-text animate-pulse">
                     Zones
@@ -184,7 +159,7 @@ const BookingHero = () => {
           />
         </section>
         {/* Turfs Grid Section */}
-        <section className="relative pb-20">
+        <section className="relative pb-20 ">
           <div className="px-6 mx-auto max-w-screen-2xl">
             {turfs.length === 0 ? (
               <div className="text-center py-20">
@@ -233,7 +208,7 @@ const BookingHero = () => {
             ) : (
               <>
                 {/* Enhanced Grid */}
-                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-24">
+                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-18 md:mt-32">
                   {turfs.map((turf, index) => (
                     <div
                       key={turf._id}
