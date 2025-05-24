@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Arrow from "../../Svg/Arrow";
 import { Link } from "react-router-dom";
+import Featured from "./Featured";
 
 const features = [
   {
@@ -47,7 +48,7 @@ const Heading = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <main className="relative   overflow-hidden">
+    <main className="relative   overflow-hidden max-w-screen-2xl mx-auto">
       <section className="relative z-10 text-gray-600 body-font max-w-screen-2xl mx-auto ">
         <div className=" px-5 py-24 mx-auto">
           {/* Enhanced Header */}
@@ -58,9 +59,13 @@ const Heading = () => {
             <h2 className="text-sm text-blue-400 tracking-widest font-semibold title-font mb-2 uppercase">
               Why We Are The Best
             </h2>
-            <h1 className="mt-10  text-black-800 text-4xl sm:text-5xl md:text-5xl mb-8 md:mb-12 font-extrabold bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text lg:mt-16">
-              Your health is of great importance to us
-            </h1>
+            
+                <h1 className="text-5xl sm:text-6xl lg:text-5xl font-black text-white mb-12 leading-tight mt-8 ">
+                  Your health is of great
+                  <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 text-transparent bg-clip-text ">
+                    importance to us
+                  </span>
+                </h1>
 
             <p className="lg:w-2/3 mx-auto leading-relaxed text-gray-300 text-normal font-light">
               At our core, your well-being holds utmost significance. We
@@ -142,6 +147,7 @@ const Heading = () => {
           </div>
         </div>
       </section>
+
     </main>
   );
 };
