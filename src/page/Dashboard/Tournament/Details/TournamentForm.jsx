@@ -1,17 +1,38 @@
-import { useContext } from "react";
+/* eslint-disable no-unused-vars */
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { AuthContext } from "../../../../Context/AuthProvider";
 import Loading from "../../../Loading/Loading";
+import {
+  Upload,
+  MapPin,
+  DollarSign,
+  Users,
+  FileText,
+  Image,
+  Mail,
+  User,
+  Phone,
+  Building,
+  RefreshCw,
+  Trophy,
+  Calendar,
+  Clock,
+} from "lucide-react";
 
 const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const TournamentForm = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const { user, loading } = useContext(AuthContext);
+  const [uploadProgress, setUploadProgress] = useState({
+    logo: false,
+    cover: false,
+  });
 
   const { data: owner } = useQuery(["owner", user?.email], async () => {
     const res = await axios.get(`${backendURL}/api/v1/user/email/${user?.email}`);
@@ -36,20 +57,25 @@ const TournamentForm = () => {
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 
-  const uploadImage = async (file) => {
+  const uploadImage = async (file, type) => {
+    setUploadProgress((prev) => ({ ...prev, [type]: true }));
     const formData = new FormData();
     formData.append("image", file);
 
-    const res = await axios.post(img_hosting_url, formData);
-    return res.data.data.display_url;
+    try {
+      const res = await axios.post(img_hosting_url, formData);
+      return res.data.data.display_url;
+    } finally {
+      setUploadProgress((prev) => ({ ...prev, [type]: false }));
+    }
   };
 
   const handleForm = async (data) => {
     try {
       Swal.fire({ title: "Uploading...", allowOutsideClick: false, didOpen: () => Swal.showLoading() });
 
-      const logoUrl = await uploadImage(data.logo[0]);
-      const coverUrl = await uploadImage(data.cover[0]);
+      const logoUrl = await uploadImage(data.logo[0], "logo");
+      const coverUrl = await uploadImage(data.cover[0], "cover");
 
       const tournamentData = {
         turf_name: data.turf_name,
@@ -90,329 +116,317 @@ const TournamentForm = () => {
       Swal.fire("Error", error.message || "Something went wrong", "error");
     }
   };
+
+  const inputClasses =
+    "w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300 text-white placeholder-gray-400 hover:border-gray-500";
+  const labelClasses = "block text-sm font-medium text-gray-300 mb-2";
+
   return (
-    <>
-      <main className="relative py-10 bg-gray-950 px-10">
-        <div className="relative z-10 max-w-screen-xl mx-auto text-gray-600 sm:px-4 md:px-8">
-          <div className="mt-12 mx-auto px-4 p-8 sm:px-8 sm:rounded-xl">
-            <div className="relative flex flex-col min-w-0 break-words w-full mb-6  rounded-lg bg-blueGray-100 border-0 bg-white p-10 shadow-2xl shadow-slate-700">
-              <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form onSubmit={handleSubmit(handleForm)}>
-                  <div className="max-w-lg space-y-3 px-4 sm:mx-auto sm:text-center sm:px-0 mb-20">
-                    <h3 className="text-black font-semibold">Owner</h3>
-                    <p className="bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text text-3xl font-bold sm:text-4xl">
-                      Tournament <br /> Registration Form
-                    </p>
-                    <p className="text-gray-900">
-                      Please do not submit with out fill up all the section
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Turf Name*
-                        </label>
-                        <input
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("turf_name", {
-                            required: true,
-                          })}
-                          placeholder="Turf Name"
-                          value={turfData?.turf_name}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Your Email address*
-                        </label>
-                        <input
-                          type="email"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("email", {
-                            required: true,
-                          })}
-                          placeholder="Owner Email address"
-                          value={turfData?.email}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Turf Id*
-                        </label>
-                        <input
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("turf_id", {
-                            required: true,
-                          })}
-                          placeholder="Owner Id"
-                          value={turfData?.id}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Your phone*
-                        </label>
-                        <input
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("ownerPhone", {
-                            required: true,
-                          })}
-                          placeholder="Owner phone Number"
-                          defaultValue={turfData?.ownerPhone}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <hr className="mt-6 border-b-1 border-blueGray-300" />
-
-                  <div className="flex flex-wrap mt-5">
-                    <div className="w-full lg:w-12/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Address*
-                        </label>
-                        <input
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("address", {
-                            required: true,
-                          })}
-                          placeholder="Turf Address"
-                          defaultValue={turfData?.address}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="w-full lg:w-4/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          City*
-                        </label>
-                        <input
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("city", {
-                            required: true,
-                          })}
-                          placeholder="City"
-                          defaultValue={"chittagong"}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full lg:w-4/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Price*
-                        </label>
-                        <input
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("price", {
-                            required: true,
-                          })}
-                          placeholder="Price In Taka"
-                          defaultValue={3500}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full lg:w-4/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          person*
-                        </label>
-                        <input
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("person", {
-                            required: true,
-                          })}
-                          placeholder="Persons"
-                          defaultValue={7}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full lg:w-4/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Tournament Name*
-                        </label>
-                        <input
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("tournament_name", {
-                            required: true,
-                          })}
-                          placeholder="Tournament Name"
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full lg:w-4/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Registration Start*
-                        </label>
-                        <input
-                          type="date"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("registration_start", {
-                            required: true,
-                          })}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full lg:w-4/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Registration End*
-                        </label>
-                        <input
-                          type="date"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          {...register("registration_end", {
-                            required: true,
-                          })}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Turf Logo*
-                        </label>
-                        <input
-                          type="file"
-                          className="file-input file-input-bordered w-full max-w-sm bg-slate-200"
-                          {...register("logo", {
-                            required: true,
-                          })}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full lg:w-6/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Cover Photo*
-                        </label>
-                        <input
-                          type="file"
-                          className="file-input file-input-bordered w-full max-w-sm bg-slate-200"
-                          {...register("cover", {
-                            required: true,
-                          })}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <hr className="mt-6 border-b-1 border-blueGray-300" />
-
-                  <div className="flex flex-wrap mt-5">
-                    <div className="w-full lg:w-12/12 px-4">
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Tournament Details*
-                        </label>
-                        <textarea
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          rows="4"
-                          {...register("about", {
-                            required: true,
-                          })}
-                          placeholder="About Tournament Details in 100 Words"
-                        ></textarea>
-                      </div>
-                      <div className="relative w-full mb-3">
-                        <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                          htmlFor="grid-password"
-                        >
-                          Tournament Rules*
-                        </label>
-                        <textarea
-                          type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          rows="4"
-                          {...register("rules", {
-                            required: true,
-                          })}
-                          placeholder="About Tournament Rules in 100 Words"
-                        ></textarea>
-                        <button className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150 mt-5">
-                          Submit
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
+    <div className="min-h-screen bg-gray-900 px-4">
+      <div className="px-10 mx-auto">
+        <div className="bg-gray-900 px-6 py-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-white">
+                Tournament Registration
+              </h1>
+              <p className="text-gray-400 mt-2">
+                Create and manage your tournament events with ease.
+              </p>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="bg-gray-700 rounded-lg px-4 py-2 border border-gray-600">
+                <span className="text-gray-300 text-sm">
+                  Last updated: Just now
+                </span>
               </div>
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                <RefreshCw className="h-4 w-4" />
+              </button>
             </div>
           </div>
         </div>
-        <div
-          className="absolute inset-0 blur-[118px] max-w-lg h-[800px] mx-auto sm:max-w-3xl sm:h-[400px]"
-          style={{
-            background:
-              "linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)",
-          }}
-        ></div>
-      </main>
-    </>
+
+        {/* Form */}
+        <div className="bg-gray-900/50 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50 overflow-hidden">
+          <div className="bg-gradient-to-r from-cyan-500/10 to-purple-600/10 p-1 rounded-3xl">
+            <div className="bg-gray-900 rounded-3xl p-8">
+              <form onSubmit={handleSubmit(handleForm)} className="space-y-10">
+                
+                {/* Tournament Information */}
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-3 mb-8">
+                    <div className="p-2 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg">
+                      <Trophy className="w-6 h-6 text-white" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-white">
+                      Tournament Information
+                    </h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className={labelClasses}>Tournament Name *</label>
+                      <input
+                        type="text"
+                        className={inputClasses}
+                        placeholder="Enter tournament name"
+                        {...register("tournament_name", { required: true })}
+                      />
+                    </div>
+
+                    <div>
+                      <label className={labelClasses}>
+                        <DollarSign className="inline w-4 h-4 mr-2" />
+                        Entry Fee (BDT) *
+                      </label>
+                      <input
+                        type="text"
+                        className={inputClasses}
+                        placeholder="3500"
+                        defaultValue={3500}
+                        {...register("price", { required: true })}
+                      />
+                    </div>
+
+                    <div>
+                      <label className={labelClasses}>
+                        <Calendar className="inline w-4 h-4 mr-2" />
+                        Registration Start *
+                      </label>
+                      <input
+                        type="date"
+                        className={inputClasses}
+                        {...register("registration_start", { required: true })}
+                      />
+                    </div>
+
+                    <div>
+                      <label className={labelClasses}>
+                        <Clock className="inline w-4 h-4 mr-2" />
+                        Registration End *
+                      </label>
+                      <input
+                        type="date"
+                        className={inputClasses}
+                        {...register("registration_end", { required: true })}
+                      />
+                    </div>
+
+                    <div>
+                      <label className={labelClasses}>
+                        <Users className="inline w-4 h-4 mr-2" />
+                        Max Persons per Team *
+                      </label>
+                      <input
+                        type="text"
+                        className={inputClasses}
+                        placeholder="7"
+                        defaultValue={7}
+                        {...register("person", { required: true })}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Turf Information */}
+                <div className="space-y-6 border-t border-gray-700 pt-10">
+                  <div className="flex items-center space-x-3 mb-8">
+                    <div className="p-2 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg">
+                      <Building className="w-6 h-6 text-white" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-white">
+                      Turf Information
+                    </h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className={labelClasses}>Turf Name *</label>
+                      <input
+                        type="text"
+                        className={inputClasses}
+                        placeholder="Turf Name"
+                        value={turfData?.turf_name || ""}
+                        {...register("turf_name", { required: true })}
+                      />
+                    </div>
+
+                    <div>
+                      <label className={labelClasses}>
+                        <Mail className="inline w-4 h-4 mr-2" />
+                        Owner Email *
+                      </label>
+                      <input
+                        type="email"
+                        className={inputClasses}
+                        placeholder="owner@example.com"
+                        value={turfData?.email || ""}
+                        {...register("email", { required: true })}
+                      />
+                    </div>
+
+                    <div>
+                      <label className={labelClasses}>
+                        <User className="inline w-4 h-4 mr-2" />
+                        Turf ID *
+                      </label>
+                      <input
+                        type="text"
+                        className={inputClasses}
+                        placeholder="Turf ID"
+                        value={turfData?.id || ""}
+                        {...register("turf_id", { required: true })}
+                      />
+                    </div>
+
+                    <div>
+                      <label className={labelClasses}>
+                        <Phone className="inline w-4 h-4 mr-2" />
+                        Owner Phone *
+                      </label>
+                      <input
+                        type="text"
+                        className={inputClasses}
+                        placeholder="Owner phone Number"
+                        defaultValue={turfData?.ownerPhone}
+                        {...register("ownerPhone", { required: true })}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="space-y-6 border-t border-gray-700 pt-10">
+                  <div className="flex items-center space-x-3 mb-8">
+                    <div className="p-2 bg-gradient-to-r from-green-500 to-blue-600 rounded-lg">
+                      <MapPin className="w-6 h-6 text-white" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-white">
+                      Location Details
+                    </h2>
+                  </div>
+
+                  <div>
+                    <label className={labelClasses}>Full Address *</label>
+                    <input
+                      type="text"
+                      className={inputClasses}
+                      placeholder="Turf Address"
+                      defaultValue={turfData?.address}
+                      {...register("address", { required: true })}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className={labelClasses}>City *</label>
+                      <input
+                        type="text"
+                        className={inputClasses}
+                        placeholder="City"
+                        defaultValue="chittagong"
+                        {...register("city", { required: true })}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Images */}
+                <div className="space-y-6 border-t border-gray-700 pt-10">
+                  <div className="flex items-center space-x-3 mb-8">
+                    <div className="p-2 bg-gradient-to-r from-pink-500 to-rose-600 rounded-lg">
+                      <Image className="w-6 h-6 text-white" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-white">Tournament Images</h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className={labelClasses}>Tournament Logo *</label>
+                      <div className="relative">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="w-full px-4 py-6 border-2 border-dashed border-gray-600 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/20 file:text-cyan-400 hover:file:bg-cyan-500/30 bg-gray-800/50 text-gray-300"
+                          {...register("logo", { required: true })}
+                        />
+                        {uploadProgress.logo && (
+                          <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                            <div className="animate-spin rounded-full h-6 w-6 border-2 border-cyan-500 border-t-transparent"></div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className={labelClasses}>Cover Photo *</label>
+                      <div className="relative">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="w-full px-4 py-6 border-2 border-dashed border-gray-600 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-cyan-500/20 file:text-cyan-400 hover:file:bg-cyan-500/30 bg-gray-800/50 text-gray-300"
+                          {...register("cover", { required: true })}
+                        />
+                        {uploadProgress.cover && (
+                          <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                            <div className="animate-spin rounded-full h-6 w-6 border-2 border-cyan-500 border-t-transparent"></div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Details */}
+                <div className="space-y-6 border-t border-gray-700 pt-10">
+                  <div className="flex items-center space-x-3 mb-8">
+                    <div className="p-2 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg">
+                      <FileText className="w-6 h-6 text-white" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-white">Tournament Details</h2>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <label className={labelClasses}>Tournament Details *</label>
+                      <textarea
+                        rows="4"
+                        className={inputClasses + " resize-none"}
+                        placeholder="About Tournament Details in 100 Words"
+                        {...register("about", { required: true })}
+                      ></textarea>
+                    </div>
+
+                    <div>
+                      <label className={labelClasses}>Tournament Rules *</label>
+                      <textarea
+                        rows="4"
+                        className={inputClasses + " resize-none"}
+                        placeholder="About Tournament Rules in 100 Words"
+                        {...register("rules", { required: true })}
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="border-t border-gray-700 pt-10">
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25 flex items-center justify-center space-x-3 text-lg"
+                  >
+                    <Trophy className="w-6 h-6" />
+                    <span>Create Tournament</span>
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

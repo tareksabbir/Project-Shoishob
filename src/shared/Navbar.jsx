@@ -17,8 +17,8 @@ export default function Navbar() {
       setIsScrolled(scrollTop > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLogout = () => {
@@ -47,27 +47,28 @@ export default function Navbar() {
     { to: "/", label: "Home", icon: "home" },
     { to: "/booking", label: "Booking", icon: "briefcase" },
     { to: "/leaderBoard", label: "Leader Board", icon: "trophy" },
+    { to: "/review", label: "Review", icon: "info-circle" },
     { to: "/about", label: "About", icon: "info-circle" },
+    { to: "/contact", label: "Contact", icon: "info-circle" },
   ];
 
   const userNavigationItems = [
-    { to: "/review", label: "Review", icon: "star" },
     { to: "/dashboard", label: "Dashboard", icon: "dashboard" },
   ];
 
   const renderNavLink = ({ to, label, icon, isMobile = false }) => {
     const isActive = isActiveRoute(to);
-    const baseClasses = isMobile 
+    const baseClasses = isMobile
       ? "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group"
       : "relative px-4 py-2 text-sm font-semibold transition-all duration-300 group";
-    
+
     const activeClasses = isActive
-      ? isMobile 
+      ? isMobile
         ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg"
         : "text-cyan-400"
       : isMobile
-        ? "text-gray-300 hover:text-white hover:bg-white/10"
-        : "text-gray-400 hover:text-cyan-400";
+      ? "text-gray-300 hover:text-white hover:bg-white/10"
+      : "text-gray-400 hover:text-cyan-400";
 
     return (
       <Link
@@ -77,17 +78,27 @@ export default function Navbar() {
         className={`${baseClasses} ${activeClasses}`}
       >
         {isMobile && (
-          <div className={`p-2 rounded-lg ${isActive ? 'bg-white/20' : 'bg-white/10'}`}>
-            <box-icon name={icon} color={isActive ? "white" : "#9ca3af"} size="18px"></box-icon>
+          <div
+            className={`p-2 rounded-lg ${
+              isActive ? "bg-white/20" : "bg-white/10"
+            }`}
+          >
+            <box-icon
+              name={icon}
+              color={isActive ? "white" : "#9ca3af"}
+              size="18px"
+            ></box-icon>
           </div>
         )}
-        
+
         <span className={isMobile ? "font-medium" : ""}>{label}</span>
-        
+
         {!isMobile && (
-          <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 transform transition-transform duration-300 ${
-            isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-          }`}></div>
+          <div
+            className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 transform transition-transform duration-300 ${
+              isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+            }`}
+          ></div>
         )}
       </Link>
     );
@@ -97,17 +108,19 @@ export default function Navbar() {
     <>
       {/* Backdrop blur overlay for mobile menu */}
       {isMobileMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
           onClick={closeMobileMenu}
         ></div>
       )}
 
-      <div className={`sticky top-0 z-50 transition-all duration-300 print:hidden ${
-        isScrolled || isMobileMenuOpen
-          ? 'bg-slate-900/95 backdrop-blur-xl border-b border-slate-700/50 shadow-lg' 
-          : 'bg-transparent'
-      }`}>
+      <div
+        className={`sticky top-0 z-50 transition-all duration-300 print:hidden ${
+          isScrolled || isMobileMenuOpen
+            ? "bg-slate-900/95 backdrop-blur-xl border-b border-slate-700/50 shadow-lg"
+            : "bg-transparent"
+        }`}
+      >
         <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
           <header className="flex items-center justify-between py-4 md:py-6">
             {/* Logo */}
@@ -118,27 +131,29 @@ export default function Navbar() {
               onClick={closeMobileMenu}
             >
               <div className="relative">
-                <img 
-                  src={icon} 
-                  alt="Shoishob Logo" 
-                  className="h-12 md:h-14 drop-shadow-lg group-hover:scale-110 transition-transform duration-300" 
+                <img
+                  src={icon}
+                  alt="Shoishob Logo"
+                  className="h-12 md:h-14 drop-shadow-lg group-hover:scale-110 transition-transform duration-300"
                 />
-             
               </div>
-              <span className={`bg-gradient-to-r transition-all duration-300 bg-clip-text text-transparent group-hover:from-cyan-400 group-hover:to-blue-400 ${
-                isScrolled || isMobileMenuOpen
-                  ? 'from-white via-cyan-100 to-blue-100'
-                  : 'from-white via-white to-gray-100'
-              }`}>
+              <span
+                className={`bg-gradient-to-r transition-all duration-300 bg-clip-text text-transparent group-hover:from-cyan-400 group-hover:to-blue-400 ${
+                  isScrolled || isMobileMenuOpen
+                    ? "from-white via-cyan-100 to-blue-100"
+                    : "from-white via-white to-gray-100"
+                }`}
+              >
                 Shoishob
               </span>
             </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-2">
-              {navigationItems.map(item => renderNavLink(item))}
-              
-              {user?.uid && userNavigationItems.map(item => renderNavLink(item))}
+              {navigationItems.map((item) => renderNavLink(item))}
+
+              {user?.uid &&
+                userNavigationItems.map((item) => renderNavLink(item))}
             </nav>
 
             {/* Desktop Auth Section */}
@@ -148,19 +163,27 @@ export default function Navbar() {
                   {/* User Avatar */}
                   <div className="flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-xl backdrop-blur-sm border border-slate-600/30">
                     <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center">
-                      <box-icon name="user" color="white" size="16px"></box-icon>
+                      <box-icon
+                        name="user"
+                        color="white"
+                        size="16px"
+                      ></box-icon>
                     </div>
                     <span className="text-white text-sm font-medium truncate max-w-32">
                       {user?.displayName || user?.email}
                     </span>
                   </div>
-                  
+
                   {/* Logout Button */}
                   <button
                     onClick={handleLogout}
                     className="px-4 py-2 text-sm font-semibold text-gray-400 hover:text-red-400 transition-colors duration-300 flex items-center gap-2 group"
                   >
-                    <box-icon name="log-out" color="#ef4444" size="16px"></box-icon>
+                    <box-icon
+                      name="log-out"
+                      color="#ef4444"
+                      size="16px"
+                    ></box-icon>
                     Sign Out
                   </button>
                 </div>
@@ -189,37 +212,55 @@ export default function Navbar() {
               aria-label="Toggle mobile menu"
             >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
-                <span className={`block w-5 h-0.5 bg-current transition-all duration-300 ${
-                  isMobileMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-1'
-                }`}></span>
-                <span className={`block w-5 h-0.5 bg-current transition-all duration-300 ${
-                  isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
-                }`}></span>
-                <span className={`block w-5 h-0.5 bg-current transition-all duration-300 ${
-                  isMobileMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-1'
-                }`}></span>
+                <span
+                  className={`block w-5 h-0.5 bg-current transition-all duration-300 ${
+                    isMobileMenuOpen
+                      ? "rotate-45 translate-y-1"
+                      : "-translate-y-1"
+                  }`}
+                ></span>
+                <span
+                  className={`block w-5 h-0.5 bg-current transition-all duration-300 ${
+                    isMobileMenuOpen ? "opacity-0" : "opacity-100"
+                  }`}
+                ></span>
+                <span
+                  className={`block w-5 h-0.5 bg-current transition-all duration-300 ${
+                    isMobileMenuOpen
+                      ? "-rotate-45 -translate-y-1"
+                      : "translate-y-1"
+                  }`}
+                ></span>
               </div>
             </button>
           </header>
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden absolute top-full left-0 right-0 transition-all duration-300 ${
-          isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
-        } ${
-          isScrolled || isMobileMenuOpen
-            ? 'bg-slate-900/98 backdrop-blur-xl border-b border-slate-700/50 shadow-2xl'
-            : 'bg-slate-900/90 backdrop-blur-lg'
-        }`}>
+        <div
+          className={`lg:hidden absolute top-full left-0 right-0 transition-all duration-300 ${
+            isMobileMenuOpen
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-4 pointer-events-none"
+          } ${
+            isScrolled || isMobileMenuOpen
+              ? "bg-slate-900/98 backdrop-blur-xl border-b border-slate-700/50 shadow-2xl"
+              : "bg-slate-900/90 backdrop-blur-lg"
+          }`}
+        >
           <div className="p-6 space-y-1">
             {/* Navigation Links */}
             <div className="space-y-2 mb-6">
-              {navigationItems.map(item => renderNavLink({ ...item, isMobile: true }))}
-              
+              {navigationItems.map((item) =>
+                renderNavLink({ ...item, isMobile: true })
+              )}
+
               {user?.uid && (
                 <>
                   <div className="border-t border-slate-700/50 my-4"></div>
-                  {userNavigationItems.map(item => renderNavLink({ ...item, isMobile: true }))}
+                  {userNavigationItems.map((item) =>
+                    renderNavLink({ ...item, isMobile: true })
+                  )}
                 </>
               )}
             </div>
@@ -231,7 +272,11 @@ export default function Navbar() {
                   {/* User Info */}
                   <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-xl backdrop-blur-sm border border-slate-600/30">
                     <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center">
-                      <box-icon name="user" color="white" size="20px"></box-icon>
+                      <box-icon
+                        name="user"
+                        color="white"
+                        size="20px"
+                      ></box-icon>
                     </div>
                     <div className="flex-1">
                       <p className="text-white font-medium text-sm truncate">
@@ -240,14 +285,18 @@ export default function Navbar() {
                       <p className="text-gray-400 text-xs">Welcome back!</p>
                     </div>
                   </div>
-                  
+
                   {/* Logout Button */}
                   <button
                     onClick={handleLogout}
                     className="flex items-center gap-3 px-4 py-3 w-full text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all duration-300 border border-transparent hover:border-red-500/30"
                   >
                     <div className="p-2 rounded-lg bg-red-500/20">
-                      <box-icon name="log-out" color="#ef4444" size="18px"></box-icon>
+                      <box-icon
+                        name="log-out"
+                        color="#ef4444"
+                        size="18px"
+                      ></box-icon>
                     </div>
                     <span className="font-medium">Sign Out</span>
                   </button>

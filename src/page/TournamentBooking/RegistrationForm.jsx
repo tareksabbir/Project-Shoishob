@@ -2,8 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 
 const RegistrationForm = () => {
-  // Mock backend URL for demonstration
-  const backendURL = "https://api.example.com";
+
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   const [formData, setFormData] = useState({
     team_name: "",
@@ -33,7 +33,7 @@ const RegistrationForm = () => {
   };
 
   // Mock data for demonstration
-  const userData = { email: "user@example.com" };
+  // const userData = { email: "user@example.com" };
   const tournamentId = "tournament-123";
 
   const validateForm = () => {

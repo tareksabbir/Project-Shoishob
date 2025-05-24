@@ -16,6 +16,7 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
 import TournamentSkeleton from "../Skeletons/TournamentSkeleton";
+import TournamentSponsors from "./TournamentSponsers";
 
 const TournamentBooking = () => {
   const { id } = useParams();
@@ -218,6 +219,7 @@ const TournamentBooking = () => {
 
         <div className="fixed z-10 max-w-screen-xl mx-auto px-4 md:px-8"></div>
       </section>
+      <TournamentSponsors/>
     </div>
   );
 };
