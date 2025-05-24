@@ -36,7 +36,7 @@ const Turf = () => {
   };
 
   return (
-    <main className="relative bg-nearest-rgb-23-32-49 ">
+    <main className="relative bg-nearest-rgb-23-32-49 max-w-screen-2xl mx-auto">
       <section className="text-gray-600 body-font">
         <div className=" py-24 mx-auto">
           {isLoading ? (
