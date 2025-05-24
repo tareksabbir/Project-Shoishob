@@ -3,26 +3,9 @@ import { Clock, Users, Star, Calendar } from "lucide-react";
 
 const GoBooking = () => {
   return (
-    <section className=" text-white py-16 min-h-screen">
-      <div className=" px-6 mx-auto ">
-        {/* Header */}
-        <div className="text-center mb-16">
-         
-          <p className="text-xl text-white max-w-2xl mx-auto leading-relaxed">
-            Premium football turf facilities with state-of-the-art amenities. 
-            Book your slot and experience the best playing surface in the city.
-          </p>
-          <div className="flex justify-center items-center mt-6 space-x-6 ">
-            <div className="flex items-center">
-              <Star className="w-5 h-5 mr-2 text-yellow-400" />
-              <span className="tracking-widest bg-gradient-to-r from-cyan-400 to-blue-600 text-transparent bg-clip-text text-xs font-medium title-font">4.8/5 Rating</span>
-            </div>
-            <div className="flex items-center">
-              <Calendar className="w-5 h-5 mr-2" />
-              <span className="tracking-widest bg-gradient-to-r from-cyan-400 to-blue-600 text-transparent bg-clip-text text-xs font-medium title-font">Online Booking</span>
-            </div>
-          </div>
-        </div>
+    <section className="max-w-7xl mx-auto text-white  min-h-screen">
+      <div className="mx-auto ">
+       
 
         {/* Pricing Table */}
         <div className="bg-gray-800 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
